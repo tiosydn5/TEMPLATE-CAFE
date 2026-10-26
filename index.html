@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TENTANG KOPI — Kopi Arabika &amp; Ruang Singgah | Sukmajaya, Depok</title>
-  <meta name="description" content="Tentang Kopi Sukmajaya, Depok (Jl. Bahagia Raya No. 4, samping Polsek Sukmajaya) — tempat menikmati kopi Arabika Nusantara, bekerja, dan berbagi cerita." />
+  <title>TENTANG KOPI — Secangkir Kopi, Sejuta Cerita | Sukmajaya, Depok</title>
+  <meta name="description" content="Tentang Kopi Sukmajaya Depok (Jl. Bahagia Raya No. 4, Samping Polsek Sukmajaya) — Ruang kopi hangat untuk menikmati kopi pilihan, bekerja dengan tenang, dan berbagi cerita." />
   <link rel="icon" type="image/jpeg" href="logo.jpg" />
 
   <!-- Google Fonts: Fraunces (Editorial Serif) & Plus Jakarta Sans (Clean UI & Tabular Numerals) -->
@@ -118,7 +118,6 @@
 
     /* ------------------------------------------------------------------------
        ACT 1: DIMENSIONAL MULTI-PLANE HERO (#hero)
-       Strong differential depth separation as soon as user scrolls down
        ------------------------------------------------------------------------ */
     .sc-hero-sunbeam {
       background:
@@ -159,47 +158,33 @@
       opacity: calc(1 - (var(--sc-p, 0) * 1.1));
     }
 
-    /* Plane 5: Hero Subject Card — Counter-parallax sink, tilt & 3D hover */
+    /* Plane 5: Hero Subject Card — Balanced parallax & 3D hover without colliding into #keunggulan */
     #hero [data-sc-depth="0.75"] {
       --sc-hero-rx: 0deg;
       --sc-hero-ry: 0deg;
       transform: perspective(1100px)
-        translate3d(0, calc(var(--sc-p, 0) * 95px), 0)
-        rotate(calc(var(--sc-p, 0) * -3.5deg))
+        translate3d(0, calc(var(--sc-p, 0) * 28px), 0)
         rotateX(var(--sc-hero-rx))
-        rotateY(var(--sc-hero-ry))
-        scale(calc(1 + (var(--sc-p, 0) * 0.05)));
-      opacity: calc(1 - (var(--sc-p, 0) * 0.55));
+        rotateY(var(--sc-hero-ry));
+      opacity: calc(1 - (var(--sc-p, 0) * 0.45));
     }
 
-    /* Plane 6: Inner Hero Photo — Pronounced counter-zoom scrub */
+    /* Plane 6: Inner Hero Photo — Subtle zoom on desktop */
     #hero [data-sc-depth="0.95"] {
-      transform: scale(calc(1 + (var(--sc-p, 0) * 0.24)))
-        translate3d(0, calc(var(--sc-p, 0) * -42px), 0);
+      transform: scale(calc(1 + (var(--sc-p, 0) * 0.08)));
     }
 
     /* ------------------------------------------------------------------------
-       ACT 2: PIN-KINETIC PILLAR WAVE (#keunggulan)
-       Staggered 3D kinetic lift + orbital SVG icon spin during scroll
+       ACT 2: HIGHLIGHT KEUNGGULAN (#keunggulan)
+       Locked 100% horizontally aligned across all 3 columns (Zero vertical stagger)
        ------------------------------------------------------------------------ */
     #keunggulan [data-sc-pillar] {
-      --sc-i: 0;
-      --sc-stagger: clamp(0, calc((var(--sc-enter, 1) - (var(--sc-i) * 0.15)) / 0.7), 1);
-      transform: perspective(800px)
-        translate3d(
-          0,
-          calc(((1 - var(--sc-stagger)) * 46px) + (var(--sc-wave, 0) * (var(--sc-i) - 1) * 14px)),
-          0
-        )
-        rotateX(calc((1 - var(--sc-stagger)) * -18deg));
-      opacity: calc(0.05 + (var(--sc-stagger) * 0.95));
-      will-change: transform, opacity;
+      transform: none;
+      opacity: 1;
     }
 
     #keunggulan [data-sc-pillar] svg {
-      transform: rotate(calc(var(--sc-wave, 0) * 42deg))
-        scale(calc(1 + (var(--sc-wave, 0) * 0.18)));
-      will-change: transform;
+      transform: none;
     }
 
     /* ------------------------------------------------------------------------
@@ -273,14 +258,12 @@
 
     /* ------------------------------------------------------------------------
        ACT 4 (ENGINEERED PEAK): ARCHITECTURAL SHUTTER WIPE & SCRUB (#suasana)
-       Bespoke Signature Move: Chiaroscuro Window Sunbeam Sweep
        ------------------------------------------------------------------------ */
     #suasana {
       position: relative;
       overflow: hidden;
     }
 
-    /* Bespoke Signature Move: Dynamic Chiaroscuro Window Light Ray */
     #suasana::before {
       content: "";
       position: absolute;
@@ -480,17 +463,18 @@
        ------------------------------------------------------------------------ */
     @media (max-width: 768px) {
       #hero [data-sc-depth="0.20"] {
-        transform: translate3d(0, calc(var(--sc-p, 0) * -35px), 0);
+        transform: translate3d(0, calc(var(--sc-p, 0) * -25px), 0);
       }
       #hero [data-sc-depth="0.35"] {
-        transform: translate3d(0, calc(var(--sc-p, 0) * -60px), 0);
+        transform: translate3d(0, calc(var(--sc-p, 0) * -40px), 0);
       }
       #hero [data-sc-depth="0.52"] {
-        transform: translate3d(0, calc(var(--sc-p, 0) * -80px), 0);
+        transform: translate3d(0, calc(var(--sc-p, 0) * -50px), 0);
       }
-      #hero [data-sc-depth="0.75"] {
-        transform: translate3d(0, calc(var(--sc-p, 0) * 45px), 0)
-          scale(calc(1 + (var(--sc-p, 0) * 0.03)));
+      #hero [data-sc-depth="0.75"],
+      #hero [data-sc-depth="0.95"] {
+        transform: none;
+        opacity: 1;
       }
       .sc-spotlight-card {
         transform: translate3d(0, calc((1 - var(--sc-card-p)) * 48px), 0)
@@ -715,7 +699,7 @@
       ></div>
 
       <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 lg:py-20">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-7 lg:gap-12 items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           <!-- Left Column (7 cols) -->
           <div class="lg:col-span-7 max-w-2xl">
@@ -770,10 +754,10 @@
             </div>
           </div>
 
-          <!-- Right Column (5 cols) — Plane 5: Focal Subject Artifact (data-sc-depth="0.75") -->
+          <!-- Right Column (5 cols) — Full 4:5 Portrait Frame on Both Mobile & Desktop (No Cropping) -->
           <div class="lg:col-span-5 flex flex-col items-center lg:items-end">
-            <figure id="hero-figure-card" data-sc-depth="0.75" class="w-full max-w-[440px]">
-              <div class="relative aspect-[16/10] sm:aspect-[4/5] w-full rounded-xl overflow-hidden border border-white/15 bg-espresso-900 shadow-2xl">
+            <figure id="hero-figure-card" data-sc-depth="0.75" class="w-full max-w-[360px] sm:max-w-[440px]">
+              <div class="relative aspect-[4/5] w-full rounded-xl overflow-hidden border border-white/15 bg-espresso-900 shadow-2xl">
                 <img
                   src="hero-signature-latte.jpg"
                   alt="Segelas Iced Signature Latte di atas meja kayu Tentang Kopi Sukmajaya"
@@ -786,7 +770,7 @@
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-espresso-950/75 via-transparent to-transparent pointer-events-none"></div>
 
-                <div class="absolute bottom-3.5 sm:bottom-5 left-4 sm:left-5 right-4 sm:right-5 flex items-end justify-between text-ivory-50 pointer-events-none">
+                <div class="absolute bottom-4 sm:bottom-5 left-4 sm:left-5 right-4 sm:right-5 flex items-end justify-between text-ivory-50 pointer-events-none">
                   <div>
                     <p class="text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-amber-brand font-semibold">Signature Cup</p>
                     <p class="font-serif text-base sm:text-lg italic text-ivory-50 leading-snug mt-0.5">Espresso &amp; Creamy Milk</p>
@@ -806,23 +790,21 @@
       </div>
 
       <!-- ====================================================================
-           HIGHLIGHT KEUNGGULAN (#keunggulan) — ACT 2: 3D PIN-KINETIC WAVE
-           Mobile: 3-Column Grid in 1 Row (Points Only, No Description)
-           Desktop: Full 3-Column Row with Icon, Title & Short Description
+           HIGHLIGHT KEUNGGULAN (#keunggulan) — Strictly Aligned 3-Column Grid
+           Mobile: 3-Column Grid in 1 Row (Points Only)
+           Desktop: 3-Column Grid in 1 Row (Icon + Title + Description)
            ==================================================================== -->
       <div
         id="keunggulan"
         data-sc-act="keunggulan"
-        data-sc-device="pin-kinetic"
         class="relative z-10 bg-ivory-100 text-stone-900 border-t border-b border-ivory-200"
       >
         <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-          <div class="grid grid-cols-3 divide-x divide-ivory-300/80">
+          <div class="grid grid-cols-3 divide-x divide-ivory-300/80 items-stretch">
             
             <!-- Pillar 1 -->
             <div
               data-sc-pillar
-              style="--sc-i: 0;"
               class="py-3.5 px-1.5 sm:py-5 sm:px-4 md:py-6 md:px-6 first:md:pl-0 flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-1.5 md:gap-4"
             >
               <svg class="w-4 h-4 sm:w-5 sm:h-5 text-amber-brand shrink-0 md:mt-0.5" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24" aria-hidden="true">
@@ -837,8 +819,7 @@
             <!-- Pillar 2 -->
             <div
               data-sc-pillar
-              style="--sc-i: 1;"
-              class="py-3.5 px-1.5 sm:py-5 sm:px-4 md:py-6 md:px-8 flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-1.5 md:gap-4"
+              class="py-3.5 px-1.5 sm:py-5 sm:px-4 md:py-6 md:px-6 flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-1.5 md:gap-4"
             >
               <svg class="w-4 h-4 sm:w-5 sm:h-5 text-amber-brand shrink-0 md:mt-0.5" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
@@ -852,7 +833,6 @@
             <!-- Pillar 3 -->
             <div
               data-sc-pillar
-              style="--sc-i: 2;"
               class="py-3.5 px-1.5 sm:py-5 sm:px-4 md:py-6 md:px-6 last:md:pr-0 flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-1.5 md:gap-4"
             >
               <svg class="w-4 h-4 sm:w-5 sm:h-5 text-amber-brand shrink-0 md:mt-0.5" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24" aria-hidden="true">
@@ -860,7 +840,7 @@
               </svg>
               <div>
                 <h2 class="text-[11px] sm:text-xs md:text-sm font-bold text-stone-900 tracking-tight leading-snug">Pastry &amp; Toast Hangat</h2>
-                <p class="hidden md:block text-xs text-stone-600 mt-0.5 leading-relaxed">Roti panggang tebal, croissant renyah, dan kudapan pendamping kopi yang disiapkan segar setiap hari.</p>
+                <p class="hidden md:block text-xs text-stone-600 mt-0.5 leading-relaxed">Roti panggang, croissant renyah, dan kudapan pendamping kopi yang segar.</p>
               </div>
             </div>
 
@@ -888,10 +868,10 @@
               KURASI SAJIAN
             </span>
             <h2 id="menu-heading" class="font-serif text-2xl sm:text-4xl font-semibold text-stone-900 tracking-tight mt-1">
-              Pilihan di Meja Anda
+              Menu Pilihan
             </h2>
             <p class="hidden sm:block text-sm sm:text-base text-stone-600 mt-2 max-w-xl">
-              Dari kopi hingga kudapan hangat, pilih kategori untuk melihat sajian dan harganya.
+              Diracik setiap hari dari bahan terbaik. Pilih kategori di bawah untuk melihat menu favorit dan harga lengkap kami.
             </p>
           </div>
 
@@ -901,7 +881,7 @@
             aria-pressed="false"
             class="shrink-0 inline-flex items-center gap-1.5 px-3 sm:px-4 h-9 sm:min-h-[42px] rounded-lg border border-stone-300 bg-transparent hover:border-stone-900 hover:bg-stone-900 hover:text-ivory-50 text-[11px] sm:text-xs font-semibold text-stone-800 transition-colors"
           >
-            <span id="view-all-menu-label">Lihat Semua Menu</span>
+            <span id="view-all-menu-label">Tampilkan Semua Menu</span>
             <span aria-hidden="true">→</span>
           </button>
         </div>
@@ -935,10 +915,10 @@
         <div class="mt-7 sm:mt-12 pt-5 sm:pt-8 border-t border-ivory-200 flex flex-col lg:flex-row lg:items-center justify-between gap-4 sm:gap-6">
           <div class="space-y-0.5">
             <p class="text-xs sm:text-sm font-semibold text-stone-900">
-              Ingin pesan antar atau menyimpan daftar menu lengkap?
+              Ingin pesan antar ke rumah/kantor atau simpan daftar menu lengkap?
             </p>
             <p class="text-[11px] sm:text-xs text-stone-600">
-              Tersedia untuk dine-in, takeaway, dan pesan antar melalui GoFood.
+              Tersedia untuk dine-in, takeaway, maupun pesan antar praktis melalui GoFood.
             </p>
           </div>
 
@@ -990,10 +970,10 @@
               RUANG &amp; KENYAMANAN
             </span>
             <h2 id="suasana-heading" class="font-serif text-2xl sm:text-4xl lg:text-[42px] font-semibold text-ivory-50 tracking-tight leading-[1.12] mt-1 sm:mt-2">
-              Ruang untuk Fokus dan Bersantai
+              Ruang yang Menginspirasi
             </h2>
             <p class="hidden sm:block text-sm text-stone-300 leading-relaxed max-w-xl mt-2">
-              Pencahayaan hangat, ruang lega, serta pilihan area untuk bekerja di dalam atau bersantai di teras.
+              Dirancang dengan pencahayaan hangat dan sirkulasi lega—baik saat Anda butuh fokus di dalam ruangan maupun bersantai di teras teduh.
             </p>
           </div>
           <button
@@ -1033,7 +1013,7 @@
               <div>
                 <span class="text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.16em] text-amber-brand block">INDOOR LOUNGE</span>
                 <h3 class="font-serif text-lg sm:text-2xl font-medium text-ivory-50 mt-0.5">Area Indoor (Full AC)</h3>
-                <p class="hidden sm:block text-xs text-stone-300 mt-1 max-w-md">Sejuk dan tenang, dengan meja kayu panjang untuk bekerja atau membaca.</p>
+                <p class="hidden sm:block text-xs text-stone-300 mt-1 max-w-md">Tenang, sejuk, dan dilengkapi meja kayu panjang untuk bekerja (WFC) atau membaca.</p>
               </div>
               <span class="text-[11px] sm:text-xs text-stone-300 group-hover:text-ivory-50 shrink-0">Perbesar ↗</span>
             </div>
@@ -1111,16 +1091,16 @@
             <div data-sc-facility style="--sc-fac-i: 0;" class="flex items-center gap-2.5 sm:gap-3.5">
               <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-brand shrink-0" aria-hidden="true"></span>
               <div class="min-w-0">
-                <span class="text-xs sm:text-sm font-semibold text-ivory-50 block truncate">Mushola</span>
-                <span class="text-[11px] sm:text-xs text-stone-400 block truncate">Tersedia di dalam kedai</span>
+                <span class="text-xs sm:text-sm font-semibold text-ivory-50 block truncate">Mushola Bersih</span>
+                <span class="text-[11px] sm:text-xs text-stone-400 block truncate">Di dalam area kedai</span>
               </div>
             </div>
 
             <div data-sc-facility style="--sc-fac-i: 1;" class="flex items-center gap-2.5 sm:gap-3.5">
               <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-brand shrink-0" aria-hidden="true"></span>
               <div class="min-w-0">
-                <span class="text-xs sm:text-sm font-semibold text-ivory-50 block truncate">Area Parkir</span>
-                <span class="text-[11px] sm:text-xs text-stone-400 block truncate">Untuk motor &amp; mobil</span>
+                <span class="text-xs sm:text-sm font-semibold text-ivory-50 block truncate">Area Parkir Memadai</span>
+                <span class="text-[11px] sm:text-xs text-stone-400 block truncate">Akses motor &amp; mobil</span>
               </div>
             </div>
 
@@ -1135,8 +1115,8 @@
             <div data-sc-facility style="--sc-fac-i: 3;" class="flex items-center gap-2.5 sm:gap-3.5">
               <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-brand shrink-0" aria-hidden="true"></span>
               <div class="min-w-0">
-                <span class="text-xs sm:text-sm font-semibold text-ivory-50 block truncate">Toilet</span>
-                <span class="text-[11px] sm:text-xs text-stone-400 block truncate">Bersih dan nyaman</span>
+                <span class="text-xs sm:text-sm font-semibold text-ivory-50 block truncate">Toilet Terawat</span>
+                <span class="text-[11px] sm:text-xs text-stone-400 block truncate">Bersih &amp; nyaman</span>
               </div>
             </div>
 
@@ -1169,10 +1149,10 @@
                 CATATAN PELANGGAN
               </span>
               <h2 id="reviews-heading" class="font-serif text-2xl sm:text-4xl font-semibold text-stone-900 tracking-tight mt-1">
-                Cerita dari Pelanggan
+                Apa Kata Mereka
               </h2>
               <p class="text-xs sm:text-sm text-stone-600 mt-1.5 leading-relaxed max-w-md">
-                Kesan dari pengunjung yang menjadikan Tentang Kopi Sukmajaya sebagai tempat singgah sehari-hari.
+                Kesan hangat dari teman-teman yang menjadikan Tentang Kopi Sukmajaya sebagai ruang singgah harian.
               </p>
             </div>
 
@@ -1242,7 +1222,7 @@
                 <div>
                   <span class="font-serif text-2xl sm:text-3xl text-amber-brand leading-none block" aria-hidden="true">“</span>
                   <p class="text-xs sm:text-sm text-stone-800 leading-relaxed mt-1.5 whitespace-normal break-words">
-                    Kopinya selalu enak dan konsisten. Baristanya ramah, suasananya tenang—pas untuk fokus bekerja atau mengerjakan tugas hingga malam.
+                    Kopi di sini selalu konsisten enak. Baristanya ramah dan tempatnya tenang banget buat fokus kerja atau nugas dari siang sampai malam.
                   </p>
                 </div>
                 <footer class="mt-4 sm:mt-6 pt-3 border-t border-ivory-200/70">
@@ -1260,7 +1240,7 @@
                 <div>
                   <span class="font-serif text-2xl sm:text-3xl text-amber-brand leading-none block" aria-hidden="true">“</span>
                   <p class="text-xs sm:text-sm text-stone-800 leading-relaxed mt-1.5 whitespace-normal break-words">
-                    Suasananya terasa nyaman dan sejuk, lokasinya pun mudah ditemukan tepat di samping Polsek Sukmajaya. Egg Toast dan es kopi susunya mantap!
+                    Suasananya homey dan adem, lokasinya juga gampang dicari tepat di samping Polsek Sukmajaya. Egg Toast dan es kopi susunya mantap!
                   </p>
                 </div>
                 <footer class="mt-4 sm:mt-6 pt-3 border-t border-ivory-200/70">
@@ -1278,7 +1258,7 @@
                 <div>
                   <span class="font-serif text-2xl sm:text-3xl text-amber-brand leading-none block" aria-hidden="true">“</span>
                   <p class="text-xs sm:text-sm text-stone-800 leading-relaxed mt-1.5 whitespace-normal break-words">
-                    Salah satu tempat ngopi favorit di Sukmajaya. Karakter espressonya terasa, manisnya pas, dan harganya bersahabat.
+                    Salah satu tempat ngopi favorit di Sukmajaya. Karakter espresso-nya berasa, manisnya pas, dan harganya sangat bersahabat di kantong.
                   </p>
                 </div>
                 <footer class="mt-4 sm:mt-6 pt-3 border-t border-ivory-200/70">
@@ -1317,7 +1297,7 @@
                 DI BALIK BAR · @TENTANGKOPIDEPOK
               </span>
               <h3 class="font-serif text-xl sm:text-3xl font-semibold text-stone-900 mt-1">
-                Di Balik Setiap Seduhan
+                Cerita di Setiap Seduhan
               </h3>
             </div>
 
@@ -1497,10 +1477,10 @@
                 RESERVASI MEJA &amp; KOMUNITAS
               </span>
               <h2 class="font-serif text-xl sm:text-3xl font-semibold text-ivory-50 leading-snug mt-1.5">
-                Perlu meja untuk rapat tim, acara komunitas, atau kerja bersama?
+                Butuh ruang untuk rapat tim, acara komunitas, atau WFC grup?
               </h2>
               <p class="text-xs sm:text-sm text-stone-300 mt-1.5 leading-relaxed">
-                Hubungi kami lewat WhatsApp untuk mengecek ketersediaan meja dan pilihan sajian untuk grup Anda.
+                Hubungi kami langsung melalui WhatsApp untuk mengamankan meja dan menyiapkan paket sajian kopi terbaik bagi grup Anda.
               </p>
             </div>
 
@@ -1588,7 +1568,7 @@
                 rel="noopener noreferrer"
                 class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 h-11 sm:min-h-[46px] rounded-lg bg-espresso-950 hover:bg-espresso-800 text-ivory-50 text-xs font-semibold transition-colors"
               >
-                <span>Cari Rute di Google Maps</span>
+                <span>Petunjuk Arah di Google Maps</span>
                 <span aria-hidden="true">↗</span>
               </a>
             </div>
@@ -1882,7 +1862,7 @@
         name: "Espresso Latte",
         categoryId: "signature-coffee",
         price: 32000,
-        description: "Double shot espresso Arabika, fresh milk yang lembut, dan sentuhan karamel ringan.",
+        description: "Perpaduan double shot espresso Arabika, fresh milk bertekstur lembut, dan sentuhan tipis karamel.",
         attributes: ["Iced", "Dairy"],
         badge: "Signature Unggulan",
         imageUrl: "menu-espresso-latte.jpg"
@@ -1892,7 +1872,7 @@
         name: "Caramel Macchiato",
         categoryId: "signature-coffee",
         price: 36000,
-        description: "Espresso, susu segar dingin, sirup vanila, dan saus karamel yang legit.",
+        description: "Espresso di atas susu segar dingin dengan sirup vanila dan saus karamel legit.",
         attributes: ["Iced", "Dairy"],
         badge: null,
         imageUrl: "menu-caramel-macchiato.jpg"
@@ -1902,7 +1882,7 @@
         name: "Americano",
         categoryId: "signature-coffee",
         price: 28000,
-        description: "Espresso 100% Arabika yang dipadukan dengan air mineral untuk rasa ringan dan menyegarkan.",
+        description: "Ekstraksi espresso 100% Arabika dengan air mineral murni yang ringan dan menyegarkan.",
         attributes: ["Hot / Iced", "Black"],
         badge: null,
         imageUrl: "menu-americano.jpg"
@@ -1912,7 +1892,7 @@
         name: "Matcha Espresso Fusion",
         categoryId: "signature-coffee",
         price: 34000,
-        description: "Matcha Jepang yang pekat, susu segar, dan satu shot espresso.",
+        description: "Kombinasi matcha Jepang pekat, susu segar, dan satu shot espresso hangat.",
         attributes: ["Iced", "Fusion"],
         badge: null,
         imageUrl: "menu-matcha-espresso.jpg"
@@ -1924,7 +1904,7 @@
         name: "Brown Sugar Boba Milk",
         categoryId: "non-coffee",
         price: 23500,
-        description: "Susu segar creamy, saus karamel gula aren, dan pearl boba yang kenyal.",
+        description: "Susu segar creamy dengan saus karamel gula aren hangat dan pearl boba kenyal.",
         attributes: ["Iced", "Dairy"],
         badge: "Favorit GoFood",
         imageUrl: "menu-brown-sugar-boba.jpg"
@@ -1944,7 +1924,7 @@
         name: "Honey Earl Grey Macchiato",
         categoryId: "non-coffee",
         price: 23500,
-        description: "Teh Earl Grey beraroma bergamot, madu murni, dan lapisan krim macchiato yang lembut.",
+        description: "Seduhan teh Earl Grey beraroma bergamot, madu murni, dan lapisan krim macchiato lembut.",
         attributes: ["Iced", "Tea Macchiato"],
         badge: null,
         imageUrl: "menu-earl-grey-macchiato.jpg"
@@ -1954,7 +1934,7 @@
         name: "Ice Red Velvet Latte",
         categoryId: "non-coffee",
         price: 22000,
-        description: "Red velvet dan susu segar dingin dengan rasa creamy serta manis yang seimbang.",
+        description: "Paduan red velvet lembut dengan susu segar dingin yang creamy dan manis seimbang.",
         attributes: ["Iced", "Dairy"],
         badge: null,
         imageUrl: "menu-red-velvet-latte.jpg"
@@ -1966,7 +1946,7 @@
         name: "V60 Aceh Gayo",
         categoryId: "manual-brew",
         price: 30000,
-        description: "Arabika Gayo single origin dengan catatan floral dan jeruk, ditutup akhir rasa bersih.",
+        description: "Single origin Arabica Gayo dengan notes floral, jeruk segar, dan akhir rasa bersih.",
         attributes: ["Hot / Iced", "Filter"],
         badge: "Pilihan Barista",
         imageUrl: "menu-v60-gayo.jpg"
@@ -1976,7 +1956,7 @@
         name: "Japanese Iced Coffee",
         categoryId: "manual-brew",
         price: 32000,
-        description: "Pour-over yang langsung menetes ke atas es untuk menjaga aroma buah segarnya.",
+        description: "Seduhan pour-over langsung di atas es kristal untuk mengunci aroma buah segar.",
         attributes: ["Iced", "Filter"],
         badge: null,
         imageUrl: "menu-japanese-iced-coffee.jpg"
@@ -1986,7 +1966,7 @@
         name: "Vietnam Drip Susu",
         categoryId: "manual-brew",
         price: 26000,
-        description: "Kopi pekat yang menetes perlahan di atas susu kental manis.",
+        description: "Ekstraksi kopi pekat perlahan di atas lapisan susu kental manis legit.",
         attributes: ["Hot / Iced", "Sweet"],
         badge: null,
         imageUrl: "menu-vietnam-drip.jpg"
@@ -1996,7 +1976,7 @@
         name: "French Press Flores Bajawa",
         categoryId: "manual-brew",
         price: 30000,
-        description: "Seduhan penuh badan dengan karakter cokelat hitam dan kacang panggang khas Flores.",
+        description: "Seduhan full-bodied dengan karakter cokelat hitam dan kacang panggang khas Flores.",
         attributes: ["Hot", "Full Body"],
         badge: null,
         imageUrl: "menu-french-press-flores.jpg"
@@ -2008,7 +1988,7 @@
         name: "Egg Tentang Toast",
         categoryId: "pastry",
         price: 24000,
-        description: "Brioche panggang mentega dengan isian telur lembut dan saus spesial Tentang Kopi.",
+        description: "Roti brioche panggang mentega tebal dengan isian telur lembut dan saus spesial Tentang Kopi.",
         attributes: ["Warm", "Savory Toast"],
         badge: "Teman Kopi Terbaik",
         imageUrl: "menu-egg-toast.jpg"
@@ -2018,7 +1998,7 @@
         name: "Butter Croissant",
         categoryId: "pastry",
         price: 24000,
-        description: "Croissant Prancis berlapis, renyah, dan harum mentega; disajikan hangat setiap hari.",
+        description: "Croissant Prancis berlapis renyah dan harum mentega, disajikan hangat setiap hari.",
         attributes: ["Warm", "Fresh Baked"],
         badge: null,
         imageUrl: "menu-butter-croissant.jpg"
@@ -2028,7 +2008,7 @@
         name: "Pain au Chocolat",
         categoryId: "pastry",
         price: 28000,
-        description: "Pastry berlapis renyah dengan isian cokelat hitam yang lumer di tengah.",
+        description: "Danish pastry berlapis renyah dengan isian cokelat hitam lumer di bagian tengah.",
         attributes: ["Warm", "Sweet"],
         badge: null,
         imageUrl: "menu-pain-au-chocolat.jpg"
@@ -2048,37 +2028,37 @@
     const ambiencePhotos = [
       {
         title: "Indoor (AC) — Tentang Kopi Sukmajaya",
-        desc: "Ruang dalam ber-AC dengan meja kayu untuk bekerja atau bersantai.",
+        desc: "Ruang dalam ber-AC yang tenang dengan meja kayu luas untuk bekerja maupun bersantai.",
         imageUrl: "ambience-indoor-ac.jpg"
       },
       {
         title: "Outdoor (Smoking) — Teras Teduh",
-        desc: "Area duduk semi-terbuka untuk menikmati suasana santai di Sukmajaya.",
+        desc: "Area duduk semi-terbuka dengan sirkulasi udara sejuk dan suasana santai di Sukmajaya.",
         imageUrl: "ambience-outdoor-terrace.jpg"
       },
       {
         title: "Coffee Bar & Espresso Station",
-        desc: "Meja seduh terbuka tempat barista menyiapkan kopi pilihan setiap hari.",
+        desc: "Meja seduh terbuka tempat barista mengekstraksi biji kopi pilihan setiap hari.",
         imageUrl: "ambience-coffee-bar.jpg"
       },
       {
         title: "Microfoam & Latte Art",
-        desc: "Sajian latte hangat dengan tekstur microfoam yang lembut.",
+        desc: "Sajian latte hangat dengan tekstur susu microfoam lembut.",
         imageUrl: "craft-latte-art.jpg"
       },
       {
         title: "Seduhan Manual Brew",
-        desc: "Seduhan pour-over yang menonjolkan karakter kopi Nusantara.",
+        desc: "Seduhan pour-over untuk menonjolkan karakter asli kopi Nusantara.",
         imageUrl: "craft-manual-brew.jpg"
       },
       {
         title: "Espresso Kalibrasi Harian",
-        desc: "Sajian cappuccino hangat untuk menemani waktu sore.",
+        desc: "Sajian cappuccino hangat untuk menemani perbincangan sore.",
         imageUrl: "craft-espresso-calibration.jpg"
       },
       {
         title: "Kudapan & Roti Hangat",
-        desc: "Pilihan toast, croissant, dan roti hangat sebagai teman minum kopi.",
+        desc: "Pilihan toast, croissant, dan roti hangat sebagai pendamping minum kopi.",
         imageUrl: "craft-fresh-pastry.jpg"
       }
     ];
@@ -2604,14 +2584,12 @@
         const scrollY = window.scrollY || window.pageYOffset || 0;
         const vh = window.innerHeight || 1;
 
-        // Hard Constraint 1: At scroll = 0, lock initial state 100% identical to original
         if (scrollY <= 2) {
           acts.forEach((act) => {
             const st = stateMap.get(act);
             const rect = act.getBoundingClientRect();
             st.targetP = 0;
             st.targetWave = 0;
-            // Sections already visible at top of page stay at enter = 1; below-the-fold sections wait at 0
             st.targetEnter = rect.top < vh * 0.92 ? 1 : 0;
           });
           return;
@@ -2628,19 +2606,9 @@
             st.targetP = heroP;
             st.targetEnter = 1;
             st.targetWave = 0;
-          } else if (actId === "keunggulan") {
-            const totalSpan = Math.max(1, vh + rect.height);
-            const rawP = clamp01((vh - rect.top) / totalSpan);
-            const enterP = clamp01((vh * 0.96 - rect.top) / (vh * 0.36));
-            // Smooth sine wave as keunggulan traverses the viewport
-            const waveVal = Math.sin(rawP * Math.PI);
-            st.targetP = rawP;
-            st.targetEnter = enterP;
-            st.targetWave = waveVal;
           } else {
             const totalSpan = Math.max(1, vh + rect.height);
             const rawP = clamp01((vh - rect.top) / totalSpan);
-            // Calibrated entrance window so user clearly sees the reveal in the active viewing zone
             const enterWindow = Math.min(vh * 0.66, Math.max(300, rect.height * 0.75));
             const enterP = clamp01((vh * 0.92 - rect.top) / enterWindow);
 
@@ -2692,7 +2660,6 @@
         }
       }
 
-      // Snap immediately on first load so scroll = 0 has zero initial jump
       computeTargets();
       acts.forEach((act) => {
         const st = stateMap.get(act);
