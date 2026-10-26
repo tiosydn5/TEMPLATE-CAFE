@@ -326,13 +326,10 @@
       will-change: transform;
     }
 
+    /* 4 Facilities are strictly locked horizontally aligned (No vertical stair-step) */
     #suasana [data-sc-facility] {
-      --sc-fac-i: 0;
-      --sc-fac-p: clamp(0, calc((var(--sc-enter, 1) - 0.22 - (var(--sc-fac-i) * 0.11)) / 0.58), 1);
-      transform: translate3d(0, calc((1 - var(--sc-fac-p)) * 44px), 0)
-        scale(calc(0.9 + (var(--sc-fac-p) * 0.1)));
-      opacity: calc(0.05 + (var(--sc-fac-p) * 0.95));
-      will-change: transform, opacity;
+      transform: none;
+      opacity: 1;
     }
 
     /* ------------------------------------------------------------------------
@@ -1084,11 +1081,11 @@
 
         </div>
 
-        <!-- 2x2 Grid on Mobile, 4-Column Row on Desktop -->
+        <!-- 4 Facilities Strictly Aligned in 1 Row (Zero Vertical Stair-Step on Desktop & Mobile) -->
         <div class="mt-6 sm:mt-12 pt-5 sm:pt-8 border-t border-white/10">
-          <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6 lg:gap-8">
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6 lg:gap-8 items-center">
             
-            <div data-sc-facility style="--sc-fac-i: 0;" class="flex items-center gap-2.5 sm:gap-3.5">
+            <div data-sc-facility class="flex items-center gap-2.5 sm:gap-3.5">
               <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-brand shrink-0" aria-hidden="true"></span>
               <div class="min-w-0">
                 <span class="text-xs sm:text-sm font-semibold text-ivory-50 block truncate">Mushola Bersih</span>
@@ -1096,7 +1093,7 @@
               </div>
             </div>
 
-            <div data-sc-facility style="--sc-fac-i: 1;" class="flex items-center gap-2.5 sm:gap-3.5">
+            <div data-sc-facility class="flex items-center gap-2.5 sm:gap-3.5">
               <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-brand shrink-0" aria-hidden="true"></span>
               <div class="min-w-0">
                 <span class="text-xs sm:text-sm font-semibold text-ivory-50 block truncate">Area Parkir Memadai</span>
@@ -1104,7 +1101,7 @@
               </div>
             </div>
 
-            <div data-sc-facility style="--sc-fac-i: 2;" class="flex items-center gap-2.5 sm:gap-3.5">
+            <div data-sc-facility class="flex items-center gap-2.5 sm:gap-3.5">
               <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-brand shrink-0" aria-hidden="true"></span>
               <div class="min-w-0">
                 <span class="text-xs sm:text-sm font-semibold text-ivory-50 block truncate">Pet Friendly</span>
@@ -1112,7 +1109,7 @@
               </div>
             </div>
 
-            <div data-sc-facility style="--sc-fac-i: 3;" class="flex items-center gap-2.5 sm:gap-3.5">
+            <div data-sc-facility class="flex items-center gap-2.5 sm:gap-3.5">
               <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-brand shrink-0" aria-hidden="true"></span>
               <div class="min-w-0">
                 <span class="text-xs sm:text-sm font-semibold text-ivory-50 block truncate">Toilet Terawat</span>
@@ -1678,7 +1675,7 @@
             title="GoFood Tentang Kopi Sukmajaya"
             class="w-9 h-9 rounded-lg border border-white/15 hover:border-amber-brand hover:text-amber-brand flex items-center justify-center text-stone-300 transition-colors"
           >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
             </svg>
           </a>
@@ -1763,7 +1760,6 @@
 
   <!-- ========================================================================
        MODAL 2: AMBIENCE & CRAFT PHOTO LIGHTBOX
-       (Desktop: Single Line with Buttons on Right | Mobile: Expandable "Selengkapnya")
        ======================================================================== -->
   <div
     id="gallery-modal"
