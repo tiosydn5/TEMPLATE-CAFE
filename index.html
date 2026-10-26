@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TENTANG KOPI — Secangkir Kopi, Sejuta Cerita | Sukmajaya, Depok</title>
-  <meta name="description" content="Tentang Kopi Sukmajaya Depok (Jl. Bahagia Raya No. 4, Samping Polsek Sukmajaya) — Ruang kopi hangat untuk menikmati kopi pilihan, bekerja dengan tenang, dan berbagi cerita." />
+  <title>TENTANG KOPI — Kopi Arabika &amp; Ruang Singgah | Sukmajaya, Depok</title>
+  <meta name="description" content="Tentang Kopi Sukmajaya, Depok (Jl. Bahagia Raya No. 4, samping Polsek Sukmajaya) — tempat menikmati kopi Arabika Nusantara, bekerja, dan berbagi cerita." />
   <link rel="icon" type="image/jpeg" href="logo.jpg" />
 
   <!-- Google Fonts: Fraunces (Editorial Serif) & Plus Jakarta Sans (Clean UI & Tabular Numerals) -->
@@ -246,7 +246,7 @@
 
     .sc-menu-row {
       --sc-row-i: 0;
-      --sc-row-p: clamp(0, calc((var(--sc-enter, 1) - 0.08 - (var(--sc-row-i) * 0.14)) / 0.62), 1);
+      --sc-row-p: clamp(0, calc((var(--sc-enter, 1) - 0.06 - (var(--sc-row-i) * 0.09)) / 0.50), 1);
       transform: translate3d(
         calc((1 - var(--sc-row-p)) * 72px),
         calc(((1 - var(--sc-row-p)) * 42px) + ((var(--sc-p, 0.5) - 0.5) * (var(--sc-row-i) + 1) * 12px)),
@@ -497,11 +497,8 @@
           scale(calc(0.92 + (var(--sc-card-p) * 0.08)));
       }
       .sc-menu-row {
-        transform: translate3d(
-          calc((1 - var(--sc-row-p)) * 32px),
-          calc((1 - var(--sc-row-p)) * 28px),
-          0
-        );
+        transform: none;
+        opacity: 1;
       }
       #suasana [data-sc-bento] {
         clip-path: inset(
@@ -729,7 +726,7 @@
               class="inline-flex flex-wrap items-center gap-2 text-[11px] sm:text-xs tracking-wide text-stone-300 mb-4 sm:mb-6"
             >
               <span id="hero-status-dot" class="w-2 h-2 rounded-full bg-[#22C55E]" aria-hidden="true"></span>
-              <span id="hero-status-text" class="tabular-nums font-medium text-ivory-100">Buka Setiap Hari · 11.00 – 22.00 WIB</span>
+              <span id="hero-status-text" class="tabular-nums font-medium text-ivory-100">Buka Hari Ini · 11.00 – 22.00 WIB</span>
               <span class="text-stone-500" aria-hidden="true">/</span>
               <span class="text-stone-400">Sukmajaya, Depok</span>
             </div>
@@ -747,7 +744,7 @@
             <!-- Plane 4: Narrative Copy & Actions Plane (data-sc-depth="0.52") -->
             <div data-sc-depth="0.52">
               <p class="mt-4 sm:mt-6 text-sm sm:text-lg text-stone-300 leading-relaxed max-w-xl font-normal">
-                Ruang singgah yang hangat di Sukmajaya untuk menikmati seduhan kopi Arabika Nusantara, bekerja dengan tenang, dan berbincang bersama orang-orang baik.
+                Tempat singgah di Sukmajaya untuk menikmati seduhan Arabika Nusantara, menyelesaikan pekerjaan, atau berbincang santai.
               </p>
 
               <!-- Compact 2-Column CTA Grid on Mobile -->
@@ -833,7 +830,7 @@
               </svg>
               <div>
                 <h2 class="text-[11px] sm:text-xs md:text-sm font-bold text-stone-900 tracking-tight leading-snug">100% Arabica Lokal</h2>
-                <p class="hidden md:block text-xs text-stone-600 mt-0.5 leading-relaxed">Biji kopi Nusantara pilihan yang disangrai untuk menghasilkan karakter rasa bersih dan seimbang.</p>
+                <p class="hidden md:block text-xs text-stone-600 mt-0.5 leading-relaxed">Biji Arabika Nusantara pilihan yang disangrai untuk rasa yang bersih dan seimbang.</p>
               </div>
             </div>
 
@@ -847,8 +844,8 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
               </svg>
               <div>
-                <h2 class="text-[11px] sm:text-xs md:text-sm font-bold text-stone-900 tracking-tight leading-snug">Nyaman untuk WFC</h2>
-                <p class="hidden md:block text-xs text-stone-600 mt-0.5 leading-relaxed">Meja kerja proporsional dengan koneksi Wi-Fi stabil dan akses stopkontak di area duduk.</p>
+                <h2 class="text-[11px] sm:text-xs md:text-sm font-bold text-stone-900 tracking-tight leading-snug">Nyaman untuk Bekerja</h2>
+                <p class="hidden md:block text-xs text-stone-600 mt-0.5 leading-relaxed">Meja kerja, Wi-Fi stabil, dan akses stopkontak tersedia di area duduk.</p>
               </div>
             </div>
 
@@ -891,10 +888,10 @@
               KURASI SAJIAN
             </span>
             <h2 id="menu-heading" class="font-serif text-2xl sm:text-4xl font-semibold text-stone-900 tracking-tight mt-1">
-              Menu Pilihan
+              Pilihan di Meja Anda
             </h2>
             <p class="hidden sm:block text-sm sm:text-base text-stone-600 mt-2 max-w-xl">
-              Diracik setiap hari dari bahan terbaik. Pilih kategori di bawah untuk melihat menu favorit dan harga lengkap kami.
+              Dari kopi hingga kudapan hangat, pilih kategori untuk melihat sajian dan harganya.
             </p>
           </div>
 
@@ -904,7 +901,7 @@
             aria-pressed="false"
             class="shrink-0 inline-flex items-center gap-1.5 px-3 sm:px-4 h-9 sm:min-h-[42px] rounded-lg border border-stone-300 bg-transparent hover:border-stone-900 hover:bg-stone-900 hover:text-ivory-50 text-[11px] sm:text-xs font-semibold text-stone-800 transition-colors"
           >
-            <span id="view-all-menu-label">Tampilkan Semua Menu</span>
+            <span id="view-all-menu-label">Lihat Semua Menu</span>
             <span aria-hidden="true">→</span>
           </button>
         </div>
@@ -938,10 +935,10 @@
         <div class="mt-7 sm:mt-12 pt-5 sm:pt-8 border-t border-ivory-200 flex flex-col lg:flex-row lg:items-center justify-between gap-4 sm:gap-6">
           <div class="space-y-0.5">
             <p class="text-xs sm:text-sm font-semibold text-stone-900">
-              Ingin pesan antar ke rumah/kantor atau simpan daftar menu lengkap?
+              Ingin pesan antar atau menyimpan daftar menu lengkap?
             </p>
             <p class="text-[11px] sm:text-xs text-stone-600">
-              Tersedia untuk dine-in, takeaway, maupun pesan antar praktis melalui GoFood.
+              Tersedia untuk dine-in, takeaway, dan pesan antar melalui GoFood.
             </p>
           </div>
 
@@ -993,10 +990,10 @@
               RUANG &amp; KENYAMANAN
             </span>
             <h2 id="suasana-heading" class="font-serif text-2xl sm:text-4xl lg:text-[42px] font-semibold text-ivory-50 tracking-tight leading-[1.12] mt-1 sm:mt-2">
-              Ruang yang Menginspirasi
+              Ruang untuk Fokus dan Bersantai
             </h2>
             <p class="hidden sm:block text-sm text-stone-300 leading-relaxed max-w-xl mt-2">
-              Dirancang dengan pencahayaan hangat dan sirkulasi lega—baik saat Anda butuh fokus di dalam ruangan maupun bersantai di teras teduh.
+              Pencahayaan hangat, ruang lega, serta pilihan area untuk bekerja di dalam atau bersantai di teras.
             </p>
           </div>
           <button
@@ -1036,7 +1033,7 @@
               <div>
                 <span class="text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.16em] text-amber-brand block">INDOOR LOUNGE</span>
                 <h3 class="font-serif text-lg sm:text-2xl font-medium text-ivory-50 mt-0.5">Area Indoor (Full AC)</h3>
-                <p class="hidden sm:block text-xs text-stone-300 mt-1 max-w-md">Tenang, sejuk, dan dilengkapi meja kayu panjang untuk bekerja (WFC) atau membaca.</p>
+                <p class="hidden sm:block text-xs text-stone-300 mt-1 max-w-md">Sejuk dan tenang, dengan meja kayu panjang untuk bekerja atau membaca.</p>
               </div>
               <span class="text-[11px] sm:text-xs text-stone-300 group-hover:text-ivory-50 shrink-0">Perbesar ↗</span>
             </div>
@@ -1114,16 +1111,16 @@
             <div data-sc-facility style="--sc-fac-i: 0;" class="flex items-center gap-2.5 sm:gap-3.5">
               <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-brand shrink-0" aria-hidden="true"></span>
               <div class="min-w-0">
-                <span class="text-xs sm:text-sm font-semibold text-ivory-50 block truncate">Mushola Bersih</span>
-                <span class="text-[11px] sm:text-xs text-stone-400 block truncate">Di dalam area kedai</span>
+                <span class="text-xs sm:text-sm font-semibold text-ivory-50 block truncate">Mushola</span>
+                <span class="text-[11px] sm:text-xs text-stone-400 block truncate">Tersedia di dalam kedai</span>
               </div>
             </div>
 
             <div data-sc-facility style="--sc-fac-i: 1;" class="flex items-center gap-2.5 sm:gap-3.5">
               <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-brand shrink-0" aria-hidden="true"></span>
               <div class="min-w-0">
-                <span class="text-xs sm:text-sm font-semibold text-ivory-50 block truncate">Area Parkir Memadai</span>
-                <span class="text-[11px] sm:text-xs text-stone-400 block truncate">Akses motor &amp; mobil</span>
+                <span class="text-xs sm:text-sm font-semibold text-ivory-50 block truncate">Area Parkir</span>
+                <span class="text-[11px] sm:text-xs text-stone-400 block truncate">Untuk motor &amp; mobil</span>
               </div>
             </div>
 
@@ -1138,8 +1135,8 @@
             <div data-sc-facility style="--sc-fac-i: 3;" class="flex items-center gap-2.5 sm:gap-3.5">
               <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-brand shrink-0" aria-hidden="true"></span>
               <div class="min-w-0">
-                <span class="text-xs sm:text-sm font-semibold text-ivory-50 block truncate">Toilet Terawat</span>
-                <span class="text-[11px] sm:text-xs text-stone-400 block truncate">Bersih &amp; nyaman</span>
+                <span class="text-xs sm:text-sm font-semibold text-ivory-50 block truncate">Toilet</span>
+                <span class="text-[11px] sm:text-xs text-stone-400 block truncate">Bersih dan nyaman</span>
               </div>
             </div>
 
@@ -1172,10 +1169,10 @@
                 CATATAN PELANGGAN
               </span>
               <h2 id="reviews-heading" class="font-serif text-2xl sm:text-4xl font-semibold text-stone-900 tracking-tight mt-1">
-                Apa Kata Mereka
+                Cerita dari Pelanggan
               </h2>
               <p class="text-xs sm:text-sm text-stone-600 mt-1.5 leading-relaxed max-w-md">
-                Kesan hangat dari teman-teman yang menjadikan Tentang Kopi Sukmajaya sebagai ruang singgah harian.
+                Kesan dari pengunjung yang menjadikan Tentang Kopi Sukmajaya sebagai tempat singgah sehari-hari.
               </p>
             </div>
 
@@ -1245,7 +1242,7 @@
                 <div>
                   <span class="font-serif text-2xl sm:text-3xl text-amber-brand leading-none block" aria-hidden="true">“</span>
                   <p class="text-xs sm:text-sm text-stone-800 leading-relaxed mt-1.5 whitespace-normal break-words">
-                    Kopi di sini selalu konsisten enak. Baristanya ramah dan tempatnya tenang banget buat fokus kerja atau nugas dari siang sampai malam.
+                    Kopinya selalu enak dan konsisten. Baristanya ramah, suasananya tenang—pas untuk fokus bekerja atau mengerjakan tugas hingga malam.
                   </p>
                 </div>
                 <footer class="mt-4 sm:mt-6 pt-3 border-t border-ivory-200/70">
@@ -1263,7 +1260,7 @@
                 <div>
                   <span class="font-serif text-2xl sm:text-3xl text-amber-brand leading-none block" aria-hidden="true">“</span>
                   <p class="text-xs sm:text-sm text-stone-800 leading-relaxed mt-1.5 whitespace-normal break-words">
-                    Suasananya homey dan adem, lokasinya juga gampang dicari tepat di samping Polsek Sukmajaya. Egg Toast dan es kopi susunya mantap!
+                    Suasananya terasa nyaman dan sejuk, lokasinya pun mudah ditemukan tepat di samping Polsek Sukmajaya. Egg Toast dan es kopi susunya mantap!
                   </p>
                 </div>
                 <footer class="mt-4 sm:mt-6 pt-3 border-t border-ivory-200/70">
@@ -1281,7 +1278,7 @@
                 <div>
                   <span class="font-serif text-2xl sm:text-3xl text-amber-brand leading-none block" aria-hidden="true">“</span>
                   <p class="text-xs sm:text-sm text-stone-800 leading-relaxed mt-1.5 whitespace-normal break-words">
-                    Salah satu tempat ngopi favorit di Sukmajaya. Karakter espresso-nya berasa, manisnya pas, dan harganya sangat bersahabat di kantong.
+                    Salah satu tempat ngopi favorit di Sukmajaya. Karakter espressonya terasa, manisnya pas, dan harganya bersahabat.
                   </p>
                 </div>
                 <footer class="mt-4 sm:mt-6 pt-3 border-t border-ivory-200/70">
@@ -1320,7 +1317,7 @@
                 DI BALIK BAR · @TENTANGKOPIDEPOK
               </span>
               <h3 class="font-serif text-xl sm:text-3xl font-semibold text-stone-900 mt-1">
-                Cerita di Setiap Seduhan
+                Di Balik Setiap Seduhan
               </h3>
             </div>
 
@@ -1500,10 +1497,10 @@
                 RESERVASI MEJA &amp; KOMUNITAS
               </span>
               <h2 class="font-serif text-xl sm:text-3xl font-semibold text-ivory-50 leading-snug mt-1.5">
-                Butuh ruang untuk rapat tim, acara komunitas, atau WFC grup?
+                Perlu meja untuk rapat tim, acara komunitas, atau kerja bersama?
               </h2>
               <p class="text-xs sm:text-sm text-stone-300 mt-1.5 leading-relaxed">
-                Hubungi kami langsung melalui WhatsApp untuk mengamankan meja dan menyiapkan paket sajian kopi terbaik bagi grup Anda.
+                Hubungi kami lewat WhatsApp untuk mengecek ketersediaan meja dan pilihan sajian untuk grup Anda.
               </p>
             </div>
 
@@ -1591,7 +1588,7 @@
                 rel="noopener noreferrer"
                 class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 h-11 sm:min-h-[46px] rounded-lg bg-espresso-950 hover:bg-espresso-800 text-ivory-50 text-xs font-semibold transition-colors"
               >
-                <span>Petunjuk Arah di Google Maps</span>
+                <span>Cari Rute di Google Maps</span>
                 <span aria-hidden="true">↗</span>
               </a>
             </div>
@@ -1785,7 +1782,8 @@
   </div>
 
   <!-- ========================================================================
-       MODAL 2: AMBIENCE & CRAFT PHOTO LIGHTBOX (Buttons Locked Next to Text)
+       MODAL 2: AMBIENCE & CRAFT PHOTO LIGHTBOX
+       (Desktop: Single Line with Buttons on Right | Mobile: Expandable "Selengkapnya")
        ======================================================================== -->
   <div
     id="gallery-modal"
@@ -1821,12 +1819,30 @@
         />
       </div>
 
-      <!-- Bottom Bar: Text on Left, Both Prev/Next Buttons Strictly on Right (No Wrap) -->
-      <div class="px-4 sm:px-6 py-3.5 bg-espresso-900 border-t border-white/10 flex items-center justify-between gap-4 shrink-0">
-        <p id="gallery-modal-desc" class="text-xs sm:text-sm text-stone-300 flex-1 min-w-0 truncate">
-          Ruang dalam ber-AC dengan pencahayaan hangat, Wi-Fi, dan stopkontak di setiap sudut meja.
-        </p>
-        <div class="flex items-center gap-2 shrink-0">
+      <!-- Bottom Bar: Expandable Description on Mobile + Prev/Next Buttons -->
+      <div
+        id="gallery-modal-footer"
+        class="px-4 sm:px-6 py-3.5 bg-espresso-900 border-t border-white/10 flex flex-row items-center justify-between gap-3 sm:gap-4 shrink-0 transition-all"
+      >
+        <div id="gallery-desc-wrap" class="flex-1 min-w-0">
+          <p
+            id="gallery-modal-desc"
+            class="text-xs sm:text-sm text-stone-300 truncate sm:whitespace-normal sm:overflow-visible leading-relaxed cursor-pointer sm:cursor-default"
+          >
+            Ruang dalam ber-AC dengan pencahayaan hangat, Wi-Fi, dan stopkontak di setiap sudut meja.
+          </p>
+          <button
+            type="button"
+            id="gallery-desc-toggle"
+            aria-expanded="false"
+            class="sm:hidden mt-0.5 inline-flex items-center gap-1 text-[11px] font-semibold text-amber-brand hover:underline"
+          >
+            <span id="gallery-desc-toggle-text">Selengkapnya</span>
+            <span id="gallery-desc-toggle-icon" aria-hidden="true">▾</span>
+          </button>
+        </div>
+
+        <div id="gallery-nav-btns" class="flex items-center gap-2 shrink-0">
           <button
             type="button"
             id="gallery-prev-btn"
@@ -1866,7 +1882,7 @@
         name: "Espresso Latte",
         categoryId: "signature-coffee",
         price: 32000,
-        description: "Perpaduan double shot espresso Arabika, fresh milk bertekstur lembut, dan sentuhan tipis karamel.",
+        description: "Double shot espresso Arabika, fresh milk yang lembut, dan sentuhan karamel ringan.",
         attributes: ["Iced", "Dairy"],
         badge: "Signature Unggulan",
         imageUrl: "menu-espresso-latte.jpg"
@@ -1876,7 +1892,7 @@
         name: "Caramel Macchiato",
         categoryId: "signature-coffee",
         price: 36000,
-        description: "Espresso di atas susu segar dingin dengan sirup vanila dan saus karamel legit.",
+        description: "Espresso, susu segar dingin, sirup vanila, dan saus karamel yang legit.",
         attributes: ["Iced", "Dairy"],
         badge: null,
         imageUrl: "menu-caramel-macchiato.jpg"
@@ -1886,7 +1902,7 @@
         name: "Americano",
         categoryId: "signature-coffee",
         price: 28000,
-        description: "Ekstraksi espresso 100% Arabika dengan air mineral murni yang ringan dan menyegarkan.",
+        description: "Espresso 100% Arabika yang dipadukan dengan air mineral untuk rasa ringan dan menyegarkan.",
         attributes: ["Hot / Iced", "Black"],
         badge: null,
         imageUrl: "menu-americano.jpg"
@@ -1896,7 +1912,7 @@
         name: "Matcha Espresso Fusion",
         categoryId: "signature-coffee",
         price: 34000,
-        description: "Kombinasi matcha Jepang pekat, susu segar, dan satu shot espresso hangat.",
+        description: "Matcha Jepang yang pekat, susu segar, dan satu shot espresso.",
         attributes: ["Iced", "Fusion"],
         badge: null,
         imageUrl: "menu-matcha-espresso.jpg"
@@ -1908,7 +1924,7 @@
         name: "Brown Sugar Boba Milk",
         categoryId: "non-coffee",
         price: 23500,
-        description: "Susu segar creamy dengan saus karamel gula aren hangat dan pearl boba kenyal.",
+        description: "Susu segar creamy, saus karamel gula aren, dan pearl boba yang kenyal.",
         attributes: ["Iced", "Dairy"],
         badge: "Favorit GoFood",
         imageUrl: "menu-brown-sugar-boba.jpg"
@@ -1928,7 +1944,7 @@
         name: "Honey Earl Grey Macchiato",
         categoryId: "non-coffee",
         price: 23500,
-        description: "Seduhan teh Earl Grey beraroma bergamot, madu murni, dan lapisan krim macchiato lembut.",
+        description: "Teh Earl Grey beraroma bergamot, madu murni, dan lapisan krim macchiato yang lembut.",
         attributes: ["Iced", "Tea Macchiato"],
         badge: null,
         imageUrl: "menu-earl-grey-macchiato.jpg"
@@ -1938,7 +1954,7 @@
         name: "Ice Red Velvet Latte",
         categoryId: "non-coffee",
         price: 22000,
-        description: "Paduan red velvet lembut dengan susu segar dingin yang creamy dan manis seimbang.",
+        description: "Red velvet dan susu segar dingin dengan rasa creamy serta manis yang seimbang.",
         attributes: ["Iced", "Dairy"],
         badge: null,
         imageUrl: "menu-red-velvet-latte.jpg"
@@ -1950,7 +1966,7 @@
         name: "V60 Aceh Gayo",
         categoryId: "manual-brew",
         price: 30000,
-        description: "Single origin Arabica Gayo dengan notes floral, jeruk segar, dan akhir rasa bersih.",
+        description: "Arabika Gayo single origin dengan catatan floral dan jeruk, ditutup akhir rasa bersih.",
         attributes: ["Hot / Iced", "Filter"],
         badge: "Pilihan Barista",
         imageUrl: "menu-v60-gayo.jpg"
@@ -1960,7 +1976,7 @@
         name: "Japanese Iced Coffee",
         categoryId: "manual-brew",
         price: 32000,
-        description: "Seduhan pour-over langsung di atas es kristal untuk mengunci aroma buah segar.",
+        description: "Pour-over yang langsung menetes ke atas es untuk menjaga aroma buah segarnya.",
         attributes: ["Iced", "Filter"],
         badge: null,
         imageUrl: "menu-japanese-iced-coffee.jpg"
@@ -1970,7 +1986,7 @@
         name: "Vietnam Drip Susu",
         categoryId: "manual-brew",
         price: 26000,
-        description: "Ekstraksi kopi pekat perlahan di atas lapisan susu kental manis legit.",
+        description: "Kopi pekat yang menetes perlahan di atas susu kental manis.",
         attributes: ["Hot / Iced", "Sweet"],
         badge: null,
         imageUrl: "menu-vietnam-drip.jpg"
@@ -1980,7 +1996,7 @@
         name: "French Press Flores Bajawa",
         categoryId: "manual-brew",
         price: 30000,
-        description: "Seduhan full-bodied dengan karakter cokelat hitam dan kacang panggang khas Flores.",
+        description: "Seduhan penuh badan dengan karakter cokelat hitam dan kacang panggang khas Flores.",
         attributes: ["Hot", "Full Body"],
         badge: null,
         imageUrl: "menu-french-press-flores.jpg"
@@ -1992,7 +2008,7 @@
         name: "Egg Tentang Toast",
         categoryId: "pastry",
         price: 24000,
-        description: "Roti brioche panggang mentega tebal dengan isian telur lembut dan saus spesial Tentang Kopi.",
+        description: "Brioche panggang mentega dengan isian telur lembut dan saus spesial Tentang Kopi.",
         attributes: ["Warm", "Savory Toast"],
         badge: "Teman Kopi Terbaik",
         imageUrl: "menu-egg-toast.jpg"
@@ -2002,7 +2018,7 @@
         name: "Butter Croissant",
         categoryId: "pastry",
         price: 24000,
-        description: "Croissant Prancis berlapis renyah dan harum mentega, disajikan hangat setiap hari.",
+        description: "Croissant Prancis berlapis, renyah, dan harum mentega; disajikan hangat setiap hari.",
         attributes: ["Warm", "Fresh Baked"],
         badge: null,
         imageUrl: "menu-butter-croissant.jpg"
@@ -2012,7 +2028,7 @@
         name: "Pain au Chocolat",
         categoryId: "pastry",
         price: 28000,
-        description: "Danish pastry berlapis renyah dengan isian cokelat hitam lumer di bagian tengah.",
+        description: "Pastry berlapis renyah dengan isian cokelat hitam yang lumer di tengah.",
         attributes: ["Warm", "Sweet"],
         badge: null,
         imageUrl: "menu-pain-au-chocolat.jpg"
@@ -2032,37 +2048,37 @@
     const ambiencePhotos = [
       {
         title: "Indoor (AC) — Tentang Kopi Sukmajaya",
-        desc: "Ruang dalam ber-AC yang tenang dengan meja kayu luas untuk bekerja maupun bersantai.",
+        desc: "Ruang dalam ber-AC dengan meja kayu untuk bekerja atau bersantai.",
         imageUrl: "ambience-indoor-ac.jpg"
       },
       {
         title: "Outdoor (Smoking) — Teras Teduh",
-        desc: "Area duduk semi-terbuka dengan sirkulasi udara sejuk dan suasana santai di Sukmajaya.",
+        desc: "Area duduk semi-terbuka untuk menikmati suasana santai di Sukmajaya.",
         imageUrl: "ambience-outdoor-terrace.jpg"
       },
       {
         title: "Coffee Bar & Espresso Station",
-        desc: "Meja seduh terbuka tempat barista mengekstraksi biji kopi pilihan setiap hari.",
+        desc: "Meja seduh terbuka tempat barista menyiapkan kopi pilihan setiap hari.",
         imageUrl: "ambience-coffee-bar.jpg"
       },
       {
         title: "Microfoam & Latte Art",
-        desc: "Sajian latte hangat dengan tekstur susu microfoam lembut.",
+        desc: "Sajian latte hangat dengan tekstur microfoam yang lembut.",
         imageUrl: "craft-latte-art.jpg"
       },
       {
         title: "Seduhan Manual Brew",
-        desc: "Seduhan pour-over untuk menonjolkan karakter asli kopi Nusantara.",
+        desc: "Seduhan pour-over yang menonjolkan karakter kopi Nusantara.",
         imageUrl: "craft-manual-brew.jpg"
       },
       {
         title: "Espresso Kalibrasi Harian",
-        desc: "Sajian cappuccino hangat untuk menemani perbincangan sore.",
+        desc: "Sajian cappuccino hangat untuk menemani waktu sore.",
         imageUrl: "craft-espresso-calibration.jpg"
       },
       {
         title: "Kudapan & Roti Hangat",
-        desc: "Pilihan toast, croissant, dan roti hangat sebagai pendamping minum kopi.",
+        desc: "Pilihan toast, croissant, dan roti hangat sebagai teman minum kopi.",
         imageUrl: "craft-fresh-pastry.jpg"
       }
     ];
@@ -2114,7 +2130,7 @@
           textEl.textContent = `Buka Hari Ini · ${rangeLabel}`;
         } else {
           dotEl.className = "w-2 h-2 rounded-full bg-amber-brand";
-          textEl.textContent = `Buka Setiap Hari · Pukul ${rangeLabel}`;
+          textEl.textContent = `Tutup · Buka Pukul ${rangeLabel}`;
         }
       } catch (e) {
         textEl.textContent = "Buka Setiap Hari · 11.00 – 22.00 WIB";
@@ -2694,6 +2710,7 @@
 
     window.addEventListener("DOMContentLoaded", () => {
       updateOperatingStatus();
+      setInterval(updateOperatingStatus, 60000);
       renderMenuSection(false);
       renderFullMenuModalContent();
       bindHeroPointerRespond();
@@ -2762,18 +2779,65 @@
       }
 
       let currentGalleryIndex = 0;
+      let isGalleryDescExpanded = false;
       const galleryModal = document.getElementById("gallery-modal");
       const openGalleryBtn = document.getElementById("btn-open-gallery");
       const closeGalleryBtn = document.getElementById("close-gallery-btn");
       const galleryTitle = document.getElementById("gallery-modal-title");
       const galleryImg = document.getElementById("gallery-modal-img");
       const galleryDesc = document.getElementById("gallery-modal-desc");
+      const galleryFooter = document.getElementById("gallery-modal-footer");
+      const galleryNavBtns = document.getElementById("gallery-nav-btns");
+      const galleryDescToggle = document.getElementById("gallery-desc-toggle");
+      const galleryDescToggleText = document.getElementById("gallery-desc-toggle-text");
+      const galleryDescToggleIcon = document.getElementById("gallery-desc-toggle-icon");
       const prevGalleryBtn = document.getElementById("gallery-prev-btn");
       const nextGalleryBtn = document.getElementById("gallery-next-btn");
+
+      function setGalleryDescExpanded(expanded) {
+        isGalleryDescExpanded = expanded;
+        if (!galleryFooter || !galleryDesc || !galleryNavBtns) return;
+
+        if (expanded) {
+          galleryFooter.className =
+            "px-4 sm:px-6 py-3.5 bg-espresso-900 border-t border-white/10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 shrink-0 transition-all";
+          galleryDesc.className =
+            "text-xs sm:text-sm text-stone-200 whitespace-normal break-words leading-relaxed cursor-pointer sm:cursor-default";
+          galleryNavBtns.className =
+            "flex items-center justify-end gap-2 shrink-0 pt-2 sm:pt-0 border-t border-white/10 sm:border-t-0";
+          if (galleryDescToggleText) galleryDescToggleText.textContent = "Sembunyikan";
+          if (galleryDescToggleIcon) galleryDescToggleIcon.textContent = "▴";
+          if (galleryDescToggle) galleryDescToggle.setAttribute("aria-expanded", "true");
+        } else {
+          galleryFooter.className =
+            "px-4 sm:px-6 py-3.5 bg-espresso-900 border-t border-white/10 flex flex-row items-center justify-between gap-3 sm:gap-4 shrink-0 transition-all";
+          galleryDesc.className =
+            "text-xs sm:text-sm text-stone-300 truncate sm:whitespace-normal sm:overflow-visible leading-relaxed cursor-pointer sm:cursor-default";
+          galleryNavBtns.className = "flex items-center gap-2 shrink-0";
+          if (galleryDescToggleText) galleryDescToggleText.textContent = "Selengkapnya";
+          if (galleryDescToggleIcon) galleryDescToggleIcon.textContent = "▾";
+          if (galleryDescToggle) galleryDescToggle.setAttribute("aria-expanded", "false");
+        }
+      }
+
+      if (galleryDescToggle) {
+        galleryDescToggle.addEventListener("click", () => {
+          setGalleryDescExpanded(!isGalleryDescExpanded);
+        });
+      }
+
+      if (galleryDesc) {
+        galleryDesc.addEventListener("click", () => {
+          if (window.matchMedia("(max-width: 639px)").matches) {
+            setGalleryDescExpanded(!isGalleryDescExpanded);
+          }
+        });
+      }
 
       function showGallerySlide(idx) {
         currentGalleryIndex = (idx + ambiencePhotos.length) % ambiencePhotos.length;
         const item = ambiencePhotos[currentGalleryIndex];
+        setGalleryDescExpanded(false);
         if (galleryTitle) galleryTitle.textContent = item.title;
         if (galleryImg) {
           galleryImg.src = item.imageUrl;
