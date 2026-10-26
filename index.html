@@ -460,13 +460,13 @@
        ------------------------------------------------------------------------ */
     @media (max-width: 768px) {
       #hero [data-sc-depth="0.20"] {
-        transform: translate3d(0, calc(var(--sc-p, 0) * -25px), 0);
+        transform: translate3d(0, calc(var(--sc-p, 0) * -18px), 0);
       }
       #hero [data-sc-depth="0.35"] {
-        transform: translate3d(0, calc(var(--sc-p, 0) * -40px), 0);
+        transform: translate3d(0, calc(var(--sc-p, 0) * -28px), 0);
       }
       #hero [data-sc-depth="0.52"] {
-        transform: translate3d(0, calc(var(--sc-p, 0) * -50px), 0);
+        transform: translate3d(0, calc(var(--sc-p, 0) * -36px), 0);
       }
       #hero [data-sc-depth="0.75"],
       #hero [data-sc-depth="0.95"] {
@@ -680,7 +680,7 @@
 
     <!-- ======================================================================
          HERO SECTION (#hero)
-         Mobile: Cinematic Atmospheric Backdrop (Pas 1 Layar, Bebas AI Slop)
+         Mobile: Tightly-Framed Atmospheric Crop (Zero Blank Space Above/Below)
          Desktop: Multi-Plane 2-Column Editorial Spread
          ====================================================================== -->
     <section
@@ -690,120 +690,124 @@
       aria-labelledby="hero-title"
       class="relative hero-editorial-bg text-ivory-50 overflow-hidden"
     >
-      <!-- Mobile Atmospheric Background (Hanya di layar < lg agar foto kopi tetap hadir tanpa makan ruang) -->
-      <div class="lg:hidden absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <img
-          src="hero-signature-latte.jpg"
-          alt=""
+      <div class="relative overflow-hidden">
+        <!-- Mobile Atmospheric Background (Cropped tightly to Hero text height, rich & warm) -->
+        <div class="lg:hidden absolute inset-0 z-0 pointer-events-none">
+          <img
+            src="hero-signature-latte.jpg"
+            alt=""
+            aria-hidden="true"
+            fetchpriority="high"
+            onerror="handleImgFallback(this, 'Signature Coffee')"
+            class="w-full h-full object-cover object-[center_48%] warm-editorial-photo opacity-35"
+          />
+          <div class="absolute inset-0 bg-gradient-to-r from-espresso-950/95 via-espresso-950/75 to-espresso-950/45"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-espresso-950 via-transparent to-espresso-950/70"></div>
+        </div>
+
+        <!-- Desktop Parallax Sunbeam Plane -->
+        <div
+          data-sc-depth="0.12"
           aria-hidden="true"
-          fetchpriority="high"
-          onerror="handleImgFallback(this, 'Signature Coffee')"
-          class="w-full h-full object-cover object-[center_35%] warm-editorial-photo opacity-25"
-        />
-        <div class="absolute inset-0 bg-gradient-to-t from-espresso-950 via-espresso-950/85 to-espresso-950/65"></div>
-      </div>
+          class="hidden lg:block sc-hero-sunbeam pointer-events-none absolute inset-0"
+        ></div>
 
-      <!-- Desktop Parallax Sunbeam Plane -->
-      <div
-        data-sc-depth="0.12"
-        aria-hidden="true"
-        class="hidden lg:block sc-hero-sunbeam pointer-events-none absolute inset-0"
-      ></div>
-
-      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 min-h-[calc(100svh-64px)] lg:min-h-0 flex flex-col justify-center">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          
-          <!-- Left Column (7 cols on Desktop, Full Width on Mobile) -->
-          <div class="lg:col-span-7 max-w-2xl">
-            <!-- Status Badge -->
-            <div
-              id="hero-status-badge"
-              data-sc-depth="0.20"
-              class="inline-flex flex-wrap items-center gap-2 text-[11px] sm:text-xs tracking-wide text-stone-300 mb-4 sm:mb-6"
-            >
-              <span id="hero-status-dot" class="w-2 h-2 rounded-full bg-[#22C55E]" aria-hidden="true"></span>
-              <span id="hero-status-text" class="tabular-nums font-medium text-ivory-100">Buka Hari Ini · 11.00 – 22.00 WIB</span>
-              <span class="text-stone-500" aria-hidden="true">/</span>
-              <span class="text-stone-400">Sukmajaya, Depok</span>
-            </div>
-
-            <!-- Primary Editorial Headline -->
-            <h1
-              id="hero-title"
-              data-sc-depth="0.35"
-              class="font-serif text-3xl sm:text-5xl lg:text-[64px] font-semibold tracking-tight text-ivory-50 leading-[1.06]"
-            >
-              Secangkir Kopi,<br />
-              <span class="italic font-normal text-amber-brand">Sejuta Cerita.</span>
-            </h1>
-
-            <!-- Narrative Copy & Actions -->
-            <div data-sc-depth="0.52">
-              <p class="mt-4 sm:mt-6 text-sm sm:text-lg text-stone-300 leading-relaxed max-w-xl font-normal">
-                Tempat singgah di Sukmajaya untuk menikmati seduhan Arabika Nusantara, menyelesaikan pekerjaan, atau berbincang santai.
-              </p>
-
-              <!-- Compact 2-Column CTA Grid on Mobile -->
-              <div class="mt-6 sm:mt-9 grid grid-cols-2 sm:flex sm:flex-row sm:items-center gap-2.5 sm:gap-4">
-                <a
-                  href="https://gofood.co.id/jakarta/restaurant/tentang-kopi-sukmajaya-f95616be-e5a2-4c9c-bc15-4b75093b2e9b"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="bg-amber-brand hover:bg-amber-hover text-espresso-950 font-semibold text-xs sm:text-sm px-3 sm:px-7 h-11 sm:min-h-[50px] rounded-lg inline-flex items-center justify-center gap-1.5 sm:gap-2.5 transition-colors shadow-lg whitespace-nowrap"
-                >
-                  <span>Pesan di GoFood</span>
-                  <span class="text-sm leading-none" aria-hidden="true">↗</span>
-                </a>
-
-                <a
-                  href="#menu"
-                  class="border border-white/25 hover:border-ivory-50 hover:bg-white/5 text-ivory-50 font-medium text-xs sm:text-sm px-3 sm:px-6 h-11 sm:min-h-[50px] rounded-lg inline-flex items-center justify-center gap-1.5 sm:gap-2 transition-colors whitespace-nowrap"
-                >
-                  <span>Lihat Menu</span>
-                  <span class="text-sm leading-none" aria-hidden="true">↓</span>
-                </a>
+        <!-- Proportional Padding: Compact on Mobile (pt-7 pb-8), Spacious on Desktop -->
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-7 pb-8 sm:py-16 lg:py-20">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            <!-- Left Column (7 cols on Desktop, Full Width on Mobile) -->
+            <div class="lg:col-span-7 max-w-2xl">
+              <!-- Status Badge -->
+              <div
+                id="hero-status-badge"
+                data-sc-depth="0.20"
+                class="inline-flex flex-wrap items-center gap-2 text-[11px] sm:text-xs tracking-wide text-stone-300 mb-3 sm:mb-6"
+              >
+                <span id="hero-status-dot" class="w-2 h-2 rounded-full bg-[#22C55E]" aria-hidden="true"></span>
+                <span id="hero-status-text" class="tabular-nums font-medium text-ivory-100">Buka Hari Ini · 11.00 – 22.00 WIB</span>
+                <span class="text-stone-500" aria-hidden="true">/</span>
+                <span class="text-stone-400">Sukmajaya, Depok</span>
               </div>
 
-              <!-- Sleek Mobile Brand Sub-caption (Pengganti Caption Foto di HP, Rapi & Ringkas) -->
-              <div class="mt-7 pt-5 border-t border-white/10 flex lg:hidden items-center justify-between text-[11px] text-stone-400 tracking-[0.14em] uppercase font-medium">
-                <span>ARABIKA NUSANTARA</span>
-                <span class="text-amber-brand">RUANG SINGGAH</span>
-              </div>
-            </div>
-          </div>
+              <!-- Primary Editorial Headline -->
+              <h1
+                id="hero-title"
+                data-sc-depth="0.35"
+                class="font-serif text-[34px] sm:text-5xl lg:text-[64px] font-semibold tracking-tight text-ivory-50 leading-[1.06]"
+              >
+                Secangkir Kopi,<br />
+                <span class="italic font-normal text-amber-brand">Sejuta Cerita.</span>
+              </h1>
 
-          <!-- Right Column (5 cols) — Tampil Eksklusif di Desktop (lg+), Elegan & Proporsional -->
-          <div class="hidden lg:flex lg:col-span-5 flex-col items-center lg:items-end">
-            <figure id="hero-figure-card" data-sc-depth="0.75" class="w-full max-w-[440px]">
-              <div class="relative aspect-[4/5] w-full rounded-xl overflow-hidden border border-white/15 bg-espresso-900 shadow-2xl">
-                <img
-                  src="hero-signature-latte.jpg"
-                  alt="Segelas Iced Signature Latte di atas meja kayu Tentang Kopi Sukmajaya"
-                  width="800"
-                  height="1000"
-                  fetchpriority="high"
-                  data-sc-depth="0.95"
-                  onerror="handleImgFallback(this, 'Signature Coffee')"
-                  class="w-full h-full object-cover object-center warm-editorial-photo"
-                />
-                <div class="absolute inset-0 bg-gradient-to-t from-espresso-950/75 via-transparent to-transparent pointer-events-none"></div>
+              <!-- Narrative Copy & Actions -->
+              <div data-sc-depth="0.52">
+                <p class="mt-3 sm:mt-6 text-sm sm:text-lg text-stone-200 sm:text-stone-300 leading-relaxed max-w-xl font-normal">
+                  Tempat singgah di Sukmajaya untuk menikmati seduhan Arabika Nusantara, menyelesaikan pekerjaan, atau berbincang santai.
+                </p>
 
-                <div class="absolute bottom-5 left-5 right-5 flex items-end justify-between text-ivory-50 pointer-events-none">
-                  <div>
-                    <p class="text-[11px] uppercase tracking-[0.18em] text-amber-brand font-semibold">Signature Cup</p>
-                    <p class="font-serif text-lg italic text-ivory-50 leading-snug mt-0.5">Espresso &amp; Creamy Milk</p>
-                  </div>
-                  <span class="text-[11px] tracking-[0.16em] uppercase text-stone-300 tabular-nums">SUKMAJAYA</span>
+                <!-- Compact 2-Column CTA Grid on Mobile -->
+                <div class="mt-5 sm:mt-9 grid grid-cols-2 sm:flex sm:flex-row sm:items-center gap-2.5 sm:gap-4">
+                  <a
+                    href="https://gofood.co.id/jakarta/restaurant/tentang-kopi-sukmajaya-f95616be-e5a2-4c9c-bc15-4b75093b2e9b"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="bg-amber-brand hover:bg-amber-hover text-espresso-950 font-semibold text-xs sm:text-sm px-3 sm:px-7 h-11 sm:min-h-[50px] rounded-lg inline-flex items-center justify-center gap-1.5 sm:gap-2.5 transition-colors shadow-lg whitespace-nowrap"
+                  >
+                    <span>Pesan di GoFood</span>
+                    <span class="text-sm leading-none" aria-hidden="true">↗</span>
+                  </a>
+
+                  <a
+                    href="#menu"
+                    class="bg-espresso-950/40 sm:bg-transparent border border-white/25 hover:border-ivory-50 hover:bg-white/5 text-ivory-50 font-medium text-xs sm:text-sm px-3 sm:px-6 h-11 sm:min-h-[50px] rounded-lg inline-flex items-center justify-center gap-1.5 sm:gap-2 transition-colors whitespace-nowrap"
+                  >
+                    <span>Lihat Menu</span>
+                    <span class="text-sm leading-none" aria-hidden="true">↓</span>
+                  </a>
+                </div>
+
+                <!-- Sleek Mobile Brand Sub-caption -->
+                <div class="mt-5 pt-3.5 border-t border-white/15 flex lg:hidden items-center justify-between text-[10px] text-stone-300 tracking-[0.14em] uppercase font-medium">
+                  <span>ARABIKA NUSANTARA</span>
+                  <span class="text-amber-brand">RUANG SINGGAH</span>
                 </div>
               </div>
+            </div>
 
-              <figcaption class="mt-3 flex items-center justify-between gap-4 text-[11px] text-stone-300 tracking-[0.14em] uppercase font-medium">
-                <span class="whitespace-nowrap">ARABIKA NUSANTARA</span>
-                <span class="text-amber-brand whitespace-nowrap shrink-0">RUANG SINGGAH</span>
-              </figcaption>
-            </figure>
+            <!-- Right Column (5 cols) — Exclusive to Desktop (lg+) -->
+            <div class="hidden lg:flex lg:col-span-5 flex-col items-center lg:items-end">
+              <figure id="hero-figure-card" data-sc-depth="0.75" class="w-full max-w-[440px]">
+                <div class="relative aspect-[4/5] w-full rounded-xl overflow-hidden border border-white/15 bg-espresso-900 shadow-2xl">
+                  <img
+                    src="hero-signature-latte.jpg"
+                    alt="Segelas Iced Signature Latte di atas meja kayu Tentang Kopi Sukmajaya"
+                    width="800"
+                    height="1000"
+                    fetchpriority="high"
+                    data-sc-depth="0.95"
+                    onerror="handleImgFallback(this, 'Signature Coffee')"
+                    class="w-full h-full object-cover object-center warm-editorial-photo"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-espresso-950/75 via-transparent to-transparent pointer-events-none"></div>
+
+                  <div class="absolute bottom-5 left-5 right-5 flex items-end justify-between text-ivory-50 pointer-events-none">
+                    <div>
+                      <p class="text-[11px] uppercase tracking-[0.18em] text-amber-brand font-semibold">Signature Cup</p>
+                      <p class="font-serif text-lg italic text-ivory-50 leading-snug mt-0.5">Espresso &amp; Creamy Milk</p>
+                    </div>
+                    <span class="text-[11px] tracking-[0.16em] uppercase text-stone-300 tabular-nums">SUKMAJAYA</span>
+                  </div>
+                </div>
+
+                <figcaption class="mt-3 flex items-center justify-between gap-4 text-[11px] text-stone-300 tracking-[0.14em] uppercase font-medium">
+                  <span class="whitespace-nowrap">ARABIKA NUSANTARA</span>
+                  <span class="text-amber-brand whitespace-nowrap shrink-0">RUANG SINGGAH</span>
+                </figcaption>
+              </figure>
+            </div>
+
           </div>
-
         </div>
       </div>
 
