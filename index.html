@@ -680,7 +680,7 @@
 
     <!-- ======================================================================
          HERO SECTION (#hero)
-         Mobile: Tightly-Framed Atmospheric Crop (Zero Blank Space Above/Below)
+         Mobile: Tightly-Framed Atmospheric Crop (Brightness Dinaikkan di HP)
          Desktop: Multi-Plane 2-Column Editorial Spread
          ====================================================================== -->
     <section
@@ -691,7 +691,7 @@
       class="relative hero-editorial-bg text-ivory-50 overflow-hidden"
     >
       <div class="relative overflow-hidden">
-        <!-- Mobile Atmospheric Background (Cropped tightly to Hero text height, rich & warm) -->
+        <!-- Mobile Atmospheric Background (Lebih terang & jelas di layar HP) -->
         <div class="lg:hidden absolute inset-0 z-0 pointer-events-none">
           <img
             src="hero-signature-latte.jpg"
@@ -699,10 +699,10 @@
             aria-hidden="true"
             fetchpriority="high"
             onerror="handleImgFallback(this, 'Signature Coffee')"
-            class="w-full h-full object-cover object-[center_48%] warm-editorial-photo opacity-35"
+            class="w-full h-full object-cover object-[center_48%] warm-editorial-photo opacity-50 brightness-110"
           />
-          <div class="absolute inset-0 bg-gradient-to-r from-espresso-950/95 via-espresso-950/75 to-espresso-950/45"></div>
-          <div class="absolute inset-0 bg-gradient-to-t from-espresso-950 via-transparent to-espresso-950/70"></div>
+          <div class="absolute inset-0 bg-gradient-to-r from-espresso-950/90 via-espresso-950/65 to-espresso-950/35"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-espresso-950 via-transparent to-espresso-950/60"></div>
         </div>
 
         <!-- Desktop Parallax Sunbeam Plane -->
@@ -1198,9 +1198,7 @@
             </div>
           </div>
 
-          <!-- Right Column (8 cols):
-               Mobile: 1 Full Wrapped Review Card per View + Subtle Triangle Arrow Controls
-               Desktop: 3 Columns Divided by Hairline -->
+          <!-- Right Column (8 cols) -->
           <div class="lg:col-span-8 min-w-0 w-full relative">
             
             <!-- Subtle Left Triangle Arrow (Mobile Only) -->
@@ -1302,8 +1300,6 @@
 
         <!-- ==================================================================
              RITUAL SEDUHAN & KOMUNITAS (#momen) — ACT 6: HORIZONTAL-PAN DRIFT
-             Mobile: 2-Col Social Grid + 1 Full Photo per Slide with Subtle Triangle Arrows
-             Desktop: 4-Column Filmstrip
              ================================================================== -->
         <div
           id="momen"
@@ -1654,8 +1650,8 @@
           </div>
         </div>
 
-        <!-- Center: Anchor Links -->
-        <nav aria-label="Navigasi Footer" class="flex flex-wrap items-center gap-5 sm:gap-8 text-xs text-stone-300">
+	<!-- Center: Anchor Links -->
+        <nav aria-label="Navigasi Footer" class="flex items-center whitespace-nowrap shrink-0 gap-5 sm:gap-7 text-xs text-stone-300">
           <a href="#menu" class="hover:text-ivory-50 transition-colors">Menu</a>
           <a href="#suasana" class="hover:text-ivory-50 transition-colors">Suasana</a>
           <a href="#tentang" class="hover:text-ivory-50 transition-colors">Cerita &amp; Ulasan</a>
@@ -1861,11 +1857,46 @@
     </div>
   </div>
 
-  <!-- ========================================================================
-       APPLICATION DATA, INTERACTIVITY & SCROLL CRAFT ENGINE SCRIPT
+<!-- ========================================================================
+       APPLICATION DATA, MULTI-CAFE SUPABASE SYNC & SCROLL CRAFT ENGINE SCRIPT
        ======================================================================== -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
   <script>
-    const GOFOOD_ORDER_URL = "https://gofood.co.id/jakarta/restaurant/tentang-kopi-sukmajaya-f95616be-e5a2-4c9c-bc15-4b75093b2e9b";
+    const ACTIVE_CAFE_SLUG = window.getActiveCafeSlug
+      ? window.getActiveCafeSlug()
+      : "tentang-kopi";
+
+    let GOFOOD_ORDER_URL =
+      (window.TENTANG_KOPI_CONFIG && window.TENTANG_KOPI_CONFIG.GOFOOD_ORDER_URL) ||
+      "https://gofood.co.id/jakarta/restaurant/tentang-kopi-sukmajaya-f95616be-e5a2-4c9c-bc15-4b75093b2e9b";
+
+    // Profil Default (Tentang Kopi Sukmajaya Depok)
+    let activeCafeProfile = {
+      slug: "tentang-kopi",
+      name: "TENTANG KOPI",
+      branch: "Sukmajaya, Depok",
+      hero_headline_1: "Secangkir Kopi,",
+      hero_headline_2: "Sejuta Cerita.",
+      hero_description:
+        "Tempat singgah di Sukmajaya untuk menikmati seduhan Arabika Nusantara, menyelesaikan pekerjaan, atau berbincang santai.",
+      whatsapp_number: "6285691895114",
+      gofood_url: GOFOOD_ORDER_URL,
+      instagram_url: "https://www.instagram.com/tentangkopidepok/",
+      tiktok_url: "https://www.tiktok.com/@tentangkopidepok",
+      address_line_1: "Jl. Bahagia Raya No. 4 (Samping Polsek Sukmajaya)",
+      address_line_2: "Kel. Sukamaju, Kec. Sukmajaya, Kota Depok, Jawa Barat 16417",
+      maps_link: "https://maps.google.com/?cid=7088790801722791724",
+      maps_embed_url:
+        "https://www.google.com/maps?q=Tentang+Kopi+Sukmajaya,+Jl.+Bahagia+Raya+No.4,+Sukamaju,+Kec.+Sukmajaya,+Kota+Depok&output=embed",
+      hours_weekday: "11.00 – 22.00 WIB",
+      hours_weekend: "11.00 – 23.00 WIB",
+      logo_url: "logo.jpg",
+      hero_image_url: "hero-signature-latte.jpg",
+      indoor_image_url: "ambience-indoor-ac.jpg",
+      outdoor_image_url: "ambience-outdoor-terrace.jpg",
+      bar_image_url: "ambience-coffee-bar.jpg"
+    };
 
     const menuCategories = [
       { id: "signature-coffee", name: "Signature Coffee" },
@@ -1874,13 +1905,17 @@
       { id: "pastry", name: "Light Bites & Pastry" }
     ];
 
-    const menuItems = [
+    // Data katalog bawaan (HANYA digunakan sebagai fallback transparan jika database tidak dapat dijangkau)
+    const fallbackMenuItems = [
       // --- Signature Coffee ---
       {
         id: "sig-1",
         name: "Espresso Latte",
         categoryId: "signature-coffee",
         price: 32000,
+        isAvailable: true,
+        isPromo: false,
+        promoPrice: null,
         description: "Perpaduan double shot espresso Arabika, fresh milk bertekstur lembut, dan sentuhan tipis karamel.",
         attributes: ["Iced", "Dairy"],
         badge: "Signature Unggulan",
@@ -1891,6 +1926,9 @@
         name: "Caramel Macchiato",
         categoryId: "signature-coffee",
         price: 36000,
+        isAvailable: true,
+        isPromo: false,
+        promoPrice: null,
         description: "Espresso di atas susu segar dingin dengan sirup vanila dan saus karamel legit.",
         attributes: ["Iced", "Dairy"],
         badge: null,
@@ -1901,6 +1939,9 @@
         name: "Americano",
         categoryId: "signature-coffee",
         price: 28000,
+        isAvailable: true,
+        isPromo: false,
+        promoPrice: null,
         description: "Ekstraksi espresso 100% Arabika dengan air mineral murni yang ringan dan menyegarkan.",
         attributes: ["Hot / Iced", "Black"],
         badge: null,
@@ -1911,6 +1952,9 @@
         name: "Matcha Espresso Fusion",
         categoryId: "signature-coffee",
         price: 34000,
+        isAvailable: true,
+        isPromo: false,
+        promoPrice: null,
         description: "Kombinasi matcha Jepang pekat, susu segar, dan satu shot espresso hangat.",
         attributes: ["Iced", "Fusion"],
         badge: null,
@@ -1923,6 +1967,9 @@
         name: "Brown Sugar Boba Milk",
         categoryId: "non-coffee",
         price: 23500,
+        isAvailable: true,
+        isPromo: false,
+        promoPrice: null,
         description: "Susu segar creamy dengan saus karamel gula aren hangat dan pearl boba kenyal.",
         attributes: ["Iced", "Dairy"],
         badge: "Favorit GoFood",
@@ -1933,6 +1980,9 @@
         name: "Salted Caramel Boba Milk",
         categoryId: "non-coffee",
         price: 28000,
+        isAvailable: true,
+        isPromo: false,
+        promoPrice: null,
         description: "Susu segar, teh pilihan, saus salted caramel gurih-manis, dan boba kenyal.",
         attributes: ["Iced", "Dairy"],
         badge: null,
@@ -1943,6 +1993,9 @@
         name: "Honey Earl Grey Macchiato",
         categoryId: "non-coffee",
         price: 23500,
+        isAvailable: true,
+        isPromo: false,
+        promoPrice: null,
         description: "Seduhan teh Earl Grey beraroma bergamot, madu murni, dan lapisan krim macchiato lembut.",
         attributes: ["Iced", "Tea Macchiato"],
         badge: null,
@@ -1953,6 +2006,9 @@
         name: "Ice Red Velvet Latte",
         categoryId: "non-coffee",
         price: 22000,
+        isAvailable: true,
+        isPromo: false,
+        promoPrice: null,
         description: "Paduan red velvet lembut dengan susu segar dingin yang creamy dan manis seimbang.",
         attributes: ["Iced", "Dairy"],
         badge: null,
@@ -1965,6 +2021,9 @@
         name: "V60 Aceh Gayo",
         categoryId: "manual-brew",
         price: 30000,
+        isAvailable: true,
+        isPromo: false,
+        promoPrice: null,
         description: "Single origin Arabica Gayo dengan notes floral, jeruk segar, dan akhir rasa bersih.",
         attributes: ["Hot / Iced", "Filter"],
         badge: "Pilihan Barista",
@@ -1975,6 +2034,9 @@
         name: "Japanese Iced Coffee",
         categoryId: "manual-brew",
         price: 32000,
+        isAvailable: true,
+        isPromo: false,
+        promoPrice: null,
         description: "Seduhan pour-over langsung di atas es kristal untuk mengunci aroma buah segar.",
         attributes: ["Iced", "Filter"],
         badge: null,
@@ -1985,6 +2047,9 @@
         name: "Vietnam Drip Susu",
         categoryId: "manual-brew",
         price: 26000,
+        isAvailable: true,
+        isPromo: false,
+        promoPrice: null,
         description: "Ekstraksi kopi pekat perlahan di atas lapisan susu kental manis legit.",
         attributes: ["Hot / Iced", "Sweet"],
         badge: null,
@@ -1995,6 +2060,9 @@
         name: "French Press Flores Bajawa",
         categoryId: "manual-brew",
         price: 30000,
+        isAvailable: true,
+        isPromo: false,
+        promoPrice: null,
         description: "Seduhan full-bodied dengan karakter cokelat hitam dan kacang panggang khas Flores.",
         attributes: ["Hot", "Full Body"],
         badge: null,
@@ -2007,6 +2075,9 @@
         name: "Egg Tentang Toast",
         categoryId: "pastry",
         price: 24000,
+        isAvailable: true,
+        isPromo: false,
+        promoPrice: null,
         description: "Roti brioche panggang mentega tebal dengan isian telur lembut dan saus spesial Tentang Kopi.",
         attributes: ["Warm", "Savory Toast"],
         badge: "Teman Kopi Terbaik",
@@ -2017,6 +2088,9 @@
         name: "Butter Croissant",
         categoryId: "pastry",
         price: 24000,
+        isAvailable: true,
+        isPromo: false,
+        promoPrice: null,
         description: "Croissant Prancis berlapis renyah dan harum mentega, disajikan hangat setiap hari.",
         attributes: ["Warm", "Fresh Baked"],
         badge: null,
@@ -2027,6 +2101,9 @@
         name: "Pain au Chocolat",
         categoryId: "pastry",
         price: 28000,
+        isAvailable: true,
+        isPromo: false,
+        promoPrice: null,
         description: "Danish pastry berlapis renyah dengan isian cokelat hitam lumer di bagian tengah.",
         attributes: ["Warm", "Sweet"],
         badge: null,
@@ -2037,12 +2114,21 @@
         name: "Cinnamon Roll Glaze",
         categoryId: "pastry",
         price: 26000,
+        isAvailable: true,
+        isPromo: false,
+        promoPrice: null,
         description: "Gulungan roti lembut beraroma kayu manis dengan lapisan cream cheese glaze.",
         attributes: ["Warm", "Sweet"],
         badge: null,
         imageUrl: "menu-cinnamon-roll.jpg"
       }
     ];
+
+    const MENU_CACHE_KEY = `tentang_kopi_live_cache_${ACTIVE_CAFE_SLUG}`;
+    let menuItems = [...fallbackMenuItems];
+    let menuDataSourceState = "loading";
+    let menuStatusNotice = "";
+    let publicRealtimeChannel = null;
 
     const ambiencePhotos = [
       {
@@ -2083,16 +2169,196 @@
     ];
 
     function formatRupiah(num) {
-      if (typeof num !== "number" || isNaN(num)) return "Rp -";
-      return "Rp " + num.toLocaleString("id-ID");
+      const parsed = Number(num);
+      if (!Number.isFinite(parsed)) return "Rp -";
+      return "Rp " + Math.round(parsed).toLocaleString("id-ID");
     }
 
-    window.handleImgFallback = function(img, label = "Tentang Kopi") {
+    function escapeHtml(str) {
+      return String(str ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    window.handleImgFallback = function (img, label = "Tentang Kopi") {
       if (!img || img.dataset.fallbackDone === "true") return;
       img.dataset.fallbackDone = "true";
       const clean = encodeURIComponent(label);
       img.src = `https://placehold.co/600x450/181310/FAF7F2?text=${clean}`;
     };
+
+    // Terapkan Profil Kafe Dinamis ke DOM tanpa merusak struktur asli
+    function applyCafeProfileToDOM(profile) {
+      if (!profile) return;
+      activeCafeProfile = { ...activeCafeProfile, ...profile };
+      GOFOOD_ORDER_URL = activeCafeProfile.gofood_url || GOFOOD_ORDER_URL;
+
+      const brandUpper = (activeCafeProfile.name || "TENTANG KOPI").toUpperCase();
+      const branchText = activeCafeProfile.branch || "Sukmajaya, Depok";
+      const h1Line1 = activeCafeProfile.hero_headline_1 || "Secangkir Kopi,";
+      const h1Line2 = activeCafeProfile.hero_headline_2 || "Sejuta Cerita.";
+
+      document.title = `${brandUpper} — ${h1Line1} ${h1Line2} | ${branchText}`;
+
+      // 1. Update Brand & Cabang di Navbar dan Footer
+      const headerBrandSpans = document.querySelectorAll("#header a[href='#hero'] span");
+      if (headerBrandSpans.length >= 2) {
+        headerBrandSpans[0].textContent = brandUpper;
+        headerBrandSpans[1].textContent = branchText;
+      }
+
+      const footerBrandLink = document.querySelector("footer a[href='#hero']:not([aria-label])");
+      if (footerBrandLink) {
+        footerBrandLink.textContent = brandUpper;
+        const footerSub = footerBrandLink.nextElementSibling;
+        if (footerSub) {
+          footerSub.textContent = `${h1Line1} ${h1Line2} · ${activeCafeProfile.address_line_1 || ""}, ${branchText}`;
+        }
+      }
+
+      const modalTitle = document.getElementById("full-menu-modal-title");
+      if (modalTitle) {
+        modalTitle.textContent = `${activeCafeProfile.name} — ${branchText}`;
+      }
+
+      // 2. Update Semua Gambar Logo
+      if (activeCafeProfile.logo_url) {
+        document.querySelectorAll("img[src='logo.jpg'], #header img, footer img, #printable-menu-sheet img").forEach((img) => {
+          delete img.dataset.fallbackDone;
+          img.src = activeCafeProfile.logo_url;
+        });
+      }
+
+      // 3. Update Hero Headline, Deskripsi & Foto Hero
+      const heroBadgeBranch = document.querySelector("#hero-status-badge span:last-child");
+      if (heroBadgeBranch) heroBadgeBranch.textContent = branchText;
+
+      const heroTitleEl = document.getElementById("hero-title");
+      if (heroTitleEl) {
+        heroTitleEl.innerHTML = `${escapeHtml(h1Line1)}<br /><span class="italic font-normal text-amber-brand">${escapeHtml(h1Line2)}</span>`;
+      }
+
+      const heroDescEl = document.querySelector("#hero [data-sc-depth='0.52'] > p");
+      if (heroDescEl && activeCafeProfile.hero_description) {
+        heroDescEl.textContent = activeCafeProfile.hero_description;
+      }
+
+      if (activeCafeProfile.hero_image_url) {
+        document.querySelectorAll("#hero img").forEach((img) => {
+          delete img.dataset.fallbackDone;
+          img.src = activeCafeProfile.hero_image_url;
+        });
+      }
+
+      // 4. Update Foto Suasana (Bento Grid & Lightbox Array)
+      const bentoIndoorImg = document.querySelector("[data-gallery-idx='0'] img");
+      if (bentoIndoorImg && activeCafeProfile.indoor_image_url) {
+        delete bentoIndoorImg.dataset.fallbackDone;
+        bentoIndoorImg.src = activeCafeProfile.indoor_image_url;
+        ambiencePhotos[0].imageUrl = activeCafeProfile.indoor_image_url;
+        ambiencePhotos[0].title = `Indoor (AC) — ${activeCafeProfile.name}`;
+      }
+
+      const bentoOutdoorImg = document.querySelector("[data-gallery-idx='1'] img");
+      if (bentoOutdoorImg && activeCafeProfile.outdoor_image_url) {
+        delete bentoOutdoorImg.dataset.fallbackDone;
+        bentoOutdoorImg.src = activeCafeProfile.outdoor_image_url;
+        ambiencePhotos[1].imageUrl = activeCafeProfile.outdoor_image_url;
+      }
+
+      const bentoBarImg = document.querySelector("[data-gallery-idx='2'] img");
+      if (bentoBarImg && activeCafeProfile.bar_image_url) {
+        delete bentoBarImg.dataset.fallbackDone;
+        bentoBarImg.src = activeCafeProfile.bar_image_url;
+        ambiencePhotos[2].imageUrl = activeCafeProfile.bar_image_url;
+      }
+
+      // 5. Update Seluruh Link GoFood, WhatsApp, Instagram, TikTok, dan Google Maps
+      const cleanWa = (activeCafeProfile.whatsapp_number || "6285691895114").replace(/[^0-9]/g, "");
+      const waGreeting = encodeURIComponent(
+        `Halo ${activeCafeProfile.name} (${branchText}), saya ingin bertanya mengenai menu dan reservasi tempat.`
+      );
+
+      document.querySelectorAll("a[href*='gofood.co.id']").forEach((a) => {
+        a.href = GOFOOD_ORDER_URL;
+      });
+
+      document.querySelectorAll("a[href*='wa.me']").forEach((a) => {
+        a.href = `https://wa.me/${cleanWa}?text=${waGreeting}`;
+        if (a.classList.contains("tabular-nums")) {
+          a.textContent = `+${cleanWa}`;
+        }
+      });
+
+      if (activeCafeProfile.instagram_url) {
+        document.querySelectorAll("a[href*='instagram.com']").forEach((a) => {
+          a.href = activeCafeProfile.instagram_url;
+        });
+      }
+
+      if (activeCafeProfile.tiktok_url) {
+        document.querySelectorAll("a[href*='tiktok.com']").forEach((a) => {
+          a.href = activeCafeProfile.tiktok_url;
+        });
+      }
+
+      // 6. Update Alamat, Jam Operasional & Peta di #lokasi
+      const lokasiBlocks = document.querySelectorAll("#lokasi [data-sc-loc-depth='0.35'] .border-t");
+      if (lokasiBlocks.length >= 1) {
+        const addrPs = lokasiBlocks[0].querySelectorAll("p");
+        if (addrPs[0] && activeCafeProfile.address_line_1) addrPs[0].textContent = activeCafeProfile.address_line_1;
+        if (addrPs[1] && activeCafeProfile.address_line_2) addrPs[1].textContent = activeCafeProfile.address_line_2;
+      }
+      if (lokasiBlocks.length >= 2) {
+        const dds = lokasiBlocks[1].querySelectorAll("dd");
+        if (dds[0] && activeCafeProfile.hours_weekday) dds[0].textContent = activeCafeProfile.hours_weekday;
+        if (dds[1] && activeCafeProfile.hours_weekend) dds[1].textContent = activeCafeProfile.hours_weekend;
+      }
+
+      if (activeCafeProfile.maps_link) {
+        document.querySelectorAll("a[href*='maps.google.com']").forEach((a) => {
+          a.href = activeCafeProfile.maps_link;
+        });
+      }
+      const mapOverlayLabel = document.querySelector("#lokasi [data-sc-loc-depth='0.65'] a span.truncate");
+      if (mapOverlayLabel) {
+        mapOverlayLabel.textContent = `${activeCafeProfile.name} · ${activeCafeProfile.address_line_1 || branchText} ↗`;
+      }
+      const mapIframe = document.querySelector("#lokasi iframe");
+      if (mapIframe && activeCafeProfile.maps_embed_url) {
+        mapIframe.src = activeCafeProfile.maps_embed_url;
+      }
+
+      updateOperatingStatus();
+    }
+
+    function renderPriceBlock(item, size = "row") {
+      const isSpotlight = size === "spotlight";
+      if (item.isPromo && item.promoPrice !== null && item.promoPrice < item.price) {
+        return `
+          <div class="text-right shrink-0">
+            <span class="block text-[11px] sm:text-xs text-stone-400 line-through tabular-nums leading-none">
+              ${formatRupiah(item.price)}
+            </span>
+            <span class="${
+              isSpotlight ? "text-base sm:text-xl" : "text-xs sm:text-base"
+            } font-bold text-stone-900 tabular-nums leading-tight mt-0.5 block">
+              ${formatRupiah(item.promoPrice)}
+            </span>
+          </div>
+        `;
+      }
+      return `
+        <span class="${
+          isSpotlight ? "text-base sm:text-xl" : "text-xs sm:text-base"
+        } font-bold text-stone-900 tabular-nums shrink-0">
+          ${formatRupiah(item.price)}
+        </span>
+      `;
+    }
 
     function updateOperatingStatus() {
       const dotEl = document.getElementById("hero-status-dot");
@@ -2120,7 +2386,9 @@
         const isExtendedDay = weekday === "Fri" || weekday === "Sat" || weekday === "Sun";
         const openMins = 11 * 60;
         const closeMins = isExtendedDay ? 23 * 60 : 22 * 60;
-        const rangeLabel = isExtendedDay ? "11.00 – 23.00 WIB" : "11.00 – 22.00 WIB";
+        const rangeLabel = isExtendedDay
+          ? activeCafeProfile.hours_weekend || "11.00 – 23.00 WIB"
+          : activeCafeProfile.hours_weekday || "11.00 – 22.00 WIB";
 
         const isOpen = currentMins >= openMins && currentMins < closeMins;
 
@@ -2132,7 +2400,7 @@
           textEl.textContent = `Tutup · Buka Pukul ${rangeLabel}`;
         }
       } catch (e) {
-        textEl.textContent = "Buka Setiap Hari · 11.00 – 22.00 WIB";
+        textEl.textContent = `Buka Setiap Hari · ${activeCafeProfile.hours_weekday || "11.00 – 22.00 WIB"}`;
       }
     }
 
@@ -2174,6 +2442,27 @@
       });
     }
 
+    function renderDataSourceNoticeHtml() {
+      if (menuDataSourceState === "live" || menuDataSourceState === "loading") return "";
+      if (menuDataSourceState === "cached") {
+        return `
+          <div class="mb-5 p-3 rounded-xl bg-amber-soft/70 border border-amber-brand/40 flex flex-wrap items-center justify-between gap-2 text-xs text-espresso-900">
+            <span><strong>Mode Cache Sesi Terakhir:</strong> ${escapeHtml(menuStatusNotice)}</span>
+            <button type="button" onclick="window.refreshPublicMenu()" class="font-semibold underline hover:text-amber-hover shrink-0">↻ Hubungkan Ulang</button>
+          </div>
+        `;
+      }
+      if (menuDataSourceState === "fallback") {
+        return `
+          <div class="mb-5 p-3 rounded-xl bg-ivory-100 border border-ivory-300 flex flex-wrap items-center justify-between gap-2 text-xs text-stone-700">
+            <span><strong>Info Katalog:</strong> ${escapeHtml(menuStatusNotice)}</span>
+            <button type="button" onclick="window.refreshPublicMenu()" class="font-semibold text-stone-900 underline hover:text-amber-brand shrink-0">↻ Muat Ulang</button>
+          </div>
+        `;
+      }
+      return "";
+    }
+
     function renderMenuSection(triggerSwitchAnim = false) {
       const tablistEl = document.getElementById("menu-tablist");
       const contentEl = document.getElementById("menu-content-area");
@@ -2207,167 +2496,235 @@
 
       const isShowingAll = activeCategory === "ALL";
       if (viewAllLabel && viewAllBtn) {
-        viewAllLabel.textContent = isShowingAll
-          ? "Kembali ke Kategori"
-          : "Tampilkan Semua Menu";
+        viewAllLabel.textContent = isShowingAll ? "Kembali ke Kategori" : "Tampilkan Semua Menu";
         viewAllBtn.setAttribute("aria-pressed", isShowingAll ? "true" : "false");
       }
+
+      if (menuDataSourceState === "loading") {
+        contentEl.innerHTML = `
+          <div class="py-12 px-4 rounded-2xl border border-ivory-200 bg-ivory-100/60 text-center space-y-2">
+            <p class="font-serif text-base sm:text-lg font-medium text-stone-800 animate-pulse">Memuat kurasi menu terbaru...</p>
+          </div>
+        `;
+        return;
+      }
+
+      if (menuDataSourceState === "empty_db" || menuItems.length === 0) {
+        contentEl.innerHTML = `
+          <div class="py-12 px-4 rounded-2xl border border-ivory-200 bg-ivory-100/60 text-center space-y-3">
+            <p class="font-serif text-base sm:text-lg font-semibold text-stone-900">Katalog Menu Sedang Diperbarui</p>
+            <button type="button" onclick="window.refreshPublicMenu()" class="inline-flex items-center gap-1.5 px-4 h-9 rounded-lg bg-espresso-950 text-ivory-50 text-xs font-semibold">↻ Muat Ulang Menu</button>
+          </div>
+        `;
+        return;
+      }
+
+      const noticeHtml = renderDataSourceNoticeHtml();
 
       if (!isShowingAll) {
         const activeCatObj = menuCategories.find((c) => c.id === activeCategory);
         const categoryItems = menuItems.filter((item) => item.categoryId === activeCategory);
-        const spotlight = categoryItems[0];
-        const supporting = categoryItems.slice(1);
 
         if (statusEl) {
           statusEl.textContent = `Menampilkan sajian pilihan ${activeCatObj ? activeCatObj.name : ""}`;
         }
 
-        const supportingRowsHtml = supporting
-          .map(
-            (item, idx) => `
-            <article style="--sc-row-i: ${idx};" class="sc-menu-row py-3.5 sm:py-5 first:pt-0 last:pb-0 flex items-center gap-3.5 sm:gap-5 group">
-              <div class="w-16 h-16 sm:w-24 sm:h-24 rounded-xl overflow-hidden bg-ivory-200 shrink-0 border border-ivory-200">
-                <img
-                  src="${item.imageUrl}"
-                  alt="${item.name} — Tentang Kopi"
-                  width="120"
-                  height="120"
-                  loading="lazy"
-                  onerror="handleImgFallback(this, '${item.name}')"
-                  class="w-full h-full object-cover object-center warm-editorial-photo group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-
-              <div class="flex-1 min-w-0">
-                <div class="flex items-baseline justify-between gap-2">
-                  <h3 class="font-serif text-sm sm:text-lg font-semibold text-stone-900 truncate">
-                    ${item.name}
-                  </h3>
-                  <span class="text-xs sm:text-base font-bold text-stone-900 tabular-nums shrink-0">
-                    ${formatRupiah(item.price)}
-                  </span>
-                </div>
-
-                <p class="text-xs sm:text-sm text-stone-600 mt-0.5 sm:mt-1 line-clamp-1 sm:line-clamp-2 leading-relaxed">
-                  ${item.description}
-                </p>
-
-                <p class="text-[10px] sm:text-[11px] font-medium text-stone-500 mt-1 sm:mt-2 tracking-wide">
-                  ${item.attributes.join(" · ")}
-                </p>
-              </div>
-            </article>
-          `
-          )
-          .join("");
-
-        contentEl.innerHTML = `
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start">
-            
-            <!-- Left 5 Cols: Featured Menu Spotlight -->
-            <article class="sc-spotlight-card lg:col-span-5 bg-ivory-100 rounded-2xl overflow-hidden border border-ivory-200 shadow-sm">
-              <div class="relative aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden bg-ivory-200">
-                <img
-                  src="${spotlight.imageUrl}"
-                  alt="${spotlight.name} — Menu Unggulan Tentang Kopi"
-                  width="640"
-                  height="480"
-                  loading="lazy"
-                  onerror="handleImgFallback(this, '${spotlight.name}')"
-                  class="sc-spotlight-img w-full h-full object-cover object-center warm-editorial-photo"
-                />
-                ${
-                  spotlight.badge
-                    ? `<span class="absolute top-3 left-3 sm:top-4 sm:left-4 bg-espresso-950/90 backdrop-blur-sm text-amber-brand text-[10px] font-semibold uppercase tracking-[0.14em] px-2.5 py-1 rounded-md">${spotlight.badge}</span>`
-                    : ""
-                }
-              </div>
-
-              <div class="p-4 sm:p-7">
-                <div class="flex items-baseline justify-between gap-3">
-                  <h3 class="font-serif text-lg sm:text-2xl font-semibold text-stone-900">
-                    ${spotlight.name}
-                  </h3>
-                  <span class="text-base sm:text-xl font-bold text-stone-900 tabular-nums shrink-0">
-                    ${formatRupiah(spotlight.price)}
-                  </span>
-                </div>
-
-                <p class="text-[11px] sm:text-xs font-medium text-stone-500 mt-0.5 tracking-wide">
-                  ${spotlight.attributes.join(" · ")}
-                </p>
-
-                <p class="text-xs sm:text-sm text-stone-700 mt-2 sm:mt-3 leading-relaxed">
-                  ${spotlight.description}
-                </p>
-
-                <div class="mt-4 sm:mt-6 pt-3.5 sm:pt-5 border-t border-ivory-200 flex items-center justify-between gap-3">
-                  <span class="text-[11px] sm:text-xs text-stone-600 font-medium">Tersedia di kedai &amp; GoFood</span>
-                  <a
-                    href="${GOFOOD_ORDER_URL}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center gap-1.5 text-xs font-semibold text-espresso-950 bg-amber-brand hover:bg-amber-hover px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-lg transition-colors shrink-0"
-                  >
-                    <span>Pesan di GoFood</span>
-                    <span aria-hidden="true">↗</span>
-                  </a>
-                </div>
-              </div>
-            </article>
-
-            <!-- Right 7 Cols: Supporting Curated Menu Rows -->
-            <div class="lg:col-span-7 divide-y divide-ivory-200 lg:pt-2">
-              ${supportingRowsHtml}
+        if (categoryItems.length === 0) {
+          contentEl.innerHTML = `
+            ${noticeHtml}
+            <div class="py-10 px-4 rounded-2xl border border-ivory-200 bg-ivory-100/50 text-center">
+              <p class="font-serif text-base font-medium text-stone-800">Belum ada menu pada kategori ini.</p>
             </div>
+          `;
+        } else {
+          const spotlight = categoryItems.find((i) => i.isAvailable) || categoryItems[0];
+          const supporting = categoryItems.filter((i) => i.id !== spotlight.id);
 
-          </div>
-        `;
+          const supportingRowsHtml = supporting
+            .map((item, idx) => {
+              const safeName = escapeHtml(item.name);
+              const safeDesc = escapeHtml(item.description);
+              const safeImg = escapeHtml(item.imageUrl);
+              const safeAttrs = (item.attributes || []).map(escapeHtml).join(" · ");
+
+              return `
+                <article style="--sc-row-i: ${idx};" class="sc-menu-row py-3.5 sm:py-5 first:pt-0 last:pb-0 flex items-start sm:items-center gap-3.5 sm:gap-5 group ${
+                  item.isAvailable ? "" : "opacity-75"
+                }">
+                  <div class="relative w-16 h-16 sm:w-24 sm:h-24 rounded-xl overflow-hidden bg-ivory-200 shrink-0 border border-ivory-200">
+                    <img
+                      src="${safeImg}"
+                      alt="${safeName}"
+                      width="120"
+                      height="120"
+                      loading="lazy"
+                      onerror="handleImgFallback(this, '${safeName}')"
+                      class="w-full h-full object-cover object-center warm-editorial-photo group-hover:scale-105 transition-transform duration-300 ${
+                        item.isAvailable ? "" : "grayscale"
+                      }"
+                    />
+                    ${
+                      !item.isAvailable
+                        ? `<span class="absolute inset-0 bg-espresso-950/60 flex items-center justify-center">
+                             <span class="px-2 py-0.5 rounded bg-espresso-950/90 text-ivory-50 text-[9px] font-bold uppercase tracking-wider">Habis</span>
+                           </span>`
+                        : ""
+                    }
+                  </div>
+
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-baseline justify-between gap-2">
+                      <div class="flex flex-wrap items-center gap-1.5 min-w-0">
+                        <h3 class="font-serif text-sm sm:text-lg font-semibold text-stone-900 sm:truncate">${safeName}</h3>
+                        ${
+                          item.isPromo && item.isAvailable
+                            ? `<span class="px-2 py-0.5 rounded-full bg-[#EA580C] text-ivory-50 text-[10px] font-bold shrink-0">Promo</span>`
+                            : ""
+                        }
+                        ${
+                          !item.isAvailable
+                            ? `<span class="px-2 py-0.5 rounded-full bg-stone-200 text-stone-600 text-[10px] font-semibold shrink-0">Habis</span>`
+                            : ""
+                        }
+                      </div>
+                      ${renderPriceBlock(item, "row")}
+                    </div>
+                    <!-- Deskripsi Menu Tampil Utuh Tanpa Terpotong di HP -->
+                    <p class="text-xs sm:text-sm text-stone-600 mt-1 leading-relaxed">${safeDesc}</p>
+                    <p class="text-[10px] sm:text-[11px] font-medium text-stone-500 mt-1.5 sm:mt-2 tracking-wide">${safeAttrs}</p>
+                  </div>
+                </article>
+              `;
+            })
+            .join("");
+
+          const safeSpotName = escapeHtml(spotlight.name);
+          const safeSpotDesc = escapeHtml(spotlight.description);
+          const safeSpotImg = escapeHtml(spotlight.imageUrl);
+          const safeSpotAttrs = (spotlight.attributes || []).map(escapeHtml).join(" · ");
+
+          contentEl.innerHTML = `
+            ${noticeHtml}
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start">
+              <article class="sc-spotlight-card lg:col-span-5 bg-ivory-100 rounded-2xl overflow-hidden border border-ivory-200 shadow-sm">
+                <div class="relative aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden bg-ivory-200">
+                  <img
+                    src="${safeSpotImg}"
+                    alt="${safeSpotName}"
+                    width="640"
+                    height="480"
+                    loading="lazy"
+                    onerror="handleImgFallback(this, '${safeSpotName}')"
+                    class="sc-spotlight-img w-full h-full object-cover object-center warm-editorial-photo ${
+                      spotlight.isAvailable ? "" : "grayscale"
+                    }"
+                  />
+                  ${
+                    spotlight.badge
+                      ? `<span class="absolute top-3 left-3 sm:top-4 sm:left-4 bg-espresso-950/90 backdrop-blur-sm text-amber-brand text-[10px] font-semibold uppercase tracking-[0.14em] px-2.5 py-1 rounded-md">${escapeHtml(spotlight.badge)}</span>`
+                      : ""
+                  }
+                  ${
+                    spotlight.isPromo && spotlight.isAvailable
+                      ? `<span class="absolute top-3 right-3 sm:top-4 sm:right-4 bg-[#EA580C] text-ivory-50 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm">Promo</span>`
+                      : ""
+                  }
+                  ${
+                    !spotlight.isAvailable
+                      ? `<div class="absolute inset-0 bg-espresso-950/60 backdrop-blur-[2px] flex items-center justify-center">
+                           <span class="px-4 py-1.5 rounded-full bg-espresso-950/90 border border-white/25 text-ivory-50 text-xs font-semibold">✕ Sold Out</span>
+                         </div>`
+                      : ""
+                  }
+                </div>
+
+                <div class="p-4 sm:p-7">
+                  <div class="flex items-baseline justify-between gap-3">
+                    <h3 class="font-serif text-lg sm:text-2xl font-semibold text-stone-900">${safeSpotName}</h3>
+                    ${renderPriceBlock(spotlight, "spotlight")}
+                  </div>
+                  <p class="text-[11px] sm:text-xs font-medium text-stone-500 mt-0.5 tracking-wide">${safeSpotAttrs}</p>
+                  <p class="text-xs sm:text-sm text-stone-700 mt-2 sm:mt-3 leading-relaxed">${safeSpotDesc}</p>
+
+                  <div class="mt-4 sm:mt-6 pt-3.5 sm:pt-5 border-t border-ivory-200 flex items-center justify-between gap-3">
+                    ${
+                      spotlight.isAvailable
+                        ? `
+                          <span class="text-[11px] sm:text-xs text-stone-600 font-medium">Tersedia di kedai &amp; GoFood</span>
+                          <a
+                            href="${GOFOOD_ORDER_URL}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-1.5 text-xs font-semibold text-espresso-950 bg-amber-brand hover:bg-amber-hover px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-lg transition-colors shrink-0"
+                          >
+                            <span>Pesan di GoFood</span>
+                            <span aria-hidden="true">↗</span>
+                          </a>
+                        `
+                        : `
+                          <span class="text-[11px] sm:text-xs text-stone-500 font-medium">Sementara sedang habis</span>
+                          <span class="inline-flex items-center justify-center text-xs font-semibold text-stone-500 bg-ivory-200 px-4 py-2 rounded-lg select-none">Habis</span>
+                        `
+                    }
+                  </div>
+                </div>
+              </article>
+
+              <div class="lg:col-span-7 divide-y divide-ivory-200 lg:pt-2">
+                ${supportingRowsHtml}
+              </div>
+            </div>
+          `;
+        }
       } else {
         if (statusEl) {
           statusEl.textContent = `Menampilkan seluruh katalog sajian dari semua kategori`;
         }
 
         contentEl.innerHTML = `
+          ${noticeHtml}
           <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 sm:gap-y-12">
             ${menuCategories
               .map((cat) => {
                 const items = menuItems.filter((i) => i.categoryId === cat.id);
-                const rows = items
-                  .map(
-                    (item, idx) => `
-                    <article style="--sc-row-i: ${idx};" class="sc-menu-row py-3.5 first:pt-0 last:pb-0 flex items-center gap-3.5">
-                      <img
-                        src="${item.imageUrl}"
-                        alt="${item.name}"
-                        width="64"
-                        height="64"
-                        loading="lazy"
-                        onerror="handleImgFallback(this, '${item.name}')"
-                        class="w-14 h-14 sm:w-16 sm:h-16 rounded-lg object-cover warm-editorial-photo shrink-0 bg-ivory-200"
-                      />
-                      <div class="flex-1 min-w-0">
-                        <div class="flex items-baseline justify-between gap-2">
-                          <h4 class="font-serif text-sm sm:text-base font-semibold text-stone-900 truncate">${item.name}</h4>
-                          <span class="text-xs sm:text-sm font-bold text-stone-900 tabular-nums shrink-0">${formatRupiah(item.price)}</span>
-                        </div>
-                        <p class="text-xs text-stone-600 mt-0.5 line-clamp-1 sm:line-clamp-2">${item.description}</p>
-                        <p class="text-[10px] sm:text-[11px] text-stone-500 mt-0.5">${item.attributes.join(" · ")}</p>
-                      </div>
-                    </article>
-                  `
-                  )
-                  .join("");
+                const rows = items.length
+                  ? items
+                      .map((item, idx) => {
+                        const safeName = escapeHtml(item.name);
+                        const safeDesc = escapeHtml(item.description);
+                        const safeImg = escapeHtml(item.imageUrl);
+                        const safeAttrs = (item.attributes || []).map(escapeHtml).join(" · ");
+
+                        return `
+                          <article style="--sc-row-i: ${idx};" class="sc-menu-row py-3.5 first:pt-0 last:pb-0 flex items-start sm:items-center gap-3.5 ${
+                            item.isAvailable ? "" : "opacity-70"
+                          }">
+                            <div class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-lg overflow-hidden shrink-0 bg-ivory-200">
+                              <img src="${safeImg}" alt="${safeName}" width="64" height="64" loading="lazy" onerror="handleImgFallback(this, '${safeName}')" class="w-full h-full object-cover warm-editorial-photo ${item.isAvailable ? "" : "grayscale"}" />
+                            </div>
+                            <div class="flex-1 min-w-0">
+                              <div class="flex items-baseline justify-between gap-2">
+                                <div class="flex flex-wrap items-center gap-1.5 min-w-0">
+                                  <h4 class="font-serif text-sm sm:text-base font-semibold text-stone-900 sm:truncate">${safeName}</h4>
+                                  ${item.isPromo && item.isAvailable ? `<span class="px-1.5 py-0.5 rounded bg-[#EA580C] text-ivory-50 text-[9px] font-bold shrink-0">Promo</span>` : ""}
+                                  ${!item.isAvailable ? `<span class="px-1.5 py-0.5 rounded bg-stone-200 text-stone-600 text-[9px] font-semibold shrink-0">Habis</span>` : ""}
+                                </div>
+                                ${renderPriceBlock(item, "row")}
+                              </div>
+                              <!-- Deskripsi Menu Tampil Utuh Tanpa Terpotong di HP -->
+                              <p class="text-xs text-stone-600 mt-1 leading-relaxed">${safeDesc}</p>
+                              <p class="text-[10px] sm:text-[11px] text-stone-500 mt-1">${safeAttrs}</p>
+                            </div>
+                          </article>
+                        `;
+                      })
+                      .join("")
+                  : `<p class="py-3 text-xs text-stone-500 italic">Belum ada menu di kategori ini.</p>`;
 
                 return `
                   <div>
-                    <h3 class="text-xs font-bold uppercase tracking-[0.16em] text-amber-brand pb-2.5 border-b border-stone-900">
-                      ${cat.name}
-                    </h3>
-                    <div class="mt-2.5 divide-y divide-ivory-200">
-                      ${rows}
-                    </div>
+                    <h3 class="text-xs font-bold uppercase tracking-[0.16em] text-amber-brand pb-2.5 border-b border-stone-900">${cat.name}</h3>
+                    <div class="mt-2.5 divide-y divide-ivory-200">${rows}</div>
                   </div>
                 `;
               })
@@ -2417,18 +2774,27 @@
         .map((cat) => {
           const items = menuItems.filter((i) => i.categoryId === cat.id);
           const rows = items
-            .map(
-              (item) => `
-              <div class="py-2.5 flex items-start justify-between gap-4">
-                <div>
-                  <h5 class="text-xs sm:text-sm font-bold text-stone-900">${item.name}</h5>
-                  <p class="text-[11px] sm:text-xs text-stone-600 mt-0.5">${item.description}</p>
-                  <p class="text-[10px] text-stone-400 mt-0.5">${item.attributes.join(" · ")}</p>
+            .map((item) => {
+              const priceHtml =
+                item.isPromo && item.promoPrice !== null && item.promoPrice < item.price
+                  ? `<span class="text-stone-400 line-through font-normal mr-1.5">${formatRupiah(item.price)}</span>${formatRupiah(item.promoPrice)}`
+                  : formatRupiah(item.price);
+
+              return `
+                <div class="py-2.5 flex items-start justify-between gap-4 ${item.isAvailable ? "" : "opacity-60"}">
+                  <div>
+                    <h5 class="text-xs sm:text-sm font-bold text-stone-900">
+                      ${escapeHtml(item.name)}
+                      ${!item.isAvailable ? '<span class="ml-1.5 text-[10px] font-semibold text-red-700">(Habis)</span>' : ""}
+                      ${item.isPromo && item.isAvailable ? '<span class="ml-1.5 text-[10px] font-semibold text-[#EA580C]">(Promo)</span>' : ""}
+                    </h5>
+                    <p class="text-[11px] sm:text-xs text-stone-600 mt-0.5">${escapeHtml(item.description)}</p>
+                    <p class="text-[10px] text-stone-400 mt-0.5">${(item.attributes || []).map(escapeHtml).join(" · ")}</p>
+                  </div>
+                  <span class="text-xs sm:text-sm font-bold text-stone-900 tabular-nums shrink-0">${priceHtml}</span>
                 </div>
-                <span class="text-xs sm:text-sm font-bold text-stone-900 tabular-nums shrink-0">${formatRupiah(item.price)}</span>
-              </div>
-            `
-            )
+              `;
+            })
             .join("");
 
           return `
@@ -2446,18 +2812,23 @@
         .map((cat) => {
           const items = menuItems.filter((i) => i.categoryId === cat.id);
           const rows = items
-            .map(
-              (item) => `
-              <tr>
-                <td style="padding:10px 0;border-bottom:1px solid #E5DCCB;">
-                  <strong>${item.name}</strong><br/>
-                  <small style="color:#57534E;">${item.description} (${item.attributes.join(" · ")})</small>
-                </td>
-                <td style="padding:10px 0;border-bottom:1px solid #E5DCCB;text-align:right;font-weight:bold;white-space:nowrap;">
-                  ${formatRupiah(item.price)}
-                </td>
-              </tr>`
-            )
+            .map((item) => {
+              const displayPrice =
+                item.isPromo && item.promoPrice !== null && item.promoPrice < item.price
+                  ? `<s>${formatRupiah(item.price)}</s> ${formatRupiah(item.promoPrice)}`
+                  : formatRupiah(item.price);
+              const statusNote = !item.isAvailable ? " [HABIS]" : item.isPromo ? " [PROMO]" : "";
+              return `
+                <tr>
+                  <td style="padding:10px 0;border-bottom:1px solid #E5DCCB;">
+                    <strong>${escapeHtml(item.name)}${statusNote}</strong><br/>
+                    <small style="color:#57534E;">${escapeHtml(item.description)} (${(item.attributes || []).map(escapeHtml).join(" · ")})</small>
+                  </td>
+                  <td style="padding:10px 0;border-bottom:1px solid #E5DCCB;text-align:right;font-weight:bold;white-space:nowrap;">
+                    ${displayPrice}
+                  </td>
+                </tr>`;
+            })
             .join("");
           return `<h2 style="font-size:13px;text-transform:uppercase;letter-spacing:1.5px;color:#C88A2B;margin-top:24px;border-bottom:1px solid #1C1917;padding-bottom:6px;">${cat.name}</h2>
                   <table style="width:100%;border-collapse:collapse;font-size:13px;">${rows}</table>`;
@@ -2468,16 +2839,16 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Katalog Menu Tentang Kopi Sukmajaya Depok</title>
+<title>Katalog Menu ${escapeHtml(activeCafeProfile.name)} — ${escapeHtml(activeCafeProfile.branch)}</title>
 <style>
   body { font-family: Georgia, serif; max-width: 700px; margin: 40px auto; padding: 0 24px; color: #1C1917; background: #FAF7F2; line-height: 1.5; }
-  h1 { margin-bottom: 4px; font-size: 24px; }
+  h1 { margin-bottom: 4px; font-size: 24px; text-transform: uppercase; }
   .meta { font-family: sans-serif; font-size: 12px; color: #57534E; margin-bottom: 24px; }
 </style>
 </head>
 <body>
-  <h1>TENTANG KOPI — SUKMAJAYA, DEPOK</h1>
-  <div class="meta">Secangkir Kopi, Sejuta Cerita · Jl. Bahagia Raya No. 4 (Samping Polsek Sukmajaya), Depok · Order Online: ${GOFOOD_ORDER_URL}</div>
+  <h1>${escapeHtml(activeCafeProfile.name)} — ${escapeHtml(activeCafeProfile.branch)}</h1>
+  <div class="meta">${escapeHtml(activeCafeProfile.address_line_1 || "")} · Order Online: ${escapeHtml(GOFOOD_ORDER_URL)}</div>
   ${sectionsHtml}
 </body>
 </html>`;
@@ -2486,12 +2857,121 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "Katalog-Menu-Tentang-Kopi-Sukmajaya.html";
+      a.download = `Katalog-Menu-${ACTIVE_CAFE_SLUG}.html`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     }
+
+    // Ambil Profil Kafe & Daftar Menu dari Supabase berdasarkan ?kafe=slug
+    async function loadPublicCafeAndMenuFromSupabase(isInitial = false) {
+      const supabase = window.getSupabaseClient ? window.getSupabaseClient() : null;
+
+      if (isInitial) {
+        menuDataSourceState = "loading";
+        renderMenuSection(false);
+      }
+
+      if (!window.isSupabaseConfigured() || !supabase) {
+        menuItems = [...fallbackMenuItems];
+        menuDataSourceState = "fallback";
+        menuStatusNotice = "Menampilkan data katalog bawaan (Konfigurasi Supabase belum dihubungkan).";
+        renderMenuSection(false);
+        renderFullMenuModalContent();
+        return;
+      }
+
+      try {
+        // 1. Ambil Profil Kafe
+        const { data: cafeRow } = await supabase
+          .from("cafes")
+          .select("*")
+          .eq("slug", ACTIVE_CAFE_SLUG)
+          .maybeSingle();
+
+        if (cafeRow) {
+          applyCafeProfileToDOM(cafeRow);
+        }
+
+        // 2. Ambil Daftar Menu untuk Kafe Tersebut
+        const { data, error } = await supabase
+          .from("menu_items")
+          .select("*")
+          .eq("cafe_slug", ACTIVE_CAFE_SLUG)
+          .order("category", { ascending: true })
+          .order("sort_order", { ascending: true })
+          .order("created_at", { ascending: true });
+
+        if (error) throw error;
+
+        if (!data || data.length === 0) {
+          menuItems = [];
+          menuDataSourceState = "empty_db";
+          menuStatusNotice = "";
+        } else {
+          menuItems = data.map(window.normalizeMenuItem);
+          menuDataSourceState = "live";
+          menuStatusNotice = "";
+          try {
+            localStorage.setItem(
+              MENU_CACHE_KEY,
+              JSON.stringify({ savedAt: new Date().toISOString(), items: menuItems })
+            );
+          } catch (e) {}
+        }
+      } catch (err) {
+        let restored = false;
+        try {
+          const rawCache = localStorage.getItem(MENU_CACHE_KEY);
+          if (rawCache) {
+            const parsed = JSON.parse(rawCache);
+            if (parsed && Array.isArray(parsed.items) && parsed.items.length > 0) {
+              menuItems = parsed.items;
+              menuDataSourceState = "cached";
+              menuStatusNotice = "Menampilkan data menu dari kunjungan terakhir.";
+              restored = true;
+            }
+          }
+        } catch (e) {}
+
+        if (!restored) {
+          menuItems = [...fallbackMenuItems];
+          menuDataSourceState = "fallback";
+          menuStatusNotice = "Server database sedang tidak dapat dijangkau. Menampilkan katalog referensi bawaan.";
+        }
+      }
+
+      renderMenuSection(false);
+      renderFullMenuModalContent();
+    }
+
+    function subscribePublicRealtime() {
+      const supabase = window.getSupabaseClient ? window.getSupabaseClient() : null;
+      if (!supabase || !window.isSupabaseConfigured()) return;
+
+      if (publicRealtimeChannel) {
+        supabase.removeChannel(publicRealtimeChannel);
+      }
+
+      publicRealtimeChannel = supabase
+        .channel(`public-sync-${ACTIVE_CAFE_SLUG}`)
+        .on(
+          "postgres_changes",
+          { event: "*", schema: "public", table: "menu_items", filter: `cafe_slug=eq.${ACTIVE_CAFE_SLUG}` },
+          () => loadPublicCafeAndMenuFromSupabase(false)
+        )
+        .on(
+          "postgres_changes",
+          { event: "*", schema: "public", table: "cafes", filter: `slug=eq.${ACTIVE_CAFE_SLUG}` },
+          () => loadPublicCafeAndMenuFromSupabase(false)
+        )
+        .subscribe();
+    }
+
+    window.refreshPublicMenu = function () {
+      loadPublicCafeAndMenuFromSupabase(true);
+    };
 
     function openModal(modalEl) {
       if (!modalEl) return;
@@ -2505,9 +2985,6 @@
       modalEl.classList.remove("flex");
     }
 
-    /**
-     * Helper to wire up mobile horizontal snap sliders with prev/next triangle buttons & dots
-     */
     function initMobileSnapSlider(sliderId, prevBtnId, nextBtnId, dotsContainerId) {
       const slider = document.getElementById(sliderId);
       const prevBtn = document.getElementById(prevBtnId);
@@ -2553,11 +3030,6 @@
       }
     }
 
-    /**
-     * ========================================================================
-     * SCROLL CRAFT PHYSICS ENGINE (Smooth Lerp + IntersectionObserver + --sc-p)
-     * ========================================================================
-     */
     function initScrollCraftEngine() {
       const acts = Array.from(document.querySelectorAll("[data-sc-act]"));
       if (!acts.length) return;
@@ -2566,14 +3038,7 @@
       const stateMap = new Map();
 
       acts.forEach((act) => {
-        stateMap.set(act, {
-          p: 0,
-          targetP: 0,
-          enter: 1,
-          targetEnter: 1,
-          wave: 0,
-          targetWave: 0
-        });
+        stateMap.set(act, { p: 0, targetP: 0, enter: 1, targetEnter: 1, wave: 0, targetWave: 0 });
       });
 
       let rafId = null;
@@ -2582,11 +3047,8 @@
         const io = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                activeActs.add(entry.target);
-              } else {
-                activeActs.delete(entry.target);
-              }
+              if (entry.isIntersecting) activeActs.add(entry.target);
+              else activeActs.delete(entry.target);
             });
             startLoop();
           },
@@ -2621,8 +3083,7 @@
           const actId = act.getAttribute("data-sc-act");
 
           if (actId === "hero") {
-            const heroP = clamp01(scrollY / Math.max(1, rect.height * 0.72));
-            st.targetP = heroP;
+            st.targetP = clamp01(scrollY / Math.max(1, rect.height * 0.72));
             st.targetEnter = 1;
             st.targetWave = 0;
           } else {
@@ -2647,7 +3108,6 @@
         const targets = activeActs.size ? activeActs : acts;
         targets.forEach((act) => {
           const st = stateMap.get(act);
-
           st.p += (st.targetP - st.p) * lerpFactor;
           st.enter += (st.targetEnter - st.enter) * lerpFactor;
           st.wave += (st.targetWave - st.wave) * lerpFactor;
@@ -2666,17 +3126,12 @@
           act.style.setProperty("--sc-wave", st.wave.toFixed(4));
         });
 
-        if (stillMoving) {
-          rafId = window.requestAnimationFrame(tick);
-        } else {
-          rafId = null;
-        }
+        if (stillMoving) rafId = window.requestAnimationFrame(tick);
+        else rafId = null;
       }
 
       function startLoop() {
-        if (!rafId) {
-          rafId = window.requestAnimationFrame(tick);
-        }
+        if (!rafId) rafId = window.requestAnimationFrame(tick);
       }
 
       computeTargets();
@@ -2697,12 +3152,11 @@
     window.addEventListener("DOMContentLoaded", () => {
       updateOperatingStatus();
       setInterval(updateOperatingStatus, 60000);
-      renderMenuSection(false);
-      renderFullMenuModalContent();
+      loadPublicCafeAndMenuFromSupabase(true);
+      subscribePublicRealtime();
       bindHeroPointerRespond();
       initScrollCraftEngine();
 
-      // Initialize Mobile Sliders (Ulasan & Momen Seduhan)
       initMobileSnapSlider("reviews-slider", "reviews-prev-btn", "reviews-next-btn", "reviews-dots");
       initMobileSnapSlider("momen-slider", "momen-prev-btn", "momen-next-btn", "momen-dots");
 
@@ -2730,16 +3184,14 @@
       if (mobileBtn && mobileDrawer) {
         mobileBtn.addEventListener("click", () => {
           const expanded = mobileBtn.getAttribute("aria-expanded") === "true";
-          if (expanded) {
-            closeMobileMenu();
-          } else {
+          if (expanded) closeMobileMenu();
+          else {
             mobileDrawer.classList.remove("hidden");
             mobileBtn.setAttribute("aria-expanded", "true");
             if (openIcon) openIcon.classList.add("hidden");
             if (closeIcon) closeIcon.classList.remove("hidden");
           }
         });
-
         document.querySelectorAll("[data-mobile-nav-link]").forEach((link) => {
           link.addEventListener("click", closeMobileMenu);
         });
@@ -2751,18 +3203,10 @@
       const printMenuBtn = document.getElementById("btn-print-menu");
       const downloadMenuBtn = document.getElementById("btn-download-menu-file");
 
-      if (openPdfBtn && pdfModal) {
-        openPdfBtn.addEventListener("click", () => openModal(pdfModal));
-      }
-      if (closePdfBtn && pdfModal) {
-        closePdfBtn.addEventListener("click", () => closeModal(pdfModal));
-      }
-      if (printMenuBtn) {
-        printMenuBtn.addEventListener("click", () => window.print());
-      }
-      if (downloadMenuBtn) {
-        downloadMenuBtn.addEventListener("click", downloadStandaloneMenuCatalog);
-      }
+      if (openPdfBtn && pdfModal) openPdfBtn.addEventListener("click", () => openModal(pdfModal));
+      if (closePdfBtn && pdfModal) closePdfBtn.addEventListener("click", () => closeModal(pdfModal));
+      if (printMenuBtn) printMenuBtn.addEventListener("click", () => window.print());
+      if (downloadMenuBtn) downloadMenuBtn.addEventListener("click", downloadStandaloneMenuCatalog);
 
       let currentGalleryIndex = 0;
       let isGalleryDescExpanded = false;
@@ -2783,22 +3227,16 @@
       function setGalleryDescExpanded(expanded) {
         isGalleryDescExpanded = expanded;
         if (!galleryFooter || !galleryDesc || !galleryNavBtns) return;
-
         if (expanded) {
-          galleryFooter.className =
-            "px-4 sm:px-6 py-3.5 bg-espresso-900 border-t border-white/10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 shrink-0 transition-all";
-          galleryDesc.className =
-            "text-xs sm:text-sm text-stone-200 whitespace-normal break-words leading-relaxed cursor-pointer sm:cursor-default";
-          galleryNavBtns.className =
-            "flex items-center justify-end gap-2 shrink-0 pt-2 sm:pt-0 border-t border-white/10 sm:border-t-0";
+          galleryFooter.className = "px-4 sm:px-6 py-3.5 bg-espresso-900 border-t border-white/10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 shrink-0 transition-all";
+          galleryDesc.className = "text-xs sm:text-sm text-stone-200 whitespace-normal break-words leading-relaxed cursor-pointer sm:cursor-default";
+          galleryNavBtns.className = "flex items-center justify-end gap-2 shrink-0 pt-2 sm:pt-0 border-t border-white/10 sm:border-t-0";
           if (galleryDescToggleText) galleryDescToggleText.textContent = "Sembunyikan";
           if (galleryDescToggleIcon) galleryDescToggleIcon.textContent = "▴";
           if (galleryDescToggle) galleryDescToggle.setAttribute("aria-expanded", "true");
         } else {
-          galleryFooter.className =
-            "px-4 sm:px-6 py-3.5 bg-espresso-900 border-t border-white/10 flex flex-row items-center justify-between gap-3 sm:gap-4 shrink-0 transition-all";
-          galleryDesc.className =
-            "text-xs sm:text-sm text-stone-300 truncate sm:whitespace-normal sm:overflow-visible leading-relaxed cursor-pointer sm:cursor-default";
+          galleryFooter.className = "px-4 sm:px-6 py-3.5 bg-espresso-900 border-t border-white/10 flex flex-row items-center justify-between gap-3 sm:gap-4 shrink-0 transition-all";
+          galleryDesc.className = "text-xs sm:text-sm text-stone-300 truncate sm:whitespace-normal sm:overflow-visible leading-relaxed cursor-pointer sm:cursor-default";
           galleryNavBtns.className = "flex items-center gap-2 shrink-0";
           if (galleryDescToggleText) galleryDescToggleText.textContent = "Selengkapnya";
           if (galleryDescToggleIcon) galleryDescToggleIcon.textContent = "▾";
@@ -2806,17 +3244,10 @@
         }
       }
 
-      if (galleryDescToggle) {
-        galleryDescToggle.addEventListener("click", () => {
-          setGalleryDescExpanded(!isGalleryDescExpanded);
-        });
-      }
-
+      if (galleryDescToggle) galleryDescToggle.addEventListener("click", () => setGalleryDescExpanded(!isGalleryDescExpanded));
       if (galleryDesc) {
         galleryDesc.addEventListener("click", () => {
-          if (window.matchMedia("(max-width: 639px)").matches) {
-            setGalleryDescExpanded(!isGalleryDescExpanded);
-          }
+          if (window.matchMedia("(max-width: 639px)").matches) setGalleryDescExpanded(!isGalleryDescExpanded);
         });
       }
 
@@ -2855,15 +3286,9 @@
         });
       });
 
-      if (closeGalleryBtn && galleryModal) {
-        closeGalleryBtn.addEventListener("click", () => closeModal(galleryModal));
-      }
-      if (prevGalleryBtn) {
-        prevGalleryBtn.addEventListener("click", () => showGallerySlide(currentGalleryIndex - 1));
-      }
-      if (nextGalleryBtn) {
-        nextGalleryBtn.addEventListener("click", () => showGallerySlide(currentGalleryIndex + 1));
-      }
+      if (closeGalleryBtn && galleryModal) closeGalleryBtn.addEventListener("click", () => closeModal(galleryModal));
+      if (prevGalleryBtn) prevGalleryBtn.addEventListener("click", () => showGallerySlide(currentGalleryIndex - 1));
+      if (nextGalleryBtn) nextGalleryBtn.addEventListener("click", () => showGallerySlide(currentGalleryIndex + 1));
 
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
