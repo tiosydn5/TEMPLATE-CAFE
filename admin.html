@@ -391,7 +391,7 @@
             <div class="bg-ivory-50 rounded-2xl p-4 sm:p-5 border border-ivory-200">
               <span class="text-xs font-medium text-stone-500">Total Item Menu</span>
               <p id="stat-total-menu" class="font-serif text-2xl sm:text-3xl font-semibold text-stone-900 mt-2 tabular-nums">0</p>
-              <p class="text-[11px] text-stone-500 mt-1">4 kategori kurasi</p>
+              <p id="stat-category-count" class="text-[11px] text-stone-500 mt-1">0 kategori kurasi</p>
             </div>
             <div class="bg-ivory-50 rounded-2xl p-4 sm:p-5 border border-ivory-200">
               <span class="text-xs font-medium text-stone-500">Menu Tersedia</span>
@@ -419,7 +419,7 @@
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
                     <h2 class="font-serif text-lg sm:text-xl font-semibold text-stone-900">Menu Terbaru</h2>
-                    <p class="text-xs text-stone-500 mt-0.5">Kelola menu, foto, harga promo, dan status ketersediaan dengan cepat.</p>
+                    <p class="text-xs text-stone-500 mt-0.5">Kelola menu, kategori, foto, harga promo, dan status ketersediaan dengan cepat.</p>
                   </div>
                   <input
                     type="search"
@@ -432,11 +432,6 @@
                 <div class="flex flex-wrap items-center justify-between gap-2">
                   <div id="category-filter-pills" class="flex flex-wrap items-center gap-1.5">
                     <button type="button" data-cat-filter="ALL" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-espresso-700 text-ivory-50">Semua</button>
-                    <button type="button" data-cat-filter="signature-coffee" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-ivory-100 hover:bg-ivory-200 text-stone-700">Coffee</button>
-                    <button type="button" data-cat-filter="non-coffee" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-ivory-100 hover:bg-ivory-200 text-stone-700">Non-Coffee</button>
-                    <button type="button" data-cat-filter="manual-brew" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-ivory-100 hover:bg-ivory-200 text-stone-700">Manual Brew</button>
-                    <button type="button" data-cat-filter="pastry" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-ivory-100 hover:bg-ivory-200 text-stone-700">Makanan</button>
-                    <button type="button" data-cat-filter="PROMO_ONLY" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-ivory-100 hover:bg-ivory-200 text-stone-700">🔥 Promo</button>
                   </div>
                   <span id="table-count-label" class="text-[11px] text-stone-500 tabular-nums">0 menu</span>
                 </div>
@@ -446,14 +441,14 @@
 
               <div id="table-wrapper" class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
-                  <thead>
+		  <thead>
                     <tr class="border-b border-ivory-200 text-[11px] font-semibold uppercase tracking-wider text-stone-500 bg-ivory-100/60">
-                      <th class="py-3.5 pl-4 sm:pl-6 pr-3">Nama Menu</th>
-                      <th class="py-3.5 px-3">Kategori</th>
-                      <th class="py-3.5 px-3">Harga</th>
-                      <th class="py-3.5 px-3">Status</th>
-                      <th class="py-3.5 px-3">Promo</th>
-                      <th class="py-3.5 pl-3 pr-4 sm:pr-6 text-right">Aksi</th>
+                      <th class="py-3 pl-4 pr-2">Nama Menu</th>
+                      <th class="py-3 px-2">Kategori</th>
+                      <th class="py-3 px-2">Harga</th>
+                      <th class="py-3 px-2">Status</th>
+                      <th class="py-3 px-2">Promo</th>
+                      <th class="py-3 pl-2 pr-4 text-right">Aksi</th>
                     </tr>
                   </thead>
                   <tbody id="menu-table-body" class="divide-y divide-ivory-200 text-xs sm:text-sm"></tbody>
@@ -524,7 +519,6 @@
 
         <!-- ====================================================================
              TAB PANEL 2: PENGATURAN PROFIL, KONTAK & FOTO KAFE
-             (Dapat digunakan oleh Super Admin maupun Pemilik Kafe untuk kafenya)
              ==================================================================== -->
         <main id="tab-panel-settings" class="hidden flex-1 p-4 sm:p-6 lg:p-8 max-w-5xl w-full mx-auto space-y-6">
           <div class="bg-ivory-50 rounded-2xl border border-ivory-200 p-5 sm:p-8 shadow-2xs">
@@ -773,13 +767,18 @@
             </div>
 
             <div>
-              <label for="form-category" class="block text-xs font-semibold text-stone-700 mb-1">Kategori *</label>
-              <select id="form-category" required class="w-full h-10 px-3.5 rounded-xl bg-white border border-ivory-300 text-xs sm:text-sm">
-                <option value="signature-coffee">Signature Coffee</option>
-                <option value="non-coffee">Non-Coffee</option>
-                <option value="manual-brew">Manual Brew</option>
-                <option value="pastry">Light Bites &amp; Pastry</option>
-              </select>
+              <label for="form-category" class="block text-xs font-semibold text-stone-700 mb-1">
+                Kategori * <span class="font-normal text-stone-400">(Pilih yang ada atau ketik kategori baru)</span>
+              </label>
+              <input
+                type="text"
+                id="form-category"
+                list="category-datalist"
+                required
+                placeholder="Ketik atau pilih: signature-coffee, dimsum, ramen..."
+                class="w-full h-10 px-3.5 rounded-xl bg-white border border-ivory-300 text-xs sm:text-sm"
+              />
+              <datalist id="category-datalist"></datalist>
             </div>
 
             <div>
@@ -843,7 +842,7 @@
       <span class="text-[10px] font-bold uppercase tracking-widest text-amber-brand block">OUTREACH AUTOMATION</span>
       <h3 class="font-serif text-xl font-semibold text-stone-900 mt-1">Duplikat untuk Kafe Baru</h3>
       <p class="text-xs text-stone-600 mt-1 leading-relaxed">
-        Menyalin seluruh tampilan dan 16 daftar menu dari kafe saat ini ke URL target baru (contoh: <code>?kafe=kopi-senja</code>).
+        Menyalin seluruh tampilan dan daftar menu dari kafe saat ini ke URL target baru (contoh: <code>?kafe=kopi-senja</code>).
       </p>
 
       <form id="duplicate-cafe-form" class="mt-4 space-y-3.5">
@@ -1139,6 +1138,70 @@
         });
       });
 
+      // Helper Format Nama Kategori
+      const catLabelMap = {
+        "signature-coffee": "Coffee",
+        "non-coffee": "Non-Coffee",
+        "manual-brew": "Manual Brew",
+        "pastry": "Makanan"
+      };
+
+      function formatCatLabel(catId) {
+        if (!catId) return "Lainnya";
+        if (catLabelMap[catId]) return catLabelMap[catId];
+        return String(catId)
+          .replace(/-/g, " ")
+          .replace(/\b\w/g, (c) => c.toUpperCase());
+      }
+
+      // Render Datalist & Tombol Filter Kategori secara Dinamis
+      function renderDynamicCategories() {
+        const uniqueCats = [...new Set(allMenuItems.map((i) => i.categoryId).filter(Boolean))];
+
+        // Jika kategori yang sedang difilter sudah tidak ada menunya, kembalikan ke ALL
+        if (
+          currentCategoryFilter !== "ALL" &&
+          currentCategoryFilter !== "PROMO_ONLY" &&
+          !uniqueCats.includes(currentCategoryFilter)
+        ) {
+          currentCategoryFilter = "ALL";
+        }
+
+        // Update angka jumlah kategori di kartu statistik
+        const catCountEl = document.getElementById("stat-category-count");
+        if (catCountEl) {
+          catCountEl.textContent = `${uniqueCats.length} kategori kurasi`;
+        }
+
+        // Update datalist di dalam modal tambah/edit menu
+        const datalist = document.getElementById("category-datalist");
+        if (datalist) {
+          datalist.innerHTML = uniqueCats
+            .map((c) => `<option value="${escapeHtml(c)}">${escapeHtml(formatCatLabel(c))}</option>`)
+            .join("");
+        }
+
+        // Render deretan tombol filter kategori di atas tabel
+        const pillsContainer = document.getElementById("category-filter-pills");
+        if (pillsContainer) {
+          const allPills = [
+            { id: "ALL", label: "Semua" },
+            ...uniqueCats.map((c) => ({ id: c, label: formatCatLabel(c) })),
+            { id: "PROMO_ONLY", label: "🔥 Promo" }
+          ];
+
+          pillsContainer.innerHTML = allPills
+            .map((p) => {
+              const active = currentCategoryFilter === p.id;
+              const cls = active
+                ? "px-3 py-1.5 rounded-lg text-xs font-semibold bg-espresso-700 text-ivory-50"
+                : "px-3 py-1.5 rounded-lg text-xs font-medium bg-ivory-100 hover:bg-ivory-200 text-stone-700";
+              return `<button type="button" data-cat-filter="${escapeHtml(p.id)}" class="${cls}">${escapeHtml(p.label)}</button>`;
+            })
+            .join("");
+        }
+      }
+
       // Statistik & Render Tabel Menu
       function updateMetricsSummary() {
         const total = allMenuItems.length;
@@ -1157,6 +1220,7 @@
 
       function renderMenuTable() {
         updateMetricsSummary();
+        renderDynamicCategories();
         const tableWrapper = document.getElementById("table-wrapper");
         const stateContainer = document.getElementById("table-state-container");
         const tbody = document.getElementById("menu-table-body");
@@ -1188,19 +1252,12 @@
         stateContainer.classList.add("hidden");
         tableWrapper.classList.remove("hidden");
 
-        const catLabelMap = {
-          "signature-coffee": "Coffee",
-          "non-coffee": "Non-Coffee",
-          "manual-brew": "Manual Brew",
-          "pastry": "Makanan"
-        };
-
         tbody.innerHTML = filtered
           .map((item) => {
             const safeName = escapeHtml(item.name);
             const safeDesc = escapeHtml(item.description);
             const safeImg = escapeHtml(item.imageUrl);
-            const catLabel = escapeHtml(catLabelMap[item.categoryId] || item.categoryId);
+            const catLabel = escapeHtml(formatCatLabel(item.categoryId));
 
             return `
               <tr class="hover:bg-ivory-100/50 transition-colors">
@@ -1333,7 +1390,7 @@
           document.getElementById("menu-modal-title").textContent = "Tambah Menu Baru";
           document.getElementById("form-item-id").value = "";
           document.getElementById("form-name").value = "";
-          document.getElementById("form-category").value = "signature-coffee";
+          document.getElementById("form-category").value = "";
           document.getElementById("form-description").value = "";
           document.getElementById("form-price").value = "";
           formIsAvailable.checked = true;
@@ -1405,7 +1462,11 @@
 
         const id = document.getElementById("form-item-id").value.trim();
         const name = document.getElementById("form-name").value.trim();
-        const category = document.getElementById("form-category").value;
+        const category = document
+          .getElementById("form-category")
+          .value.trim()
+          .toLowerCase()
+          .replace(/\s+/g, "-");
         const description = document.getElementById("form-description").value.trim();
         const price = Number(document.getElementById("form-price").value);
         const isAvailable = formIsAvailable.checked;
@@ -1414,6 +1475,11 @@
 
         if (name.length < 2) {
           errBanner.textContent = "Nama menu minimal 2 karakter.";
+          errBanner.classList.remove("hidden");
+          return;
+        }
+        if (!category) {
+          errBanner.textContent = "Kategori wajib diisi.";
           errBanner.classList.remove("hidden");
           return;
         }
@@ -1569,25 +1635,18 @@
         showToast("Profil kafe prospek berhasil dihapus.");
       });
 
-      // Filter Kategori & Search
-      const filterPills = Array.from(document.querySelectorAll("[data-cat-filter]"));
-      filterPills.forEach((pill) => {
-        pill.addEventListener("click", () => {
-          currentCategoryFilter = pill.getAttribute("data-cat-filter");
-          filterPills.forEach((p) => {
-            const active = p === pill;
-            p.className = active
-              ? "px-3 py-1.5 rounded-lg text-xs font-semibold bg-espresso-700 text-ivory-50"
-              : "px-3 py-1.5 rounded-lg text-xs font-medium bg-ivory-100 hover:bg-ivory-200 text-stone-700";
-          });
-          renderMenuTable();
-        });
+      // Delegasi Klik Filter Kategori & Search
+      document.getElementById("category-filter-pills").addEventListener("click", (e) => {
+        const pill = e.target.closest("button[data-cat-filter]");
+        if (!pill) return;
+        currentCategoryFilter = pill.getAttribute("data-cat-filter");
+        renderMenuTable();
       });
 
       document.getElementById("sidebar-promo-shortcut").addEventListener("click", () => {
         switchMainTab("menu");
-        const promoPill = document.querySelector("[data-cat-filter='PROMO_ONLY']");
-        if (promoPill) promoPill.click();
+        currentCategoryFilter = "PROMO_ONLY";
+        renderMenuTable();
       });
 
       document.getElementById("menu-search-input").addEventListener("input", (e) => {
@@ -1703,19 +1762,17 @@
         document.getElementById("auth-view").classList.remove("hidden");
       });
 
-	window.formatRupiah = function (angka) {
-	  const num = Number(angka) || 0;
-	  return "Rp " + num.toLocaleString("id-ID");
-	};
-	
-// Auto-scroll mulus saat tombol Promo Diskon atau Dashboard di sidebar diklik
+      window.formatRupiah = function (angka) {
+        const num = Number(angka) || 0;
+        return "Rp " + num.toLocaleString("id-ID");
+      };
+
+      // Auto-scroll mulus saat tombol Promo Diskon di sidebar diklik
       document.addEventListener("click", function (e) {
         const btn = e.target.closest("button, a");
         if (!btn) return;
 
         const text = (btn.textContent || "").trim();
-        
-        // Kalau yang diklik tombol "Promo Diskon" di sidebar kiri
         if (text.includes("Promo Diskon") && !text.includes("🔥")) {
           setTimeout(() => {
             const searchInput = document.querySelector('input[placeholder*="Cari menu"]');

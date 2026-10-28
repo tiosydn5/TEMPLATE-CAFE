@@ -1898,12 +1898,41 @@
       bar_image_url: "ambience-coffee-bar.jpg"
     };
 
-    const menuCategories = [
+     const defaultCategoryNames = {
+      "signature-coffee": "Signature Coffee",
+      "non-coffee": "Non-Coffee",
+      "manual-brew": "Manual Brew",
+      "pastry": "Light Bites & Pastry"
+    };
+
+    let menuCategories = [
       { id: "signature-coffee", name: "Signature Coffee" },
       { id: "non-coffee", name: "Non-Coffee" },
       { id: "manual-brew", name: "Manual Brew" },
       { id: "pastry", name: "Light Bites & Pastry" }
     ];
+
+    function formatPublicCategoryName(catId) {
+      if (!catId) return "Lainnya";
+      if (defaultCategoryNames[catId]) return defaultCategoryNames[catId];
+      return String(catId)
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, (c) => c.toUpperCase());
+    }
+
+    function syncCategoriesFromItems() {
+      const uniqueIds = [...new Set(menuItems.map((i) => i.categoryId).filter(Boolean))];
+      if (uniqueIds.length === 0) return;
+
+      menuCategories = uniqueIds.map((id) => ({
+        id,
+        name: formatPublicCategoryName(id)
+      }));
+
+      if (activeCategory !== "ALL" && !uniqueIds.includes(activeCategory)) {
+        activeCategory = uniqueIds[0];
+      }
+    }
 
     // Data katalog bawaan (HANYA digunakan sebagai fallback transparan jika database tidak dapat dijangkau)
     const fallbackMenuItems = [
@@ -2464,12 +2493,13 @@
     }
 
     function renderMenuSection(triggerSwitchAnim = false) {
-      const tablistEl = document.getElementById("menu-tablist");
-      const contentEl = document.getElementById("menu-content-area");
-      const viewAllBtn = document.getElementById("btn-view-all-menu");
-      const viewAllLabel = document.getElementById("view-all-menu-label");
-      const statusEl = document.getElementById("menu-filter-status");
-      if (!tablistEl || !contentEl) return;
+      	syncCategoriesFromItems();
+      	const tablistEl = document.getElementById("menu-tablist");
+      	const contentEl = document.getElementById("menu-content-area");
+      	const viewAllBtn = document.getElementById("btn-view-all-menu");
+      	const viewAllLabel = document.getElementById("view-all-menu-label");
+      	const statusEl = document.getElementById("menu-filter-status");
+      	if (!tablistEl || !contentEl) return;
 
       tablistEl.innerHTML = menuCategories
         .map((cat) => {
@@ -3163,7 +3193,7 @@
       const viewAllBtn = document.getElementById("btn-view-all-menu");
       if (viewAllBtn) {
         viewAllBtn.addEventListener("click", () => {
-          activeCategory = activeCategory === "ALL" ? "signature-coffee" : "ALL";
+          activeCategory = activeCategory === "ALL" ? (menuCategories[0]?.id || "signature-coffee") : "ALL";
           renderMenuSection(true);
         });
       }
