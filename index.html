@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TENTANG KOPI — Secangkir Kopi, Sejuta Cerita | Sukmajaya, Depok</title>
-  <meta name="description" content="Tentang Kopi Sukmajaya Depok (Jl. Bahagia Raya No. 4, Samping Polsek Sukmajaya) — Ruang kopi hangat untuk menikmati kopi pilihan, bekerja dengan tenang, dan berbagi cerita." />
-  <link rel="icon" type="image/jpeg" href="logo.jpg" />
+  <title>Katalog Menu &amp; Reservasi Tempat — Official Website</title>
+  <meta name="description" id="dynamic-meta-desc" content="Jelajahi kurasi menu pilihan, suasana ruang yang nyaman, jam operasional, dan lokasi lengkap kedai kami." />
+  <link rel="icon" type="image/jpeg" href="logo.jpg" id="dynamic-favicon" />
 
   <!-- Google Fonts: Fraunces (Editorial Serif) & Plus Jakarta Sans (Clean UI & Tabular Numerals) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Tailwind CSS CDN -->
+  <!-- Tailwind CSS CDN dengan dukungan CSS Variables untuk Dynamic Brand Color -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -24,14 +24,14 @@
           },
           colors: {
             espresso: {
-              950: '#110E0C',
-              900: '#181310',
-              800: '#241D18',
-              700: '#332922',
+              950: 'rgb(var(--rgb-dark-950) / <alpha-value>)',
+              900: 'rgb(var(--rgb-dark-900) / <alpha-value>)',
+              800: 'rgb(var(--rgb-dark-800) / <alpha-value>)',
+              700: 'rgb(var(--rgb-dark-700) / <alpha-value>)',
             },
             ivory: {
-              50: '#FAF7F2',
-              100: '#F2ECE1',
+              50: 'rgb(var(--rgb-light-50) / <alpha-value>)',
+              100: 'rgb(var(--rgb-light-100) / <alpha-value>)',
               200: '#E5DCCB',
               300: '#D5C7B2',
             },
@@ -43,8 +43,8 @@
               400: '#A8A29E',
             },
             amber: {
-              brand: '#C88A2B',
-              hover: '#B5791E',
+              brand: 'rgb(var(--rgb-accent) / <alpha-value>)',
+              hover: 'rgb(var(--rgb-accent-hover) / <alpha-value>)',
               soft: '#F5E6C8',
             },
             gofood: '#EE2737',
@@ -57,27 +57,37 @@
   <style>
     :root {
       --sc-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      /* Default Brand Palette (Warm Espresso & Gold) — Diubah otomatis oleh Super Admin CMS */
+      --rgb-dark-950: 17 14 12;
+      --rgb-dark-900: 24 19 16;
+      --rgb-dark-800: 36 29 24;
+      --rgb-dark-700: 51 41 34;
+      --rgb-accent: 200 138 43;
+      --rgb-accent-hover: 181 121 30;
+      --rgb-light-50: 250 247 242;
+      --rgb-light-100: 242 236 225;
+      --hex-dark-950: #110E0C;
+      --hex-dark-900: #181310;
+      --hex-accent: #C88A2B;
+      --hex-light-50: #FAF7F2;
     }
 
     html {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #FAF7F2;
+      background-color: var(--hex-light-50);
       color: #1C1917;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Offset anchor targets so sticky navbar never covers section headings */
     section[id], div[id] {
       scroll-margin-top: 76px;
     }
 
-    /* Tabular numerals for aligned pricing and operating schedule */
     .tabular-nums {
       font-variant-numeric: tabular-nums;
     }
 
-    /* Hide scrollbar on horizontal tabs & mobile sliders */
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
@@ -86,29 +96,25 @@
       scrollbar-width: none;
     }
 
-    /* Unified warm coffee house color grading across all photography */
     .warm-editorial-photo {
       filter: sepia(10%) saturate(95%) contrast(104%) brightness(98%);
     }
 
-    /* Subtle chiaroscuro lighting for Hero section */
     .hero-editorial-bg {
       background:
-        radial-gradient(circle at 80% 40%, rgba(200, 138, 43, 0.12) 0%, rgba(24, 19, 16, 0.92) 55%, #110E0C 100%),
-        #110E0C;
+        radial-gradient(circle at 80% 40%, rgb(var(--rgb-accent) / 0.14) 0%, rgb(var(--rgb-dark-900) / 0.92) 55%, var(--hex-dark-950) 100%),
+        var(--hex-dark-950);
     }
 
-    /* Keyboard focus accessibility */
     a:focus-visible,
     button:focus-visible,
     [role="button"]:focus-visible {
-      outline: 2px solid #C88A2B;
+      outline: 2px solid var(--hex-accent);
       outline-offset: 3px;
     }
 
     /* ========================================================================
        SCROLL CRAFT ENGINE — HIGH-IMPACT NON-DESTRUCTIVE CHOREOGRAPHY
-       (100% Identical to Original Design at scroll = 0)
        ======================================================================== */
     [data-sc-act] {
       --sc-p: 0;
@@ -116,12 +122,10 @@
       --sc-wave: 0;
     }
 
-    /* ------------------------------------------------------------------------
-       ACT 1: DIMENSIONAL MULTI-PLANE HERO (#hero)
-       ------------------------------------------------------------------------ */
+    /* ACT 1: HERO */
     .sc-hero-sunbeam {
       background:
-        radial-gradient(ellipse 55% 45% at 78% 38%, rgba(200, 138, 43, 0.22) 0%, rgba(200, 138, 43, 0.05) 45%, transparent 75%);
+        radial-gradient(ellipse 55% 45% at 78% 38%, rgb(var(--rgb-accent) / 0.22) 0%, rgb(var(--rgb-accent) / 0.05) 45%, transparent 75%);
       transform: translate3d(
         calc(var(--sc-p, 0) * -90px),
         calc(var(--sc-p, 0) * 120px),
@@ -135,13 +139,11 @@
       will-change: transform, opacity;
     }
 
-    /* Plane 2: Status Badge — Fast upward float & fade */
     #hero [data-sc-depth="0.20"] {
       transform: translate3d(0, calc(var(--sc-p, 0) * -65px), 0);
       opacity: calc(1 - (var(--sc-p, 0) * 1.15));
     }
 
-    /* Plane 3: Headline — Deep architectural glide & subtle perspective tilt */
     #hero [data-sc-depth="0.35"] {
       transform: perspective(900px)
         translate3d(0, calc(var(--sc-p, 0) * -115px), 0)
@@ -151,14 +153,12 @@
       transform-origin: left center;
     }
 
-    /* Plane 4: Body Copy & CTAs — Stronger upward velocity */
     #hero [data-sc-depth="0.52"] {
       transform: translate3d(0, calc(var(--sc-p, 0) * -160px), 0)
         scale(calc(1 - (var(--sc-p, 0) * 0.06)));
       opacity: calc(1 - (var(--sc-p, 0) * 1.1));
     }
 
-    /* Plane 5: Hero Subject Card — Balanced parallax & 3D hover on desktop */
     #hero [data-sc-depth="0.75"] {
       --sc-hero-rx: 0deg;
       --sc-hero-ry: 0deg;
@@ -169,15 +169,11 @@
       opacity: calc(1 - (var(--sc-p, 0) * 0.45));
     }
 
-    /* Plane 6: Inner Hero Photo — Subtle zoom on desktop */
     #hero [data-sc-depth="0.95"] {
       transform: scale(calc(1 + (var(--sc-p, 0) * 0.08)));
     }
 
-    /* ------------------------------------------------------------------------
-       ACT 2: HIGHLIGHT KEUNGGULAN (#keunggulan)
-       Strictly aligned horizontally across all 3 columns (Zero vertical shift)
-       ------------------------------------------------------------------------ */
+    /* ACT 2: KEUNGGULAN */
     #keunggulan [data-sc-pillar] {
       transform: none;
       opacity: 1;
@@ -187,9 +183,7 @@
       transform: none;
     }
 
-    /* ------------------------------------------------------------------------
-       ACT 3: POINTER-RESPOND & STAGGERED LEDGER (#menu)
-       ------------------------------------------------------------------------ */
+    /* ACT 3: MENU */
     #menu .sc-menu-header {
       transform: translate3d(
         calc((1 - var(--sc-enter, 1)) * -48px),
@@ -256,9 +250,7 @@
       animation: scTabSwitchCascade 0.52s var(--sc-ease-out) both;
     }
 
-    /* ------------------------------------------------------------------------
-       ACT 4 (ENGINEERED PEAK): ARCHITECTURAL SHUTTER WIPE & SCRUB (#suasana)
-       ------------------------------------------------------------------------ */
+    /* ACT 4: SUASANA */
     #suasana {
       position: relative;
       overflow: hidden;
@@ -273,9 +265,9 @@
         linear-gradient(
           118deg,
           transparent 30%,
-          rgba(200, 138, 43, 0.16) 46%,
+          rgb(var(--rgb-accent) / 0.16) 46%,
           rgba(245, 230, 200, 0.09) 50%,
-          rgba(200, 138, 43, 0.14) 54%,
+          rgb(var(--rgb-accent) / 0.14) 54%,
           transparent 70%
         );
       transform: translate3d(
@@ -326,15 +318,12 @@
       will-change: transform;
     }
 
-    /* 4 Facilities are strictly locked horizontally aligned (Zero vertical shift) */
     #suasana [data-sc-facility] {
       transform: none;
       opacity: 1;
     }
 
-    /* ------------------------------------------------------------------------
-       ACT 5: STACK-CARDS FAN-OUT (#tentang Reviews Ledger)
-       ------------------------------------------------------------------------ */
+    /* ACT 5: TENTANG / REVIEWS */
     #tentang .sc-review-ledger {
       transform: translate3d(
         calc((1 - var(--sc-enter, 1)) * -64px),
@@ -362,9 +351,7 @@
       }
     }
 
-    /* ------------------------------------------------------------------------
-       ACT 6: HORIZONTAL-PAN FILMSTRIP DRIFT (#momen)
-       ------------------------------------------------------------------------ */
+    /* ACT 6: MOMEN / CRAFT / PROMO CARDS */
     #momen .sc-momen-header {
       transform: translate3d(0, calc((1 - var(--sc-enter, 1)) * 45px), 0);
       opacity: calc(0.05 + (var(--sc-enter, 1) * 0.95));
@@ -393,9 +380,7 @@
       }
     }
 
-    /* ------------------------------------------------------------------------
-       ACT 7: CLIP-REVEAL EXPANSION & GOLDEN SHEEN (#promo)
-       ------------------------------------------------------------------------ */
+    /* ACT 7: PROMO BANNER */
     #promo[data-sc-act="promo"] {
       position: relative;
       overflow: hidden;
@@ -420,18 +405,16 @@
       background: linear-gradient(
         112deg,
         transparent 25%,
-        rgba(200, 138, 43, 0.22) 47%,
+        rgb(var(--rgb-accent) / 0.22) 47%,
         rgba(250, 247, 242, 0.12) 50%,
-        rgba(200, 138, 43, 0.16) 53%,
+        rgb(var(--rgb-accent) / 0.16) 53%,
         transparent 75%
       );
       transform: translate3d(calc((var(--sc-p, 0) * 180%) - 90%), 0, 0);
       will-change: transform;
     }
 
-    /* ------------------------------------------------------------------------
-       ACT 8: PARALLAX-PLANES CONVERGENCE (#lokasi)
-       ------------------------------------------------------------------------ */
+    /* ACT 8: LOKASI */
     #lokasi [data-sc-loc-depth="0.35"] {
       transform: translate3d(
         calc((1 - var(--sc-enter, 1)) * -65px),
@@ -455,9 +438,6 @@
       will-change: transform, opacity;
     }
 
-    /* ------------------------------------------------------------------------
-       MOBILE VIEWPORT TUNING (max-width: 768px)
-       ------------------------------------------------------------------------ */
     @media (max-width: 768px) {
       #hero [data-sc-depth="0.20"] {
         transform: translate3d(0, calc(var(--sc-p, 0) * -18px), 0);
@@ -497,7 +477,6 @@
       }
     }
 
-    /* Dedicated Print Stylesheet for Full Menu PDF Export */
     @media print {
       body * {
         visibility: hidden;
@@ -560,11 +539,11 @@
     <div class="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3">
       
       <!-- Brand Identity (Left) -->
-      <a href="#hero" class="flex items-center gap-2.5 sm:gap-3 group shrink-0 py-1" aria-label="Tentang Kopi Sukmajaya Depok — Kembali ke atas">
+      <a href="#hero" class="flex items-center gap-2.5 sm:gap-3 group shrink-0 py-1" aria-label="Kembali ke atas">
         <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full overflow-hidden border border-white/25 bg-white flex items-center justify-center shrink-0 shadow-sm group-hover:border-amber-brand transition-colors">
           <img
             src="logo.jpg"
-            alt="Logo Tentang Kopi Sukmajaya Depok"
+            alt="Logo Kafe"
             width="44"
             height="44"
             onerror="handleImgFallback(this, 'TK')"
@@ -579,30 +558,32 @@
 
       <!-- Desktop Anchor Navigation (Center) -->
       <nav aria-label="Navigasi Utama" class="hidden md:flex items-center gap-8 text-sm font-medium text-stone-300">
-        <a href="#menu" class="hover:text-ivory-50 transition-colors py-2">Menu</a>
-        <a href="#suasana" class="hover:text-ivory-50 transition-colors py-2">Suasana</a>
-        <a href="#tentang" class="hover:text-ivory-50 transition-colors py-2">Cerita &amp; Ulasan</a>
-        <a href="#lokasi" class="hover:text-ivory-50 transition-colors py-2">Lokasi</a>
+        <a href="#menu" data-nav-label="1" class="hover:text-ivory-50 transition-colors py-2">Menu</a>
+        <a href="#suasana" data-nav-label="2" class="hover:text-ivory-50 transition-colors py-2">Suasana</a>
+        <a href="#tentang" data-nav-label="3" class="hover:text-ivory-50 transition-colors py-2">Cerita &amp; Ulasan</a>
+        <a href="#lokasi" data-nav-label="4" class="hover:text-ivory-50 transition-colors py-2">Lokasi</a>
       </nav>
 
       <!-- Action Controls (Right) -->
       <div class="flex items-center gap-2">
         <a
+          id="nav-order-cta"
           href="https://gofood.co.id/jakarta/restaurant/tentang-kopi-sukmajaya-f95616be-e5a2-4c9c-bc15-4b75093b2e9b"
           target="_blank"
           rel="noopener noreferrer"
           class="bg-amber-brand hover:bg-amber-hover text-espresso-950 font-semibold text-xs sm:text-sm px-3.5 sm:px-5 h-9 sm:h-[42px] rounded-lg inline-flex items-center justify-center gap-1.5 transition-colors"
         >
-          <span>Pesan Online</span>
+          <span id="nav-order-cta-label">Pesan Online</span>
           <span aria-hidden="true" class="text-xs">↗</span>
         </a>
 
         <a
+          id="nav-wa-cta"
           href="https://wa.me/6285691895114?text=Halo%20Tentang%20Kopi%20Sukmajaya%20Depok%2C%20saya%20ingin%20bertanya%20mengenai%20menu%20dan%20reservasi%20tempat."
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Hubungi Tentang Kopi Sukmajaya via WhatsApp"
-          title="Chat WhatsApp Tentang Kopi Sukmajaya"
+          aria-label="Hubungi via WhatsApp"
+          title="Chat WhatsApp"
           class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg border border-white/15 hover:border-white/40 hover:bg-white/5 flex items-center justify-center text-ivory-50 transition-colors shrink-0"
         >
           <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
@@ -637,33 +618,35 @@
     >
       <nav class="grid grid-cols-2 gap-2 text-xs font-medium text-stone-200">
         <a href="#menu" data-mobile-nav-link class="p-3 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-between">
-          <span>Menu Pilihan</span>
+          <span data-nav-label="1">Menu Pilihan</span>
           <span aria-hidden="true" class="text-amber-brand">→</span>
         </a>
         <a href="#suasana" data-mobile-nav-link class="p-3 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-between">
-          <span>Suasana</span>
+          <span data-nav-label="2">Suasana</span>
           <span aria-hidden="true" class="text-amber-brand">→</span>
         </a>
         <a href="#tentang" data-mobile-nav-link class="p-3 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-between">
-          <span>Cerita &amp; Ulasan</span>
+          <span data-nav-label="3">Cerita &amp; Ulasan</span>
           <span aria-hidden="true" class="text-amber-brand">→</span>
         </a>
         <a href="#lokasi" data-mobile-nav-link class="p-3 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-between">
-          <span>Lokasi &amp; Jam</span>
+          <span data-nav-label="4">Lokasi &amp; Jam</span>
           <span aria-hidden="true" class="text-amber-brand">→</span>
         </a>
       </nav>
-      <div class="mt-2.5 grid grid-cols-2 gap-2">
+      <div id="mobile-drawer-cta-grid" class="mt-2.5 grid grid-cols-2 gap-2">
         <a
+          id="mobile-order-cta"
           href="https://gofood.co.id/jakarta/restaurant/tentang-kopi-sukmajaya-f95616be-e5a2-4c9c-bc15-4b75093b2e9b"
           target="_blank"
           rel="noopener noreferrer"
           class="bg-amber-brand text-espresso-950 font-semibold text-xs h-10 px-3 rounded-lg text-center flex items-center justify-center gap-1.5"
         >
-          <span>Pesan GoFood</span>
+          <span id="mobile-order-cta-label">Pesan di GoFood</span>
           <span aria-hidden="true">↗</span>
         </a>
         <a
+          id="mobile-wa-cta"
           href="https://wa.me/6285691895114?text=Halo%20Tentang%20Kopi%20Sukmajaya%20Depok%2C%20saya%20ingin%20reservasi%20tempat."
           target="_blank"
           rel="noopener noreferrer"
@@ -680,8 +663,6 @@
 
     <!-- ======================================================================
          HERO SECTION (#hero)
-         Mobile: Tightly-Framed Atmospheric Crop (Brightness Dinaikkan di HP)
-         Desktop: Multi-Plane 2-Column Editorial Spread
          ====================================================================== -->
     <section
       id="hero"
@@ -691,7 +672,7 @@
       class="relative hero-editorial-bg text-ivory-50 overflow-hidden"
     >
       <div class="relative overflow-hidden">
-        <!-- Mobile Atmospheric Background (Lebih terang & jelas di layar HP) -->
+        <!-- Mobile Atmospheric Background -->
         <div class="lg:hidden absolute inset-0 z-0 pointer-events-none">
           <img
             src="hero-signature-latte.jpg"
@@ -712,11 +693,10 @@
           class="hidden lg:block sc-hero-sunbeam pointer-events-none absolute inset-0"
         ></div>
 
-        <!-- Proportional Padding: Compact on Mobile (pt-7 pb-8), Spacious on Desktop -->
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-7 pb-8 sm:py-16 lg:py-20">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
-            <!-- Left Column (7 cols on Desktop, Full Width on Mobile) -->
+            <!-- Left Column (7 cols on Desktop) -->
             <div class="lg:col-span-7 max-w-2xl">
               <!-- Status Badge -->
               <div
@@ -727,7 +707,7 @@
                 <span id="hero-status-dot" class="w-2 h-2 rounded-full bg-[#22C55E]" aria-hidden="true"></span>
                 <span id="hero-status-text" class="tabular-nums font-medium text-ivory-100">Buka Hari Ini · 11.00 – 22.00 WIB</span>
                 <span class="text-stone-500" aria-hidden="true">/</span>
-                <span class="text-stone-400">Sukmajaya, Depok</span>
+                <span id="hero-status-branch" class="text-stone-400">Sukmajaya, Depok</span>
               </div>
 
               <!-- Primary Editorial Headline -->
@@ -740,37 +720,39 @@
                 <span class="italic font-normal text-amber-brand">Sejuta Cerita.</span>
               </h1>
 
-              <!-- Narrative Copy & Actions -->
+              <!-- Narrative Copy & Adaptive CTA Container -->
               <div data-sc-depth="0.52">
-                <p class="mt-3 sm:mt-6 text-sm sm:text-lg text-stone-200 sm:text-stone-300 leading-relaxed max-w-xl font-normal">
+                <p id="hero-desc-text" class="mt-3 sm:mt-6 text-sm sm:text-lg text-stone-200 sm:text-stone-300 leading-relaxed max-w-xl font-normal">
                   Tempat singgah di Sukmajaya untuk menikmati seduhan Arabika Nusantara, menyelesaikan pekerjaan, atau berbincang santai.
                 </p>
 
-                <!-- Compact 2-Column CTA Grid on Mobile -->
-                <div class="mt-5 sm:mt-9 grid grid-cols-2 sm:flex sm:flex-row sm:items-center gap-2.5 sm:gap-4">
+                <!-- Adaptive CTA Grid: Otomatis merapikan lebar jika tombol Order dimatikan -->
+                <div id="hero-cta-container" class="mt-5 sm:mt-9 grid grid-cols-2 sm:flex sm:flex-row sm:items-center gap-2.5 sm:gap-4">
                   <a
+                    id="hero-order-cta"
                     href="https://gofood.co.id/jakarta/restaurant/tentang-kopi-sukmajaya-f95616be-e5a2-4c9c-bc15-4b75093b2e9b"
                     target="_blank"
                     rel="noopener noreferrer"
                     class="bg-amber-brand hover:bg-amber-hover text-espresso-950 font-semibold text-xs sm:text-sm px-3 sm:px-7 h-11 sm:min-h-[50px] rounded-lg inline-flex items-center justify-center gap-1.5 sm:gap-2.5 transition-colors shadow-lg whitespace-nowrap"
                   >
-                    <span>Pesan di GoFood</span>
+                    <span id="hero-order-cta-label">Pesan di GoFood</span>
                     <span class="text-sm leading-none" aria-hidden="true">↗</span>
                   </a>
 
                   <a
+                    id="hero-menu-cta"
                     href="#menu"
                     class="bg-espresso-950/40 sm:bg-transparent border border-white/25 hover:border-ivory-50 hover:bg-white/5 text-ivory-50 font-medium text-xs sm:text-sm px-3 sm:px-6 h-11 sm:min-h-[50px] rounded-lg inline-flex items-center justify-center gap-1.5 sm:gap-2 transition-colors whitespace-nowrap"
                   >
-                    <span>Lihat Menu</span>
+                    <span id="hero-menu-cta-label">Lihat Menu</span>
                     <span class="text-sm leading-none" aria-hidden="true">↓</span>
                   </a>
                 </div>
 
                 <!-- Sleek Mobile Brand Sub-caption -->
                 <div class="mt-5 pt-3.5 border-t border-white/15 flex lg:hidden items-center justify-between text-[10px] text-stone-300 tracking-[0.14em] uppercase font-medium">
-                  <span>ARABIKA NUSANTARA</span>
-                  <span class="text-amber-brand">RUANG SINGGAH</span>
+                  <span data-hero-sub-left>ARABIKA NUSANTARA</span>
+                  <span data-hero-sub-right class="text-amber-brand">RUANG SINGGAH</span>
                 </div>
               </div>
             </div>
@@ -781,7 +763,7 @@
                 <div class="relative aspect-[4/5] w-full rounded-xl overflow-hidden border border-white/15 bg-espresso-900 shadow-2xl">
                   <img
                     src="hero-signature-latte.jpg"
-                    alt="Segelas Iced Signature Latte di atas meja kayu Tentang Kopi Sukmajaya"
+                    alt="Sajian unggulan"
                     width="800"
                     height="1000"
                     fetchpriority="high"
@@ -793,16 +775,16 @@
 
                   <div class="absolute bottom-5 left-5 right-5 flex items-end justify-between text-ivory-50 pointer-events-none">
                     <div>
-                      <p class="text-[11px] uppercase tracking-[0.18em] text-amber-brand font-semibold">Signature Cup</p>
-                      <p class="font-serif text-lg italic text-ivory-50 leading-snug mt-0.5">Espresso &amp; Creamy Milk</p>
+                      <p id="hero-card-kicker" class="text-[11px] uppercase tracking-[0.18em] text-amber-brand font-semibold">Signature Cup</p>
+                      <p id="hero-card-title" class="font-serif text-lg italic text-ivory-50 leading-snug mt-0.5">Espresso &amp; Creamy Milk</p>
                     </div>
-                    <span class="text-[11px] tracking-[0.16em] uppercase text-stone-300 tabular-nums">SUKMAJAYA</span>
+                    <span id="hero-card-badge" class="text-[11px] tracking-[0.16em] uppercase text-stone-300 tabular-nums">SUKMAJAYA</span>
                   </div>
                 </div>
 
                 <figcaption class="mt-3 flex items-center justify-between gap-4 text-[11px] text-stone-300 tracking-[0.14em] uppercase font-medium">
-                  <span class="whitespace-nowrap">ARABIKA NUSANTARA</span>
-                  <span class="text-amber-brand whitespace-nowrap shrink-0">RUANG SINGGAH</span>
+                  <span data-hero-sub-left class="whitespace-nowrap">ARABIKA NUSANTARA</span>
+                  <span data-hero-sub-right class="text-amber-brand whitespace-nowrap shrink-0">RUANG SINGGAH</span>
                 </figcaption>
               </figure>
             </div>
@@ -812,7 +794,7 @@
       </div>
 
       <!-- ====================================================================
-           HIGHLIGHT KEUNGGULAN (#keunggulan) — 100% Sejajar Rata (Zero Shift)
+           HIGHLIGHT KEUNGGULAN (#keunggulan) — 3 Pilar USP
            ==================================================================== -->
       <div
         id="keunggulan"
@@ -831,8 +813,8 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 3c2.2 0 4 2.69 4 6s-1.8 6-4 6-4-2.69-4-6 1.8-6 4-6zm0 0c.8 1.8.8 4.2 0 6-.8 1.8-.8 4.2 0 6" />
               </svg>
               <div>
-                <h2 class="text-[11px] sm:text-xs md:text-sm font-bold text-stone-900 tracking-tight leading-snug">100% Arabica Lokal</h2>
-                <p class="hidden md:block text-xs text-stone-600 mt-0.5 leading-relaxed">Biji Arabika Nusantara pilihan yang disangrai untuk rasa yang bersih dan seimbang.</p>
+                <h2 id="usp-1-title" class="text-[11px] sm:text-xs md:text-sm font-bold text-stone-900 tracking-tight leading-snug">100% Arabica Lokal</h2>
+                <p id="usp-1-desc" class="hidden md:block text-xs text-stone-600 mt-0.5 leading-relaxed">Biji Arabika Nusantara pilihan yang disangrai untuk rasa yang bersih dan seimbang.</p>
               </div>
             </div>
 
@@ -845,8 +827,8 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
               </svg>
               <div>
-                <h2 class="text-[11px] sm:text-xs md:text-sm font-bold text-stone-900 tracking-tight leading-snug">Nyaman untuk Bekerja</h2>
-                <p class="hidden md:block text-xs text-stone-600 mt-0.5 leading-relaxed">Meja kerja, Wi-Fi stabil, dan akses stopkontak tersedia di area duduk.</p>
+                <h2 id="usp-2-title" class="text-[11px] sm:text-xs md:text-sm font-bold text-stone-900 tracking-tight leading-snug">Nyaman untuk Bekerja</h2>
+                <p id="usp-2-desc" class="hidden md:block text-xs text-stone-600 mt-0.5 leading-relaxed">Meja kerja, Wi-Fi stabil, dan akses stopkontak tersedia di area duduk.</p>
               </div>
             </div>
 
@@ -859,8 +841,8 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 15s1-6 8-6 8 6 8 6M4 15c0 1.657 1.343 3 3 3h10c1.657 0 3-1.343 3-3M4 15h16M9 9V6.5a1.5 1.5 0 013 0V9m3 0V7a1.5 1.5 0 013 0v2" />
               </svg>
               <div>
-                <h2 class="text-[11px] sm:text-xs md:text-sm font-bold text-stone-900 tracking-tight leading-snug">Pastry &amp; Toast Hangat</h2>
-                <p class="hidden md:block text-xs text-stone-600 mt-0.5 leading-relaxed">Roti panggang, croissant renyah, dan kudapan pendamping kopi yang segar.</p>
+                <h2 id="usp-3-title" class="text-[11px] sm:text-xs md:text-sm font-bold text-stone-900 tracking-tight leading-snug">Pastry &amp; Toast Hangat</h2>
+                <p id="usp-3-desc" class="hidden md:block text-xs text-stone-600 mt-0.5 leading-relaxed">Roti panggang, croissant renyah, dan kudapan pendamping kopi yang segar.</p>
               </div>
             </div>
 
@@ -870,7 +852,7 @@
     </section>
 
     <!-- ======================================================================
-         MENU PILIHAN (#menu) — ACT 3: POINTER-RESPOND & STAGGERED LEDGER
+         MENU PILIHAN (#menu)
          ====================================================================== -->
     <section
       id="menu"
@@ -884,13 +866,13 @@
         <!-- Editorial Header -->
         <div class="sc-menu-header flex flex-row items-end justify-between gap-4">
           <div>
-            <span class="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-brand block">
+            <span id="menu-kicker" class="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-brand block">
               KURASI SAJIAN
             </span>
             <h2 id="menu-heading" class="font-serif text-2xl sm:text-4xl font-semibold text-stone-900 tracking-tight mt-1">
               Menu Pilihan
             </h2>
-            <p class="hidden sm:block text-sm sm:text-base text-stone-600 mt-2 max-w-xl">
+            <p id="menu-subdesc" class="hidden sm:block text-sm sm:text-base text-stone-600 mt-2 max-w-xl">
               Diracik setiap hari dari bahan terbaik. Pilih kategori di bawah untuk melihat menu favorit dan harga lengkap kami.
             </p>
           </div>
@@ -931,18 +913,18 @@
           <!-- Populated by JS -->
         </div>
 
-        <!-- Unified Order & Printable PDF Catalog Bar -->
-        <div class="mt-7 sm:mt-12 pt-5 sm:pt-8 border-t border-ivory-200 flex flex-col lg:flex-row lg:items-center justify-between gap-4 sm:gap-6">
+        <!-- Adaptive Order & Printable PDF Catalog Bar -->
+        <div id="menu-bottom-bar" class="mt-7 sm:mt-12 pt-5 sm:pt-8 border-t border-ivory-200 flex flex-col lg:flex-row lg:items-center justify-between gap-4 sm:gap-6">
           <div class="space-y-0.5">
-            <p class="text-xs sm:text-sm font-semibold text-stone-900">
+            <p id="menu-bar-title" class="text-xs sm:text-sm font-semibold text-stone-900">
               Ingin pesan antar ke rumah/kantor atau simpan daftar menu lengkap?
             </p>
-            <p class="text-[11px] sm:text-xs text-stone-600">
+            <p id="menu-bar-desc" class="text-[11px] sm:text-xs text-stone-600">
               Tersedia untuk dine-in, takeaway, maupun pesan antar praktis melalui GoFood.
             </p>
           </div>
 
-          <div class="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2.5 sm:gap-3 shrink-0">
+          <div id="menu-bar-actions" class="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2.5 sm:gap-3 shrink-0">
             <button
               type="button"
               id="btn-open-pdf-menu"
@@ -951,17 +933,18 @@
               <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-brand shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4" />
               </svg>
-              <span>Katalog PDF</span>
+              <span id="pdf-btn-label">Katalog PDF</span>
             </button>
 
             <a
+              id="menu-bar-order-cta"
               href="https://gofood.co.id/jakarta/restaurant/tentang-kopi-sukmajaya-f95616be-e5a2-4c9c-bc15-4b75093b2e9b"
               target="_blank"
               rel="noopener noreferrer"
               class="inline-flex items-center justify-center gap-1.5 sm:gap-2.5 px-3 sm:px-6 h-10 sm:min-h-[44px] rounded-lg bg-amber-brand hover:bg-amber-hover text-espresso-950 text-[11px] sm:text-xs font-semibold transition-colors shadow-sm whitespace-nowrap"
             >
               <span class="w-2 h-2 rounded-full bg-gofood shrink-0" aria-hidden="true"></span>
-              <span>Pesan di GoFood</span>
+              <span id="menu-bar-order-label">Pesan di GoFood</span>
               <span aria-hidden="true">↗</span>
             </a>
           </div>
@@ -971,7 +954,7 @@
     </section>
 
     <!-- ======================================================================
-         SUASANA & FASILITAS (#suasana) — ACT 4 (ENGINEERED PEAK): SHUTTER WIPE
+         SUASANA & FASILITAS (#suasana)
          ====================================================================== -->
     <section
       id="suasana"
@@ -986,13 +969,13 @@
         <!-- Section Intro Header -->
         <div class="sc-peak-header flex flex-row items-end justify-between gap-4 mb-6 sm:mb-10">
           <div>
-            <span class="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-brand block">
+            <span id="suasana-kicker" class="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-brand block">
               RUANG &amp; KENYAMANAN
             </span>
             <h2 id="suasana-heading" class="font-serif text-2xl sm:text-4xl lg:text-[42px] font-semibold text-ivory-50 tracking-tight leading-[1.12] mt-1 sm:mt-2">
               Ruang yang Menginspirasi
             </h2>
-            <p class="hidden sm:block text-sm text-stone-300 leading-relaxed max-w-xl mt-2">
+            <p id="suasana-desc" class="hidden sm:block text-sm text-stone-300 leading-relaxed max-w-xl mt-2">
               Dirancang dengan pencahayaan hangat dan sirkulasi lega—baik saat Anda butuh fokus di dalam ruangan maupun bersantai di teras teduh.
             </p>
           </div>
@@ -1001,27 +984,27 @@
             id="btn-open-gallery"
             class="shrink-0 inline-flex items-center gap-1.5 px-3.5 sm:px-4 h-9 sm:min-h-[40px] rounded-lg border border-white/25 hover:border-ivory-50 hover:bg-white/5 text-[11px] sm:text-xs font-medium text-ivory-50 transition-colors"
           >
-            <span>Galeri Foto</span>
+            <span id="btn-open-gallery-label">Galeri Foto</span>
             <span aria-hidden="true">↗</span>
           </button>
         </div>
 
-        <!-- Bento Photo Grid (1 Top + 2 Side-by-Side on Mobile, 8+4 on Desktop) -->
+        <!-- Bento Photo Grid -->
         <div class="grid grid-cols-2 md:grid-cols-12 gap-3 sm:gap-5">
           
-          <!-- Primary Space: Indoor (AC) -->
+          <!-- Space 1: Primary Space (Indoor AC) -->
           <article
             data-gallery-idx="0"
             data-sc-bento
             style="--sc-bento-i: 0; --sc-bento-dir: -1;"
             tabindex="0"
             role="button"
-            aria-label="Perbesar foto area Indoor (AC)"
+            aria-label="Perbesar foto ruang 1"
             class="col-span-2 md:col-span-8 relative rounded-xl overflow-hidden group cursor-pointer h-[210px] sm:h-[360px] md:h-[460px] border border-white/10 bg-espresso-900"
           >
             <img
               src="ambience-indoor-ac.jpg"
-              alt="Area Indoor (AC) dengan meja kayu hangat dan pencahayaan tenang di Tentang Kopi Sukmajaya"
+              alt="Area Indoor"
               width="900"
               height="600"
               loading="lazy"
@@ -1031,30 +1014,30 @@
             <div class="absolute inset-0 bg-gradient-to-t from-espresso-950/90 via-espresso-950/20 to-transparent"></div>
             <div class="absolute bottom-3.5 sm:bottom-5 left-4 sm:left-5 right-4 sm:right-5 flex items-end justify-between gap-4">
               <div>
-                <span class="text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.16em] text-amber-brand block">INDOOR LOUNGE</span>
-                <h3 class="font-serif text-lg sm:text-2xl font-medium text-ivory-50 mt-0.5">Area Indoor (Full AC)</h3>
-                <p class="hidden sm:block text-xs text-stone-300 mt-1 max-w-md">Tenang, sejuk, dan dilengkapi meja kayu panjang untuk bekerja (WFC) atau membaca.</p>
+                <span id="space-1-kicker" class="text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.16em] text-amber-brand block">INDOOR LOUNGE</span>
+                <h3 id="space-1-title" class="font-serif text-lg sm:text-2xl font-medium text-ivory-50 mt-0.5">Area Indoor (Full AC)</h3>
+                <p id="space-1-sub" class="hidden sm:block text-xs text-stone-300 mt-1 max-w-md">Tenang, sejuk, dan dilengkapi meja kayu panjang untuk bekerja (WFC) atau membaca.</p>
               </div>
               <span class="text-[11px] sm:text-xs text-stone-300 group-hover:text-ivory-50 shrink-0">Perbesar ↗</span>
             </div>
           </article>
 
-          <!-- Secondary Spaces: Side-by-Side 2 Cols on Mobile, Stacked on Desktop -->
+          <!-- Secondary Spaces (2 & 3) -->
           <div class="col-span-2 md:col-span-4 grid grid-cols-2 md:grid-cols-1 gap-3 sm:gap-5">
             
-            <!-- Space 2: Outdoor (Smoking) -->
+            <!-- Space 2 -->
             <article
               data-gallery-idx="1"
               data-sc-bento
               style="--sc-bento-i: 1; --sc-bento-dir: 1;"
               tabindex="0"
               role="button"
-              aria-label="Perbesar foto area Outdoor (Smoking)"
+              aria-label="Perbesar foto ruang 2"
               class="relative rounded-xl overflow-hidden group cursor-pointer h-[135px] sm:h-[200px] md:h-[220px] border border-white/10 bg-espresso-900"
             >
               <img
                 src="ambience-outdoor-terrace.jpg"
-                alt="Area Outdoor (Smoking) yang sejuk dan terbuka di Tentang Kopi Sukmajaya"
+                alt="Area Outdoor"
                 width="600"
                 height="400"
                 loading="lazy"
@@ -1064,26 +1047,26 @@
               <div class="absolute inset-0 bg-gradient-to-t from-espresso-950/90 via-espresso-950/20 to-transparent"></div>
               <div class="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 flex items-end justify-between">
                 <div>
-                  <span class="text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.14em] text-amber-brand block">TERRACE AREA</span>
-                  <h3 class="font-serif text-sm sm:text-lg font-medium text-ivory-50 leading-tight mt-0.5">Outdoor (Smoking)</h3>
+                  <span id="space-2-kicker" class="text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.14em] text-amber-brand block">TERRACE AREA</span>
+                  <h3 id="space-2-title" class="font-serif text-sm sm:text-lg font-medium text-ivory-50 leading-tight mt-0.5">Outdoor (Smoking)</h3>
                 </div>
                 <span class="text-xs text-stone-300">↗</span>
               </div>
             </article>
 
-            <!-- Space 3: Coffee Bar -->
+            <!-- Space 3 -->
             <article
               data-gallery-idx="2"
               data-sc-bento
               style="--sc-bento-i: 2; --sc-bento-dir: 1;"
               tabindex="0"
               role="button"
-              aria-label="Perbesar foto area Coffee Bar"
+              aria-label="Perbesar foto ruang 3"
               class="relative rounded-xl overflow-hidden group cursor-pointer h-[135px] sm:h-[200px] md:h-[220px] border border-white/10 bg-espresso-900"
             >
               <img
                 src="ambience-coffee-bar.jpg"
-                alt="Area Coffee Bar tempat barista Tentang Kopi menyeduh kopi"
+                alt="Area Bar"
                 width="600"
                 height="400"
                 loading="lazy"
@@ -1093,8 +1076,8 @@
               <div class="absolute inset-0 bg-gradient-to-t from-espresso-950/90 via-espresso-950/20 to-transparent"></div>
               <div class="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 flex items-end justify-between">
                 <div>
-                  <span class="text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.14em] text-amber-brand block">SLOW BAR</span>
-                  <h3 class="font-serif text-sm sm:text-lg font-medium text-ivory-50 leading-tight mt-0.5">Espresso &amp; Brew Bar</h3>
+                  <span id="space-3-kicker" class="text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.14em] text-amber-brand block">SLOW BAR</span>
+                  <h3 id="space-3-title" class="font-serif text-sm sm:text-lg font-medium text-ivory-50 leading-tight mt-0.5">Espresso &amp; Brew Bar</h3>
                 </div>
                 <span class="text-xs text-stone-300">↗</span>
               </div>
@@ -1104,39 +1087,39 @@
 
         </div>
 
-        <!-- 4 Facilities Strictly Aligned in 1 Row (Zero Vertical Shift) -->
+        <!-- 4 Facilities Strictly Aligned in 1 Row -->
         <div class="mt-6 sm:mt-12 pt-5 sm:pt-8 border-t border-white/10">
           <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6 lg:gap-8 items-center">
             
             <div data-sc-facility class="flex items-center gap-2.5 sm:gap-3.5">
               <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-brand shrink-0" aria-hidden="true"></span>
               <div class="min-w-0">
-                <span class="text-xs sm:text-sm font-semibold text-ivory-50 block truncate">Mushola Bersih</span>
-                <span class="text-[11px] sm:text-xs text-stone-400 block truncate">Di dalam area kedai</span>
+                <span id="fac-1-title" class="text-xs sm:text-sm font-semibold text-ivory-50 block truncate">Mushola Bersih</span>
+                <span id="fac-1-desc" class="text-[11px] sm:text-xs text-stone-400 block truncate">Di dalam area kedai</span>
               </div>
             </div>
 
             <div data-sc-facility class="flex items-center gap-2.5 sm:gap-3.5">
               <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-brand shrink-0" aria-hidden="true"></span>
               <div class="min-w-0">
-                <span class="text-xs sm:text-sm font-semibold text-ivory-50 block truncate">Area Parkir Memadai</span>
-                <span class="text-[11px] sm:text-xs text-stone-400 block truncate">Akses motor &amp; mobil</span>
+                <span id="fac-2-title" class="text-xs sm:text-sm font-semibold text-ivory-50 block truncate">Area Parkir Memadai</span>
+                <span id="fac-2-desc" class="text-[11px] sm:text-xs text-stone-400 block truncate">Akses motor &amp; mobil</span>
               </div>
             </div>
 
             <div data-sc-facility class="flex items-center gap-2.5 sm:gap-3.5">
               <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-brand shrink-0" aria-hidden="true"></span>
               <div class="min-w-0">
-                <span class="text-xs sm:text-sm font-semibold text-ivory-50 block truncate">Pet Friendly</span>
-                <span class="text-[11px] sm:text-xs text-stone-400 block truncate">Area teras outdoor</span>
+                <span id="fac-3-title" class="text-xs sm:text-sm font-semibold text-ivory-50 block truncate">Pet Friendly</span>
+                <span id="fac-3-desc" class="text-[11px] sm:text-xs text-stone-400 block truncate">Area teras outdoor</span>
               </div>
             </div>
 
             <div data-sc-facility class="flex items-center gap-2.5 sm:gap-3.5">
               <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-brand shrink-0" aria-hidden="true"></span>
               <div class="min-w-0">
-                <span class="text-xs sm:text-sm font-semibold text-ivory-50 block truncate">Toilet Terawat</span>
-                <span class="text-[11px] sm:text-xs text-stone-400 block truncate">Bersih &amp; nyaman</span>
+                <span id="fac-4-title" class="text-xs sm:text-sm font-semibold text-ivory-50 block truncate">Toilet Terawat</span>
+                <span id="fac-4-desc" class="text-[11px] sm:text-xs text-stone-400 block truncate">Bersih &amp; nyaman</span>
               </div>
             </div>
 
@@ -1148,7 +1131,6 @@
 
     <!-- ======================================================================
          CERITA, ULASAN & MOMEN SEDUHAN (#tentang & #momen)
-         ACT 5: STACK-CARDS FAN-OUT | ACT 6: HORIZONTAL-PAN | ACT 7: CLIP-REVEAL
          ====================================================================== -->
     <section
       id="tentang"
@@ -1165,13 +1147,13 @@
           <!-- Left Column (4 cols) -->
           <div class="sc-review-ledger lg:col-span-4 lg:pr-6 flex flex-col sm:flex-row lg:flex-col sm:items-center lg:items-start justify-between gap-4">
             <div>
-              <span class="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-brand block">
+              <span id="reviews-kicker" class="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-brand block">
                 CATATAN PELANGGAN
               </span>
               <h2 id="reviews-heading" class="font-serif text-2xl sm:text-4xl font-semibold text-stone-900 tracking-tight mt-1">
                 Apa Kata Mereka
               </h2>
-              <p class="text-xs sm:text-sm text-stone-600 mt-1.5 leading-relaxed max-w-md">
+              <p id="reviews-desc" class="text-xs sm:text-sm text-stone-600 mt-1.5 leading-relaxed max-w-md">
                 Kesan hangat dari teman-teman yang menjadikan Tentang Kopi Sukmajaya sebagai ruang singgah harian.
               </p>
             </div>
@@ -1179,7 +1161,7 @@
             <!-- Verified Google Maps Score Block -->
             <div class="pt-3 sm:pt-0 lg:mt-6 lg:pt-6 border-t sm:border-t-0 lg:border-t border-ivory-200 shrink-0">
               <div class="flex items-baseline gap-2">
-                <span class="font-serif text-2xl sm:text-4xl font-semibold text-stone-900 tabular-nums">4.5</span>
+                <span id="reviews-score-num" class="font-serif text-2xl sm:text-4xl font-semibold text-stone-900 tabular-nums">4.5</span>
                 <span class="text-xs sm:text-sm text-stone-500 tabular-nums">/ 5.0</span>
                 <span class="text-amber-brand text-xs sm:text-sm tracking-widest ml-1" aria-hidden="true">★★★★★</span>
               </div>
@@ -1201,7 +1183,6 @@
           <!-- Right Column (8 cols) -->
           <div class="lg:col-span-8 min-w-0 w-full relative">
             
-            <!-- Subtle Left Triangle Arrow (Mobile Only) -->
             <button
               type="button"
               id="reviews-prev-btn"
@@ -1213,7 +1194,6 @@
               </svg>
             </button>
 
-            <!-- Subtle Right Triangle Arrow (Mobile Only) -->
             <button
               type="button"
               id="reviews-next-btn"
@@ -1239,13 +1219,13 @@
               >
                 <div>
                   <span class="font-serif text-2xl sm:text-3xl text-amber-brand leading-none block" aria-hidden="true">“</span>
-                  <p class="text-xs sm:text-sm text-stone-800 leading-relaxed mt-1.5 whitespace-normal break-words">
+                  <p id="rev-1-quote" class="text-xs sm:text-sm text-stone-800 leading-relaxed mt-1.5 whitespace-normal break-words">
                     Kopi di sini selalu konsisten enak. Baristanya ramah dan tempatnya tenang banget buat fokus kerja atau nugas dari siang sampai malam.
                   </p>
                 </div>
                 <footer class="mt-4 sm:mt-6 pt-3 border-t border-ivory-200/70">
-                  <cite class="not-italic text-xs font-bold text-stone-900 block">Rizky A.</cite>
-                  <span class="text-[11px] text-stone-500">Local Guide · Sukmajaya</span>
+                  <cite id="rev-1-author" class="not-italic text-xs font-bold text-stone-900 block">Rizky A.</cite>
+                  <span id="rev-1-role" class="text-[11px] text-stone-500">Local Guide · Sukmajaya</span>
                 </footer>
               </blockquote>
 
@@ -1257,13 +1237,13 @@
               >
                 <div>
                   <span class="font-serif text-2xl sm:text-3xl text-amber-brand leading-none block" aria-hidden="true">“</span>
-                  <p class="text-xs sm:text-sm text-stone-800 leading-relaxed mt-1.5 whitespace-normal break-words">
+                  <p id="rev-2-quote" class="text-xs sm:text-sm text-stone-800 leading-relaxed mt-1.5 whitespace-normal break-words">
                     Suasananya homey dan adem, lokasinya juga gampang dicari tepat di samping Polsek Sukmajaya. Egg Toast dan es kopi susunya mantap!
                   </p>
                 </div>
                 <footer class="mt-4 sm:mt-6 pt-3 border-t border-ivory-200/70">
-                  <cite class="not-italic text-xs font-bold text-stone-900 block">Dewi S.</cite>
-                  <span class="text-[11px] text-stone-500">Pelanggan Setia · Depok</span>
+                  <cite id="rev-2-author" class="not-italic text-xs font-bold text-stone-900 block">Dewi S.</cite>
+                  <span id="rev-2-role" class="text-[11px] text-stone-500">Pelanggan Setia · Depok</span>
                 </footer>
               </blockquote>
 
@@ -1275,19 +1255,18 @@
               >
                 <div>
                   <span class="font-serif text-2xl sm:text-3xl text-amber-brand leading-none block" aria-hidden="true">“</span>
-                  <p class="text-xs sm:text-sm text-stone-800 leading-relaxed mt-1.5 whitespace-normal break-words">
+                  <p id="rev-3-quote" class="text-xs sm:text-sm text-stone-800 leading-relaxed mt-1.5 whitespace-normal break-words">
                     Salah satu tempat ngopi favorit di Sukmajaya. Karakter espresso-nya berasa, manisnya pas, dan harganya sangat bersahabat di kantong.
                   </p>
                 </div>
                 <footer class="mt-4 sm:mt-6 pt-3 border-t border-ivory-200/70">
-                  <cite class="not-italic text-xs font-bold text-stone-900 block">Andi P.</cite>
-                  <span class="text-[11px] text-stone-500">Penikmat Kopi · Depok</span>
+                  <cite id="rev-3-author" class="not-italic text-xs font-bold text-stone-900 block">Andi P.</cite>
+                  <span id="rev-3-role" class="text-[11px] text-stone-500">Penikmat Kopi · Depok</span>
                 </footer>
               </blockquote>
 
             </div>
 
-            <!-- Minimalist Dots Indicator (Mobile Only) -->
             <div id="reviews-dots" class="md:hidden mt-3 flex items-center justify-center gap-1.5" aria-hidden="true">
               <span class="w-4 h-1 rounded-full bg-amber-brand transition-all"></span>
               <span class="w-1.5 h-1 rounded-full bg-stone-300 transition-all"></span>
@@ -1299,7 +1278,7 @@
         </div>
 
         <!-- ==================================================================
-             RITUAL SEDUHAN & KOMUNITAS (#momen) — ACT 6: HORIZONTAL-PAN DRIFT
+             SECTION MULTI-FUNGSI: CERITA SEDUHAN / HIGHLIGHT / 4 POSTER PROMO (#momen)
              ================================================================== -->
         <div
           id="momen"
@@ -1309,15 +1288,14 @@
         >
           <div class="sc-momen-header flex flex-col md:flex-row md:items-end justify-between gap-4 mb-5 sm:mb-8">
             <div>
-              <span class="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-brand block">
+              <span id="momen-kicker" class="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-brand block">
                 DI BALIK BAR · @TENTANGKOPIDEPOK
               </span>
-              <h3 class="font-serif text-xl sm:text-3xl font-semibold text-stone-900 mt-1">
+              <h3 id="momen-heading" class="font-serif text-xl sm:text-3xl font-semibold text-stone-900 mt-1">
                 Cerita di Setiap Seduhan
               </h3>
             </div>
 
-            <!-- Side-by-Side 2-Column Grid for Instagram & TikTok on Mobile -->
             <div class="grid grid-cols-2 sm:flex sm:items-center gap-2.5 sm:gap-4 text-xs font-semibold">
               <a
                 href="https://www.instagram.com/tentangkopidepok/"
@@ -1340,14 +1318,12 @@
             </div>
           </div>
 
-          <!-- Craft Filmstrip Wrapper with Subtle Mobile Triangle Arrows -->
           <div class="relative w-full min-w-0">
             
-            <!-- Subtle Left Triangle Arrow (Mobile/Tablet Only) -->
             <button
               type="button"
               id="momen-prev-btn"
-              aria-label="Foto seduhan sebelumnya"
+              aria-label="Foto sebelumnya"
               class="lg:hidden absolute left-2.5 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-espresso-950/60 hover:bg-espresso-950/85 border border-white/20 text-ivory-50 flex items-center justify-center backdrop-blur-sm transition-colors"
             >
               <svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 12 12" aria-hidden="true">
@@ -1355,11 +1331,10 @@
               </svg>
             </button>
 
-            <!-- Subtle Right Triangle Arrow (Mobile/Tablet Only) -->
             <button
               type="button"
               id="momen-next-btn"
-              aria-label="Foto seduhan selanjutnya"
+              aria-label="Foto selanjutnya"
               class="lg:hidden absolute right-2.5 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-espresso-950/60 hover:bg-espresso-950/85 border border-white/20 text-ivory-50 flex items-center justify-center backdrop-blur-sm transition-colors"
             >
               <svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 12 12" aria-hidden="true">
@@ -1367,107 +1342,109 @@
               </svg>
             </button>
 
-            <!-- 1 Full Image per View on Mobile, 4-Column Grid on Desktop -->
             <div
               id="momen-slider"
               class="flex lg:grid lg:grid-cols-4 overflow-x-auto lg:overflow-visible snap-x snap-mandatory no-scrollbar scroll-smooth gap-4 sm:gap-5 w-full"
             >
               
-              <!-- Craft 1 -->
+              <!-- Craft / Promo Card 1 -->
               <button
                 type="button"
                 data-gallery-idx="3"
                 data-sc-craft
                 style="--sc-c-i: 0; --sc-c-dir: -1;"
-                aria-label="Perbesar foto proses tuang Latte Art"
+                aria-label="Perbesar foto 1"
                 class="w-full min-w-full sm:min-w-[calc(50%-10px)] lg:min-w-0 lg:w-auto shrink-0 snap-center group relative rounded-xl overflow-hidden aspect-[4/3] bg-ivory-200 text-left cursor-pointer"
               >
                 <img
+                  id="craft-1-img"
                   src="craft-latte-art.jpg"
-                  alt="Proses menuang susu microfoam untuk Latte Art di Tentang Kopi"
+                  alt="Microfoam & Latte Art"
                   width="450"
                   height="340"
                   loading="lazy"
-                  onerror="handleImgFallback(this, 'Latte Art')"
+                  onerror="handleImgFallback(this, 'Visual 1')"
                   class="w-full h-full object-cover warm-editorial-photo"
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-espresso-950/80 via-transparent to-transparent flex items-end p-4">
-                  <span class="text-ivory-50 text-xs font-medium tracking-wide">Microfoam &amp; Latte Art</span>
+                  <span id="craft-1-title" class="text-ivory-50 text-xs font-medium tracking-wide">Microfoam &amp; Latte Art</span>
                 </div>
               </button>
 
-              <!-- Craft 2 -->
+              <!-- Craft / Promo Card 2 -->
               <button
                 type="button"
                 data-gallery-idx="4"
                 data-sc-craft
                 style="--sc-c-i: 1; --sc-c-dir: 1;"
-                aria-label="Perbesar foto seduhan kopi manual brew"
+                aria-label="Perbesar foto 2"
                 class="w-full min-w-full sm:min-w-[calc(50%-10px)] lg:min-w-0 lg:w-auto shrink-0 snap-center group relative rounded-xl overflow-hidden aspect-[4/3] bg-ivory-200 text-left cursor-pointer"
               >
                 <img
+                  id="craft-2-img"
                   src="craft-manual-brew.jpg"
-                  alt="Seduhan manual brew pour-over di Tentang Kopi"
+                  alt="Seduhan Manual Brew"
                   width="450"
                   height="340"
                   loading="lazy"
-                  onerror="handleImgFallback(this, 'Manual Brew')"
+                  onerror="handleImgFallback(this, 'Visual 2')"
                   class="w-full h-full object-cover warm-editorial-photo"
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-espresso-950/80 via-transparent to-transparent flex items-end p-4">
-                  <span class="text-ivory-50 text-xs font-medium tracking-wide">Seduhan Manual Brew</span>
+                  <span id="craft-2-title" class="text-ivory-50 text-xs font-medium tracking-wide">Seduhan Manual Brew</span>
                 </div>
               </button>
 
-              <!-- Craft 3 -->
+              <!-- Craft / Promo Card 3 -->
               <button
                 type="button"
                 data-gallery-idx="5"
                 data-sc-craft
                 style="--sc-c-i: 2; --sc-c-dir: -1;"
-                aria-label="Perbesar foto sajian cappuccino hangat"
+                aria-label="Perbesar foto 3"
                 class="w-full min-w-full sm:min-w-[calc(50%-10px)] lg:min-w-0 lg:w-auto shrink-0 snap-center group relative rounded-xl overflow-hidden aspect-[4/3] bg-ivory-200 text-left cursor-pointer"
               >
                 <img
+                  id="craft-3-img"
                   src="craft-espresso-calibration.jpg"
-                  alt="Cangkir cappuccino hangat di atas meja kayu Tentang Kopi"
+                  alt="Espresso Kalibrasi Harian"
                   width="450"
                   height="340"
                   loading="lazy"
-                  onerror="handleImgFallback(this, 'Warm Cup')"
+                  onerror="handleImgFallback(this, 'Visual 3')"
                   class="w-full h-full object-cover warm-editorial-photo"
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-espresso-950/80 via-transparent to-transparent flex items-end p-4">
-                  <span class="text-ivory-50 text-xs font-medium tracking-wide">Espresso Kalibrasi Harian</span>
+                  <span id="craft-3-title" class="text-ivory-50 text-xs font-medium tracking-wide">Espresso Kalibrasi Harian</span>
                 </div>
               </button>
 
-              <!-- Craft 4 -->
+              <!-- Craft / Promo Card 4 -->
               <button
                 type="button"
                 data-gallery-idx="6"
                 data-sc-craft
                 style="--sc-c-i: 3; --sc-c-dir: 1;"
-                aria-label="Perbesar foto pastry panggang segar"
+                aria-label="Perbesar foto 4"
                 class="w-full min-w-full sm:min-w-[calc(50%-10px)] lg:min-w-0 lg:w-auto shrink-0 snap-center group relative rounded-xl overflow-hidden aspect-[4/3] bg-ivory-200 text-left cursor-pointer"
               >
                 <img
+                  id="craft-4-img"
                   src="craft-fresh-pastry.jpg"
-                  alt="Roti dan pastry panggang hangat pendamping minum kopi"
+                  alt="Kudapan & Roti Hangat"
                   width="450"
                   height="340"
                   loading="lazy"
-                  onerror="handleImgFallback(this, 'Fresh Pastry')"
+                  onerror="handleImgFallback(this, 'Visual 4')"
                   class="w-full h-full object-cover warm-editorial-photo"
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-espresso-950/80 via-transparent to-transparent flex items-end p-4">
-                  <span class="text-ivory-50 text-xs font-medium tracking-wide">Kudapan &amp; Roti Hangat</span>
+                  <span id="craft-4-title" class="text-ivory-50 text-xs font-medium tracking-wide">Kudapan &amp; Roti Hangat</span>
                 </div>
               </button>
 
             </div>
 
-            <!-- Minimalist Dots Indicator (Mobile Only) -->
             <div id="momen-dots" class="lg:hidden mt-3 flex items-center justify-center gap-1.5" aria-hidden="true">
               <span class="w-4 h-1 rounded-full bg-amber-brand transition-all"></span>
               <span class="w-1.5 h-1 rounded-full bg-stone-300 transition-all"></span>
@@ -1479,7 +1456,7 @@
         </div>
 
         <!-- ==================================================================
-             CTA RESERVASI (#promo) — ACT 7: CLIP-REVEAL & GOLDEN SHEEN
+             CTA RESERVASI / BANNER BAWAH (#promo) — OPSIONAL
              ================================================================== -->
         <div
           id="promo"
@@ -1489,19 +1466,20 @@
         >
           <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-5 sm:gap-8">
             <div class="max-w-2xl">
-              <span class="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-brand block">
+              <span id="promo-kicker" class="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-brand block">
                 RESERVASI MEJA &amp; KOMUNITAS
               </span>
-              <h2 class="font-serif text-xl sm:text-3xl font-semibold text-ivory-50 leading-snug mt-1.5">
+              <h2 id="promo-heading" class="font-serif text-xl sm:text-3xl font-semibold text-ivory-50 leading-snug mt-1.5">
                 Butuh ruang untuk rapat tim, acara komunitas, atau WFC grup?
               </h2>
-              <p class="text-xs sm:text-sm text-stone-300 mt-1.5 leading-relaxed">
+              <p id="promo-desc" class="text-xs sm:text-sm text-stone-300 mt-1.5 leading-relaxed">
                 Hubungi kami langsung melalui WhatsApp untuk mengamankan meja dan menyiapkan paket sajian kopi terbaik bagi grup Anda.
               </p>
             </div>
 
             <div class="shrink-0">
               <a
+                id="promo-wa-cta"
                 href="https://wa.me/6285691895114?text=Halo%20Tentang%20Kopi%20Sukmajaya%20Depok%2C%20saya%20ingin%20booking%20tempat%20untuk%20grup%2Frapat."
                 target="_blank"
                 rel="noopener noreferrer"
@@ -1510,7 +1488,7 @@
                 <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.124.556 4.119 1.528 5.847l-1.528 5.581 5.714-1.499c1.682.912 3.607 1.433 5.654 1.433 6.627 0 12-5.373 12-12s-5.373-12-12.368-11.362z"/>
                 </svg>
-                <span>Reservasi via WhatsApp</span>
+                <span id="promo-btn-label">Reservasi via WhatsApp</span>
               </a>
             </div>
           </div>
@@ -1520,7 +1498,7 @@
     </section>
 
     <!-- ======================================================================
-         LOKASI & JAM BUKA (#lokasi) — ACT 8: PARALLAX-PLANES CONVERGENCE
+         LOKASI & JAM BUKA (#lokasi)
          ====================================================================== -->
     <section
       id="lokasi"
@@ -1534,7 +1512,7 @@
           
           <!-- Left Column (5 Cols) -->
           <div data-sc-loc-depth="0.35" class="lg:col-span-5">
-            <span class="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-brand block">
+            <span id="lokasi-kicker" class="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-brand block">
               KUNJUNGI KAMI
             </span>
             <h2 id="lokasi-heading" class="font-serif text-2xl sm:text-4xl font-semibold text-stone-900 tracking-tight mt-1">
@@ -1545,32 +1523,32 @@
               <!-- Address Block -->
               <div class="pt-4 sm:pt-6 border-t border-ivory-300">
                 <h3 class="text-[11px] font-bold uppercase tracking-wider text-stone-500">Alamat Kedai</h3>
-                <p class="text-sm sm:text-base font-bold text-stone-900 mt-1.5">
+                <p id="lokasi-addr-1" class="text-sm sm:text-base font-bold text-stone-900 mt-1.5">
                   Jl. Bahagia Raya No. 4 (Samping Polsek Sukmajaya)
                 </p>
-                <p class="text-xs sm:text-sm text-stone-600 mt-1 leading-relaxed">
+                <p id="lokasi-addr-2" class="text-xs sm:text-sm text-stone-600 mt-1 leading-relaxed">
                   Kel. Sukamaju, Kec. Sukmajaya, Kota Depok, Jawa Barat 16417
                 </p>
-                <p class="text-xs text-stone-500 mt-2">
+                <p id="lokasi-wa-line" class="text-xs text-stone-500 mt-2">
                   WhatsApp: <a href="https://wa.me/6285691895114" target="_blank" rel="noopener noreferrer" class="font-semibold text-stone-800 hover:underline tabular-nums">+62 856-9189-5114</a>
                 </p>
               </div>
 
-              <!-- Operating Hours Ledger -->
+              <!-- Operating Hours Ledger (Fleksibel 1 atau 2 Jadwal) -->
               <div class="pt-4 sm:pt-6 border-t border-ivory-300">
                 <div class="flex items-center justify-between">
                   <h3 class="text-[11px] font-bold uppercase tracking-wider text-stone-500">Jam Operasional</h3>
-                  <span class="text-[11px] font-medium text-amber-brand">Buka Setiap Hari</span>
+                  <span id="lokasi-hours-badge" class="text-[11px] font-medium text-amber-brand">Buka Setiap Hari</span>
                 </div>
 
                 <dl class="mt-2.5 divide-y divide-ivory-300/70 text-xs sm:text-sm">
-                  <div class="py-2 flex items-center justify-between">
-                    <dt class="text-stone-700">Senin – Kamis</dt>
-                    <dd class="font-semibold text-stone-900 tabular-nums">11.00 – 22.00 WIB</dd>
+                  <div id="lokasi-hours-row-1" class="py-2 flex items-center justify-between">
+                    <dt id="lokasi-hours-label-1" class="text-stone-700">Senin – Kamis</dt>
+                    <dd id="lokasi-hours-val-1" class="font-semibold text-stone-900 tabular-nums">11.00 – 22.00 WIB</dd>
                   </div>
-                  <div class="py-2 flex items-center justify-between">
-                    <dt class="text-stone-700">Jumat – Minggu</dt>
-                    <dd class="font-semibold text-stone-900 tabular-nums">11.00 – 23.00 WIB</dd>
+                  <div id="lokasi-hours-row-2" class="py-2 flex items-center justify-between">
+                    <dt id="lokasi-hours-label-2" class="text-stone-700">Jumat – Minggu</dt>
+                    <dd id="lokasi-hours-val-2" class="font-semibold text-stone-900 tabular-nums">11.00 – 23.00 WIB</dd>
                   </div>
                 </dl>
               </div>
@@ -1584,7 +1562,7 @@
                 rel="noopener noreferrer"
                 class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 h-11 sm:min-h-[46px] rounded-lg bg-espresso-950 hover:bg-espresso-800 text-ivory-50 text-xs font-semibold transition-colors"
               >
-                <span>Petunjuk Arah di Google Maps</span>
+                <span id="lokasi-maps-btn-label">Petunjuk Arah di Google Maps</span>
                 <span aria-hidden="true">↗</span>
               </a>
             </div>
@@ -1594,7 +1572,7 @@
           <div data-sc-loc-depth="0.65" class="lg:col-span-7 w-full">
             <div class="relative rounded-xl overflow-hidden border border-ivory-300 shadow-md bg-ivory-200 h-[250px] sm:h-[380px]">
               <iframe
-                title="Peta Lokasi Tentang Kopi Sukmajaya — Jl. Bahagia Raya No. 4, Depok"
+                title="Peta Lokasi Kedai"
                 src="https://www.google.com/maps?q=Tentang+Kopi+Sukmajaya,+Jl.+Bahagia+Raya+No.4,+Sukamaju,+Kec.+Sukmajaya,+Kota+Depok&output=embed"
                 class="w-full h-full border-0 contrast-[0.98] sepia-[0.08]"
                 loading="lazy"
@@ -1629,10 +1607,10 @@
         
         <!-- Left: Brand Identity -->
         <div class="flex items-center gap-3">
-          <a href="#hero" class="w-10 h-10 rounded-full overflow-hidden border border-white/25 bg-white flex items-center justify-center shrink-0 shadow-sm" aria-label="Logo Tentang Kopi Sukmajaya Depok">
+          <a href="#hero" class="w-10 h-10 rounded-full overflow-hidden border border-white/25 bg-white flex items-center justify-center shrink-0 shadow-sm" aria-label="Logo Kafe">
             <img
               src="logo.jpg"
-              alt="Logo Tentang Kopi Sukmajaya Depok"
+              alt="Logo Kafe"
               width="40"
               height="40"
               loading="lazy"
@@ -1650,12 +1628,12 @@
           </div>
         </div>
 
-	<!-- Center: Anchor Links -->
+        <!-- Center: Anchor Links -->
         <nav aria-label="Navigasi Footer" class="flex items-center whitespace-nowrap shrink-0 gap-5 sm:gap-7 text-xs text-stone-300">
-          <a href="#menu" class="hover:text-ivory-50 transition-colors">Menu</a>
-          <a href="#suasana" class="hover:text-ivory-50 transition-colors">Suasana</a>
-          <a href="#tentang" class="hover:text-ivory-50 transition-colors">Cerita &amp; Ulasan</a>
-          <a href="#lokasi" class="hover:text-ivory-50 transition-colors">Lokasi</a>
+          <a href="#menu" data-nav-label="1" class="hover:text-ivory-50 transition-colors">Menu</a>
+          <a href="#suasana" data-nav-label="2" class="hover:text-ivory-50 transition-colors">Suasana</a>
+          <a href="#tentang" data-nav-label="3" class="hover:text-ivory-50 transition-colors">Cerita &amp; Ulasan</a>
+          <a href="#lokasi" data-nav-label="4" class="hover:text-ivory-50 transition-colors">Lokasi</a>
         </nav>
 
         <!-- Right: Official Channels -->
@@ -1664,8 +1642,8 @@
             href="https://www.instagram.com/tentangkopidepok/"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Instagram resmi @tentangkopidepok"
-            title="Instagram @tentangkopidepok"
+            aria-label="Instagram resmi"
+            title="Instagram"
             class="w-9 h-9 rounded-lg border border-white/15 hover:border-amber-brand hover:text-amber-brand flex items-center justify-center text-stone-300 transition-colors"
           >
             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
@@ -1677,8 +1655,8 @@
             href="https://www.tiktok.com/@tentangkopidepok"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="TikTok resmi @tentangkopidepok"
-            title="TikTok @tentangkopidepok"
+            aria-label="TikTok resmi"
+            title="TikTok"
             class="w-9 h-9 rounded-lg border border-white/15 hover:border-amber-brand hover:text-amber-brand flex items-center justify-center text-stone-300 transition-colors"
           >
             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
@@ -1687,11 +1665,12 @@
           </a>
 
           <a
+            id="footer-order-icon"
             href="https://gofood.co.id/jakarta/restaurant/tentang-kopi-sukmajaya-f95616be-e5a2-4c9c-bc15-4b75093b2e9b"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Pesan Tentang Kopi Sukmajaya di GoFood"
-            title="GoFood Tentang Kopi Sukmajaya"
+            aria-label="Pesan Online"
+            title="Pesan Online"
             class="w-9 h-9 rounded-lg border border-white/15 hover:border-amber-brand hover:text-amber-brand flex items-center justify-center text-stone-300 transition-colors"
           >
             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
@@ -1702,10 +1681,10 @@
 
       </div>
 
-      <!-- Subtle Mockup Note Only in Footer Bottom Bar -->
+      <!-- Footer Bottom Bar (Copyright & Watermark bisa diubah/dihapus dari Super Admin) -->
       <div class="mt-7 pt-5 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-stone-500">
-        <p>© 2025 Tentang Kopi Sukmajaya Depok. All rights reserved.</p>
-        <p>Desain Landing Page (Mockup Presentasi) · Sukmajaya, Depok</p>
+        <p id="footer-copy-text">© 2026 Tentang Kopi Sukmajaya Depok. All rights reserved.</p>
+        <p id="footer-note-text">Desain Landing Page (Mockup Presentasi) · Sukmajaya, Depok</p>
       </div>
     </div>
   </footer>
@@ -1724,10 +1703,10 @@
       <div class="px-5 sm:px-6 py-4 bg-espresso-950 text-ivory-50 flex items-center justify-between shrink-0">
         <div class="flex items-center gap-3">
           <div class="w-9 h-9 rounded-full overflow-hidden border border-white/20 bg-white flex items-center justify-center shrink-0">
-            <img src="logo.jpg" alt="Logo Tentang Kopi Sukmajaya Depok" width="36" height="36" onerror="handleImgFallback(this, 'TK')" class="w-full h-full object-contain p-0.5" />
+            <img src="logo.jpg" alt="Logo Kafe" width="36" height="36" onerror="handleImgFallback(this, 'TK')" class="w-full h-full object-contain p-0.5" />
           </div>
           <div>
-            <span class="text-[10px] font-semibold uppercase tracking-widest text-amber-brand block">KATALOG MENU LENGKAP</span>
+            <span id="modal-menu-kicker" class="text-[10px] font-semibold uppercase tracking-widest text-amber-brand block">KATALOG MENU LENGKAP</span>
             <h3 id="full-menu-modal-title" class="font-serif text-base sm:text-lg font-medium">Tentang Kopi — Sukmajaya, Depok</h3>
           </div>
         </div>
@@ -1765,12 +1744,13 @@
         </div>
 
         <a
+          id="modal-order-cta"
           href="https://gofood.co.id/jakarta/restaurant/tentang-kopi-sukmajaya-f95616be-e5a2-4c9c-bc15-4b75093b2e9b"
           target="_blank"
           rel="noopener noreferrer"
           class="px-4 h-9 rounded-lg bg-amber-brand hover:bg-amber-hover text-espresso-950 text-xs font-semibold inline-flex items-center gap-1.5"
         >
-          <span>Pesan di GoFood</span>
+          <span id="modal-order-cta-label">Pesan di GoFood</span>
           <span aria-hidden="true">↗</span>
         </a>
       </div>
@@ -1791,7 +1771,7 @@
       <!-- Top Bar -->
       <div class="px-5 sm:px-6 py-3.5 border-b border-white/10 flex items-center justify-between gap-4 shrink-0">
         <div class="min-w-0">
-          <span class="text-[10px] font-semibold uppercase tracking-widest text-amber-brand block">GALERI RUANG &amp; SEDUHAN</span>
+          <span id="modal-gallery-kicker" class="text-[10px] font-semibold uppercase tracking-widest text-amber-brand block">GALERI RUANG &amp; SEDUHAN</span>
           <h3 id="gallery-modal-title" class="font-serif text-sm sm:text-base font-medium truncate">Indoor (AC) — Tentang Kopi Sukmajaya</h3>
         </div>
         <button
@@ -1809,12 +1789,12 @@
         <img
           id="gallery-modal-img"
           src="ambience-indoor-ac.jpg"
-          alt="Suasana ruang Tentang Kopi Sukmajaya"
+          alt="Suasana ruang"
           class="w-full max-h-[58vh] sm:max-h-[64vh] object-cover warm-editorial-photo"
         />
       </div>
 
-      <!-- Bottom Bar: Expandable Description on Mobile + Prev/Next Buttons -->
+      <!-- Bottom Bar -->
       <div
         id="gallery-modal-footer"
         class="px-4 sm:px-6 py-3.5 bg-espresso-900 border-t border-white/10 flex flex-row items-center justify-between gap-3 sm:gap-4 shrink-0 transition-all"
@@ -1856,6 +1836,7 @@
       </div>
     </div>
   </div>
+  <!-- TEMPEL KODE TAHAP 2 TEPAT DI BAWAH BARIS INI -->
 
 <!-- ========================================================================
        APPLICATION DATA, MULTI-CAFE SUPABASE SYNC & SCROLL CRAFT ENGINE SCRIPT
@@ -1870,6 +1851,22 @@
     let GOFOOD_ORDER_URL =
       (window.TENTANG_KOPI_CONFIG && window.TENTANG_KOPI_CONFIG.GOFOOD_ORDER_URL) ||
       "https://gofood.co.id/jakarta/restaurant/tentang-kopi-sukmajaya-f95616be-e5a2-4c9c-bc15-4b75093b2e9b";
+
+    // State Kontrol CTA & Copywriting Kartu Menu
+    let activeCtaConfig = {
+      enableOnlineOrder: true,
+      enableWaCta: true,
+      enablePdfBar: true,
+      enablePromoBanner: true,
+      orderBtnNav: "Pesan Online",
+      orderBtnMain: "Pesan di GoFood",
+      heroBtnMenu: "Lihat Menu",
+      spotlightAvailOrder: "Tersedia di kedai & GoFood",
+      spotlightAvailCatalog: "✦ Tersedia untuk Dine-In & Takeaway",
+      pdfBtnText: "Katalog PDF",
+      menuBarTitle: "Ingin pesan antar ke rumah/kantor atau simpan daftar menu lengkap?",
+      menuBarDesc: "Tersedia untuk dine-in, takeaway, maupun pesan antar praktis melalui GoFood."
+    };
 
     // Profil Default (Tentang Kopi Sukmajaya Depok)
     let activeCafeProfile = {
@@ -1895,10 +1892,11 @@
       hero_image_url: "hero-signature-latte.jpg",
       indoor_image_url: "ambience-indoor-ac.jpg",
       outdoor_image_url: "ambience-outdoor-terrace.jpg",
-      bar_image_url: "ambience-coffee-bar.jpg"
+      bar_image_url: "ambience-coffee-bar.jpg",
+      custom_config: {}
     };
 
-     const defaultCategoryNames = {
+    const defaultCategoryNames = {
       "signature-coffee": "Signature Coffee",
       "non-coffee": "Non-Coffee",
       "manual-brew": "Manual Brew",
@@ -1934,9 +1932,8 @@
       }
     }
 
-    // Data katalog bawaan (HANYA digunakan sebagai fallback transparan jika database tidak dapat dijangkau)
+    // Data katalog bawaan (Fallback transparan jika database tidak dapat dijangkau)
     const fallbackMenuItems = [
-      // --- Signature Coffee ---
       {
         id: "sig-1",
         name: "Espresso Latte",
@@ -1989,8 +1986,6 @@
         badge: null,
         imageUrl: "menu-matcha-espresso.jpg"
       },
-
-      // --- Non-Coffee ---
       {
         id: "non-1",
         name: "Brown Sugar Boba Milk",
@@ -2043,8 +2038,6 @@
         badge: null,
         imageUrl: "menu-red-velvet-latte.jpg"
       },
-
-      // --- Manual Brew ---
       {
         id: "brew-1",
         name: "V60 Aceh Gayo",
@@ -2097,8 +2090,6 @@
         badge: null,
         imageUrl: "menu-french-press-flores.jpg"
       },
-
-      // --- Light Bites & Pastry ---
       {
         id: "pas-1",
         name: "Egg Tentang Toast",
@@ -2212,18 +2203,84 @@
         .replace(/'/g, "&#039;");
     }
 
-    window.handleImgFallback = function (img, label = "Tentang Kopi") {
+    window.handleImgFallback = function (img, label = "Kafe") {
       if (!img || img.dataset.fallbackDone === "true") return;
       img.dataset.fallbackDone = "true";
       const clean = encodeURIComponent(label);
       img.src = `https://placehold.co/600x450/181310/FAF7F2?text=${clean}`;
     };
 
-    // Terapkan Profil Kafe Dinamis ke DOM tanpa merusak struktur asli
+    // Helper Konversi HEX ke RGB Triplet untuk Tailwind CSS Variables
+    function parseHexToRgbObj(hex, fallback = [17, 14, 12]) {
+      const clean = String(hex || "").trim().replace("#", "");
+      if (!/^[0-9A-Fa-f]{6}$/.test(clean)) {
+        return { r: fallback[0], g: fallback[1], b: fallback[2] };
+      }
+      return {
+        r: parseInt(clean.substring(0, 2), 16),
+        g: parseInt(clean.substring(2, 4), 16),
+        b: parseInt(clean.substring(4, 6), 16)
+      };
+    }
+
+    function lightenRgb({ r, g, b }, add = 14) {
+      return `${Math.min(255, r + add)} ${Math.min(255, g + add)} ${Math.min(255, b + add)}`;
+    }
+
+    function applyBrandThemeToCSS(theme) {
+      if (!theme) return;
+      const root = document.documentElement;
+      const d950 = parseHexToRgbObj(theme.bgDark || "#110E0C", [17, 14, 12]);
+      const d900 = parseHexToRgbObj(theme.bgDarkSec || "#181310", [24, 19, 16]);
+      const acc = parseHexToRgbObj(theme.accent || "#C88A2B", [200, 138, 43]);
+      const accHov = parseHexToRgbObj(theme.accentHover || "#B5791E", [181, 121, 30]);
+      const l50 = parseHexToRgbObj(theme.bgLight || "#FAF7F2", [250, 247, 242]);
+      const l100 = parseHexToRgbObj(theme.bgLightSec || "#F2ECE1", [242, 236, 225]);
+
+      root.style.setProperty("--rgb-dark-950", `${d950.r} ${d950.g} ${d950.b}`);
+      root.style.setProperty("--rgb-dark-900", `${d900.r} ${d900.g} ${d900.b}`);
+      root.style.setProperty("--rgb-dark-800", lightenRgb(d900, 14));
+      root.style.setProperty("--rgb-dark-700", lightenRgb(d900, 28));
+      root.style.setProperty("--rgb-accent", `${acc.r} ${acc.g} ${acc.b}`);
+      root.style.setProperty("--rgb-accent-hover", `${accHov.r} ${accHov.g} ${accHov.b}`);
+      root.style.setProperty("--rgb-light-50", `${l50.r} ${l50.g} ${l50.b}`);
+      root.style.setProperty("--rgb-light-100", `${l100.r} ${l100.g} ${l100.b}`);
+
+      root.style.setProperty("--hex-dark-950", theme.bgDark || "#110E0C");
+      root.style.setProperty("--hex-dark-900", theme.bgDarkSec || "#181310");
+      root.style.setProperty("--hex-accent", theme.accent || "#C88A2B");
+      root.style.setProperty("--hex-light-50", theme.bgLight || "#FAF7F2");
+    }
+
+    function setElText(id, val) {
+      const el = document.getElementById(id);
+      if (el && val !== undefined && val !== null && val !== "") {
+        el.textContent = val;
+      }
+    }
+
+    // Terapkan Seluruh Profil Kafe + Custom Config Super Admin (Bagian 1 s/d 10) ke DOM
     function applyCafeProfileToDOM(profile) {
       if (!profile) return;
       activeCafeProfile = { ...activeCafeProfile, ...profile };
-      GOFOOD_ORDER_URL = activeCafeProfile.gofood_url || GOFOOD_ORDER_URL;
+      const cc = activeCafeProfile.custom_config || {};
+
+      // Terapkan Tema Warna Brand
+      if (cc.theme) {
+        applyBrandThemeToCSS(cc.theme);
+      }
+
+      // Sinkronisasi Konfigurasi CTA & Opsionalitas Tombol Order
+      if (cc.ctaConfig) {
+        activeCtaConfig = { ...activeCtaConfig, ...cc.ctaConfig };
+      }
+
+      const hasValidOrderUrl = Boolean(activeCafeProfile.gofood_url && activeCafeProfile.gofood_url.trim() !== "");
+      GOFOOD_ORDER_URL = hasValidOrderUrl ? activeCafeProfile.gofood_url.trim() : GOFOOD_ORDER_URL;
+      const showOrder = activeCtaConfig.enableOnlineOrder !== false;
+      const showWa = activeCtaConfig.enableWaCta !== false;
+      const showPdfBar = activeCtaConfig.enablePdfBar !== false;
+      const showPromoBanner = activeCtaConfig.enablePromoBanner !== false;
 
       const brandUpper = (activeCafeProfile.name || "TENTANG KOPI").toUpperCase();
       const branchText = activeCafeProfile.branch || "Sukmajaya, Depok";
@@ -2232,7 +2289,15 @@
 
       document.title = `${brandUpper} — ${h1Line1} ${h1Line2} | ${branchText}`;
 
-      // 1. Update Brand & Cabang di Navbar dan Footer
+      const metaDescEl = document.getElementById("dynamic-meta-desc") || document.querySelector("meta[name='description']");
+      if (metaDescEl) {
+        metaDescEl.setAttribute(
+          "content",
+          `${activeCafeProfile.name} ${branchText} (${activeCafeProfile.address_line_1 || ""}) — ${activeCafeProfile.hero_description || ""}`
+        );
+      }
+
+      // 1. Update Brand & Cabang di Navbar, Modal & Footer
       const headerBrandSpans = document.querySelectorAll("#header a[href='#hero'] span");
       if (headerBrandSpans.length >= 2) {
         headerBrandSpans[0].textContent = brandUpper;
@@ -2248,32 +2313,27 @@
         }
       }
 
-      const modalTitle = document.getElementById("full-menu-modal-title");
-      if (modalTitle) {
-        modalTitle.textContent = `${activeCafeProfile.name} — ${branchText}`;
-      }
+      setElText("full-menu-modal-title", `${activeCafeProfile.name} — ${branchText}`);
 
-      // 2. Update Semua Gambar Logo
+      // 2. Update Logo & Favicon
       if (activeCafeProfile.logo_url) {
+        const fav = document.getElementById("dynamic-favicon");
+        if (fav) fav.href = activeCafeProfile.logo_url;
         document.querySelectorAll("img[src='logo.jpg'], #header img, footer img, #printable-menu-sheet img").forEach((img) => {
           delete img.dataset.fallbackDone;
           img.src = activeCafeProfile.logo_url;
         });
       }
 
-      // 3. Update Hero Headline, Deskripsi & Foto Hero
-      const heroBadgeBranch = document.querySelector("#hero-status-badge span:last-child");
-      if (heroBadgeBranch) heroBadgeBranch.textContent = branchText;
+      // 3. Update Hero Section & Adaptive Hero CTA Layout
+      setElText("hero-status-branch", branchText);
 
       const heroTitleEl = document.getElementById("hero-title");
       if (heroTitleEl) {
         heroTitleEl.innerHTML = `${escapeHtml(h1Line1)}<br /><span class="italic font-normal text-amber-brand">${escapeHtml(h1Line2)}</span>`;
       }
 
-      const heroDescEl = document.querySelector("#hero [data-sc-depth='0.52'] > p");
-      if (heroDescEl && activeCafeProfile.hero_description) {
-        heroDescEl.textContent = activeCafeProfile.hero_description;
-      }
+      setElText("hero-desc-text", activeCafeProfile.hero_description);
 
       if (activeCafeProfile.hero_image_url) {
         document.querySelectorAll("#hero img").forEach((img) => {
@@ -2282,7 +2342,33 @@
         });
       }
 
-      // 4. Update Foto Suasana (Bento Grid & Lightbox Array)
+      if (cc.heroExtra) {
+        setElText("hero-card-kicker", cc.heroExtra.cardKicker);
+        setElText("hero-card-title", cc.heroExtra.cardTitle);
+        setElText("hero-card-badge", cc.heroExtra.cardBadge);
+        if (cc.heroExtra.subLeft) {
+          document.querySelectorAll("[data-hero-sub-left]").forEach((el) => { el.textContent = cc.heroExtra.subLeft; });
+        }
+        if (cc.heroExtra.subRight) {
+          document.querySelectorAll("[data-hero-sub-right]").forEach((el) => { el.textContent = cc.heroExtra.subRight; });
+        }
+      }
+
+      // 4. Update 3 Pilar USP & Header Menu
+      if (Array.isArray(cc.usp) && cc.usp.length === 3) {
+        [1, 2, 3].forEach((n, idx) => {
+          setElText(`usp-${n}-title`, cc.usp[idx]?.title);
+          setElText(`usp-${n}-desc`, cc.usp[idx]?.desc);
+        });
+      }
+
+      if (cc.menuHeader) {
+        setElText("menu-kicker", cc.menuHeader.kicker);
+        setElText("menu-heading", cc.menuHeader.title);
+        setElText("menu-subdesc", cc.menuHeader.desc);
+      }
+
+      // 5. Update Section Suasana, 3 Foto Ruang + Deskripsi Lightbox & 4 Fasilitas
       const bentoIndoorImg = document.querySelector("[data-gallery-idx='0'] img");
       if (bentoIndoorImg && activeCafeProfile.indoor_image_url) {
         delete bentoIndoorImg.dataset.fallbackDone;
@@ -2305,14 +2391,171 @@
         ambiencePhotos[2].imageUrl = activeCafeProfile.bar_image_url;
       }
 
-      // 5. Update Seluruh Link GoFood, WhatsApp, Instagram, TikTok, dan Google Maps
+      if (cc.ambience) {
+        setElText("suasana-kicker", cc.ambience.kicker);
+        setElText("suasana-heading", cc.ambience.title);
+        setElText("suasana-desc", cc.ambience.desc);
+
+        if (Array.isArray(cc.ambience.spaces) && cc.ambience.spaces.length === 3) {
+          const sp = cc.ambience.spaces;
+          setElText("space-1-kicker", sp[0]?.kicker);
+          setElText("space-1-title", sp[0]?.title);
+          const sp1SubEl = document.getElementById("space-1-sub");
+          if (sp1SubEl && sp[0]?.subtitle !== undefined) {
+            sp1SubEl.textContent = sp[0].subtitle;
+            sp1SubEl.classList.toggle("hidden", !sp[0].subtitle);
+          }
+          if (sp[0]?.title) ambiencePhotos[0].title = `${sp[0].title} — ${activeCafeProfile.name}`;
+          if (sp[0]?.lightboxDesc) ambiencePhotos[0].desc = sp[0].lightboxDesc;
+
+          setElText("space-2-kicker", sp[1]?.kicker);
+          setElText("space-2-title", sp[1]?.title);
+          if (sp[1]?.title) ambiencePhotos[1].title = `${sp[1].title} — ${activeCafeProfile.name}`;
+          if (sp[1]?.lightboxDesc) ambiencePhotos[1].desc = sp[1].lightboxDesc;
+
+          setElText("space-3-kicker", sp[2]?.kicker);
+          setElText("space-3-title", sp[2]?.title);
+          if (sp[2]?.title) ambiencePhotos[2].title = `${sp[2].title} — ${activeCafeProfile.name}`;
+          if (sp[2]?.lightboxDesc) ambiencePhotos[2].desc = sp[2].lightboxDesc;
+        }
+
+        if (Array.isArray(cc.ambience.facilities) && cc.ambience.facilities.length === 4) {
+          [1, 2, 3, 4].forEach((n, idx) => {
+            setElText(`fac-${n}-title`, cc.ambience.facilities[idx]?.title);
+            setElText(`fac-${n}-desc`, cc.ambience.facilities[idx]?.desc);
+          });
+        }
+      }
+
+      // 6. Update Section Ulasan & 3 Kartu Testimoni
+      if (cc.reviews) {
+        setElText("reviews-score-num", cc.reviews.score);
+        setElText("reviews-kicker", cc.reviews.kicker);
+        setElText("reviews-heading", cc.reviews.title);
+        setElText("reviews-desc", cc.reviews.desc);
+
+        if (Array.isArray(cc.reviews.items) && cc.reviews.items.length === 3) {
+          [1, 2, 3].forEach((n, idx) => {
+            setElText(`rev-${n}-quote`, cc.reviews.items[idx]?.quote);
+            setElText(`rev-${n}-author`, cc.reviews.items[idx]?.author);
+            setElText(`rev-${n}-role`, cc.reviews.items[idx]?.role);
+          });
+        }
+      }
+
+      // 7. Update Section Multi-Fungsi (Cerita Seduhan / 4 Kartu Promo) + Lightbox Array
+      if (cc.momen) {
+        setElText("momen-kicker", cc.momen.kicker);
+        setElText("momen-heading", cc.momen.title);
+
+        if (Array.isArray(cc.momen.cards) && cc.momen.cards.length === 4) {
+          [1, 2, 3, 4].forEach((n, idx) => {
+            const cardData = cc.momen.cards[idx];
+            if (!cardData) return;
+            setElText(`craft-${n}-title`, cardData.title);
+            const cImg = document.getElementById(`craft-${n}-img`);
+            if (cImg && cardData.imageUrl) {
+              delete cImg.dataset.fallbackDone;
+              cImg.src = cardData.imageUrl;
+              cImg.alt = cardData.title || `Visual ${n}`;
+            }
+            const galleryIdx = idx + 3;
+            if (ambiencePhotos[galleryIdx]) {
+              if (cardData.title) ambiencePhotos[galleryIdx].title = cardData.title;
+              if (cardData.desc) ambiencePhotos[galleryIdx].desc = cardData.desc;
+              if (cardData.imageUrl) ambiencePhotos[galleryIdx].imageUrl = cardData.imageUrl;
+            }
+          });
+        }
+      }
+
+      // 8. Update Banner Reservasi Bawah (#promo)
+      const promoSection = document.getElementById("promo");
+      if (promoSection) {
+        promoSection.classList.toggle("hidden", !showPromoBanner);
+      }
+      if (cc.promoBanner) {
+        setElText("promo-kicker", cc.promoBanner.kicker);
+        setElText("promo-heading", cc.promoBanner.title);
+        setElText("promo-desc", cc.promoBanner.desc);
+        setElText("promo-btn-label", cc.promoBanner.btnText);
+      }
+
+      // 9. Update Label Navigasi, Modal, Lokasi & Footer
+      if (cc.navLabels) {
+        [1, 2, 3, 4].forEach((n) => {
+          const val = cc.navLabels[`nav${n}`];
+          if (val) {
+            document.querySelectorAll(`[data-nav-label='${n}']`).forEach((el) => {
+              el.textContent = val;
+            });
+          }
+        });
+      }
+
+      if (cc.lokasiExtra) {
+        setElText("lokasi-kicker", cc.lokasiExtra.kicker);
+        setElText("lokasi-heading", cc.lokasiExtra.title);
+        setElText("lokasi-maps-btn-label", cc.lokasiExtra.btnText);
+        setElText("modal-menu-kicker", cc.lokasiExtra.modalMenuKicker);
+        setElText("modal-gallery-kicker", cc.lokasiExtra.modalGalleryKicker);
+        setElText("btn-open-gallery-label", cc.lokasiExtra.btnGallery);
+      }
+
+      if (cc.footer) {
+        setElText("footer-copy-text", cc.footer.copyright);
+        const fNoteEl = document.getElementById("footer-note-text");
+        if (fNoteEl && cc.footer.note !== undefined) {
+          fNoteEl.textContent = cc.footer.note;
+          fNoteEl.classList.toggle("hidden", !cc.footer.note);
+        }
+      }
+
+      // 10. Update Alamat, Jam Operasional Fleksibel (1 atau 2 Baris) & Peta di #lokasi
+      setElText("lokasi-addr-1", activeCafeProfile.address_line_1);
+      setElText("lokasi-addr-2", activeCafeProfile.address_line_2);
+
+      const hoursCfg = cc.hours || {};
+      setElText("lokasi-hours-badge", hoursCfg.badgeText || "Buka Setiap Hari");
+      setElText("lokasi-hours-label-1", hoursCfg.label1 || "Senin – Kamis");
+      setElText("lokasi-hours-val-1", activeCafeProfile.hours_weekday || "11.00 – 22.00 WIB");
+
+      const row2El = document.getElementById("lokasi-hours-row-2");
+      const label2Text = hoursCfg.label2 !== undefined ? hoursCfg.label2 : "Jumat – Minggu";
+      const val2Text = activeCafeProfile.hours_weekend !== undefined && activeCafeProfile.hours_weekend !== null ? activeCafeProfile.hours_weekend : "";
+
+      if (row2El) {
+        if (!label2Text && !val2Text) {
+          row2El.classList.add("hidden");
+        } else {
+          row2El.classList.remove("hidden");
+          setElText("lokasi-hours-label-2", label2Text);
+          setElText("lokasi-hours-val-2", val2Text);
+        }
+      }
+
+      if (activeCafeProfile.maps_link) {
+        document.querySelectorAll("a[href*='maps.google.com']").forEach((a) => {
+          a.href = activeCafeProfile.maps_link;
+        });
+      }
+      const mapOverlayLabel = document.querySelector("#lokasi [data-sc-loc-depth='0.65'] a span.truncate");
+      if (mapOverlayLabel) {
+        mapOverlayLabel.textContent = `${activeCafeProfile.name} · ${activeCafeProfile.address_line_1 || branchText} ↗`;
+      }
+      const mapIframe = document.querySelector("#lokasi iframe");
+      if (mapIframe && activeCafeProfile.maps_embed_url) {
+        mapIframe.src = activeCafeProfile.maps_embed_url;
+      }
+
+      // 11. Update Link Kontak & Terapkan Visibilitas Adaptif untuk Tombol Order & WA
       const cleanWa = (activeCafeProfile.whatsapp_number || "6285691895114").replace(/[^0-9]/g, "");
       const waGreeting = encodeURIComponent(
         `Halo ${activeCafeProfile.name} (${branchText}), saya ingin bertanya mengenai menu dan reservasi tempat.`
       );
 
-      document.querySelectorAll("a[href*='gofood.co.id']").forEach((a) => {
-        a.href = GOFOOD_ORDER_URL;
+      document.querySelectorAll("a[href*='gofood.co.id'], #nav-order-cta, #mobile-order-cta, #hero-order-cta, #menu-bar-order-cta, #footer-order-icon, #modal-order-cta").forEach((a) => {
+        if (a) a.href = GOFOOD_ORDER_URL;
       });
 
       document.querySelectorAll("a[href*='wa.me']").forEach((a) => {
@@ -2334,31 +2577,76 @@
         });
       }
 
-      // 6. Update Alamat, Jam Operasional & Peta di #lokasi
-      const lokasiBlocks = document.querySelectorAll("#lokasi [data-sc-loc-depth='0.35'] .border-t");
-      if (lokasiBlocks.length >= 1) {
-        const addrPs = lokasiBlocks[0].querySelectorAll("p");
-        if (addrPs[0] && activeCafeProfile.address_line_1) addrPs[0].textContent = activeCafeProfile.address_line_1;
-        if (addrPs[1] && activeCafeProfile.address_line_2) addrPs[1].textContent = activeCafeProfile.address_line_2;
-      }
-      if (lokasiBlocks.length >= 2) {
-        const dds = lokasiBlocks[1].querySelectorAll("dd");
-        if (dds[0] && activeCafeProfile.hours_weekday) dds[0].textContent = activeCafeProfile.hours_weekday;
-        if (dds[1] && activeCafeProfile.hours_weekend) dds[1].textContent = activeCafeProfile.hours_weekend;
+      // Update Teks Tombol CTA
+      setElText("nav-order-cta-label", activeCtaConfig.orderBtnNav);
+      setElText("mobile-order-cta-label", activeCtaConfig.orderBtnMain);
+      setElText("hero-order-cta-label", activeCtaConfig.orderBtnMain);
+      setElText("menu-bar-order-label", activeCtaConfig.orderBtnMain);
+      setElText("modal-order-cta-label", activeCtaConfig.orderBtnMain);
+      setElText("hero-menu-cta-label", activeCtaConfig.heroBtnMenu);
+      setElText("pdf-btn-label", activeCtaConfig.pdfBtnText);
+      setElText("menu-bar-title", activeCtaConfig.menuBarTitle);
+      setElText("menu-bar-desc", activeCtaConfig.menuBarDesc);
+
+      // Terapkan Visibilitas & Layout Adaptif Navbar, Drawer HP, Hero, Bar Menu & Footer
+      const navOrderBtn = document.getElementById("nav-order-cta");
+      if (navOrderBtn) navOrderBtn.classList.toggle("hidden", !showOrder);
+
+      const navWaBtn = document.getElementById("nav-wa-cta");
+      if (navWaBtn) navWaBtn.classList.toggle("hidden", !showWa);
+
+      const lokasiWaLine = document.getElementById("lokasi-wa-line");
+      if (lokasiWaLine) lokasiWaLine.classList.toggle("hidden", !showWa);
+
+      const footerOrderIcon = document.getElementById("footer-order-icon");
+      if (footerOrderIcon) footerOrderIcon.classList.toggle("hidden", !showOrder);
+
+      const modalOrderCta = document.getElementById("modal-order-cta");
+      if (modalOrderCta) modalOrderCta.classList.toggle("hidden", !showOrder);
+
+      // Drawer HP Adaptif
+      const mobileDrawerGrid = document.getElementById("mobile-drawer-cta-grid");
+      const mobileOrderBtn = document.getElementById("mobile-order-cta");
+      const mobileWaBtn = document.getElementById("mobile-wa-cta");
+      if (mobileOrderBtn) mobileOrderBtn.classList.toggle("hidden", !showOrder);
+      if (mobileWaBtn) mobileWaBtn.classList.toggle("hidden", !showWa);
+      if (mobileDrawerGrid) {
+        if (!showOrder && !showWa) {
+          mobileDrawerGrid.classList.add("hidden");
+        } else {
+          mobileDrawerGrid.classList.remove("hidden");
+          mobileDrawerGrid.className = (showOrder && showWa)
+            ? "mt-2.5 grid grid-cols-2 gap-2"
+            : "mt-2.5 grid grid-cols-1 gap-2";
+        }
       }
 
-      if (activeCafeProfile.maps_link) {
-        document.querySelectorAll("a[href*='maps.google.com']").forEach((a) => {
-          a.href = activeCafeProfile.maps_link;
-        });
+      // Hero CTA Adaptif (Jika tombol Order disembunyikan, tombol Lihat Menu otomatis rapi tanpa ruang kosong)
+      const heroCtaContainer = document.getElementById("hero-cta-container");
+      const heroOrderBtn = document.getElementById("hero-order-cta");
+      if (heroOrderBtn) heroOrderBtn.classList.toggle("hidden", !showOrder);
+      if (heroCtaContainer) {
+        heroCtaContainer.className = showOrder
+          ? "mt-5 sm:mt-9 grid grid-cols-2 sm:flex sm:flex-row sm:items-center gap-2.5 sm:gap-4"
+          : "mt-5 sm:mt-9 grid grid-cols-1 sm:flex sm:flex-row sm:items-center gap-2.5 sm:gap-4";
       }
-      const mapOverlayLabel = document.querySelector("#lokasi [data-sc-loc-depth='0.65'] a span.truncate");
-      if (mapOverlayLabel) {
-        mapOverlayLabel.textContent = `${activeCafeProfile.name} · ${activeCafeProfile.address_line_1 || branchText} ↗`;
+
+      // Bar Bawah Menu Adaptif
+      const menuBottomBar = document.getElementById("menu-bottom-bar");
+      const menuBarActions = document.getElementById("menu-bar-actions");
+      const openPdfBtn = document.getElementById("btn-open-pdf-menu");
+      const menuBarOrderBtn = document.getElementById("menu-bar-order-cta");
+
+      if (openPdfBtn) openPdfBtn.classList.toggle("hidden", !showPdfBar);
+      if (menuBarOrderBtn) menuBarOrderBtn.classList.toggle("hidden", !showOrder);
+
+      if (menuBottomBar) {
+        menuBottomBar.classList.toggle("hidden", !showPdfBar && !showOrder);
       }
-      const mapIframe = document.querySelector("#lokasi iframe");
-      if (mapIframe && activeCafeProfile.maps_embed_url) {
-        mapIframe.src = activeCafeProfile.maps_embed_url;
+      if (menuBarActions) {
+        menuBarActions.className = (showPdfBar && showOrder)
+          ? "grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2.5 sm:gap-3 shrink-0"
+          : "grid grid-cols-1 sm:flex sm:flex-wrap items-center gap-2.5 sm:gap-3 shrink-0";
       }
 
       updateOperatingStatus();
@@ -2394,6 +2682,16 @@
       const textEl = document.getElementById("hero-status-text");
       if (!dotEl || !textEl) return;
 
+      const cc = activeCafeProfile.custom_config || {};
+      const hoursCfg = cc.hours || {};
+
+      // Jika Super Admin atau Owner mengisi teks badge Hero kustom, tampilkan langsung
+      if (hoursCfg.customHeroStatus && hoursCfg.customHeroStatus.trim() !== "") {
+        dotEl.className = "w-2 h-2 rounded-full bg-[#22C55E]";
+        textEl.textContent = hoursCfg.customHeroStatus.trim();
+        return;
+      }
+
       try {
         const now = new Date();
         const formatter = new Intl.DateTimeFormat("en-US", {
@@ -2415,9 +2713,9 @@
         const isExtendedDay = weekday === "Fri" || weekday === "Sat" || weekday === "Sun";
         const openMins = 11 * 60;
         const closeMins = isExtendedDay ? 23 * 60 : 22 * 60;
-        const rangeLabel = isExtendedDay
-          ? activeCafeProfile.hours_weekend || "11.00 – 23.00 WIB"
-          : activeCafeProfile.hours_weekday || "11.00 – 22.00 WIB";
+        const rangeLabel = (isExtendedDay && activeCafeProfile.hours_weekend)
+          ? activeCafeProfile.hours_weekend
+          : (activeCafeProfile.hours_weekday || "11.00 – 22.00 WIB");
 
         const isOpen = currentMins >= openMins && currentMins < closeMins;
 
@@ -2426,10 +2724,10 @@
           textEl.textContent = `Buka Hari Ini · ${rangeLabel}`;
         } else {
           dotEl.className = "w-2 h-2 rounded-full bg-amber-brand";
-          textEl.textContent = `Tutup · Buka Pukul ${rangeLabel}`;
+          textEl.textContent = `Jam Operasional · ${rangeLabel}`;
         }
       } catch (e) {
-        textEl.textContent = `Buka Setiap Hari · ${activeCafeProfile.hours_weekday || "11.00 – 22.00 WIB"}`;
+        textEl.textContent = `Buka · ${activeCafeProfile.hours_weekday || "11.00 – 22.00 WIB"}`;
       }
     }
 
@@ -2493,13 +2791,15 @@
     }
 
     function renderMenuSection(triggerSwitchAnim = false) {
-      	syncCategoriesFromItems();
-      	const tablistEl = document.getElementById("menu-tablist");
-      	const contentEl = document.getElementById("menu-content-area");
-      	const viewAllBtn = document.getElementById("btn-view-all-menu");
-      	const viewAllLabel = document.getElementById("view-all-menu-label");
-      	const statusEl = document.getElementById("menu-filter-status");
-      	if (!tablistEl || !contentEl) return;
+      syncCategoriesFromItems();
+      const tablistEl = document.getElementById("menu-tablist");
+      const contentEl = document.getElementById("menu-content-area");
+      const viewAllBtn = document.getElementById("btn-view-all-menu");
+      const viewAllLabel = document.getElementById("view-all-menu-label");
+      const statusEl = document.getElementById("menu-filter-status");
+      if (!tablistEl || !contentEl) return;
+
+      const showOrder = activeCtaConfig.enableOnlineOrder !== false;
 
       tablistEl.innerHTML = menuCategories
         .map((cat) => {
@@ -2518,7 +2818,7 @@
                   : 'border-transparent text-stone-500 hover:text-stone-800'
               }"
             >
-              ${cat.name}
+              ${escapeHtml(cat.name)}
             </button>
           `;
         })
@@ -2605,7 +2905,7 @@
                   <div class="flex-1 min-w-0">
                     <div class="flex items-baseline justify-between gap-2">
                       <div class="flex flex-wrap items-center gap-1.5 min-w-0">
-                        <h3 class="font-serif text-sm sm:text-lg font-semibold text-stone-900 sm:truncate">${safeName}</h3>
+                        <h3 class="font-serif text-sm sm:text-lg font-semibold text-stone-900 break-words">${safeName}</h3>
                         ${
                           item.isPromo && item.isAvailable
                             ? `<span class="px-2 py-0.5 rounded-full bg-[#EA580C] text-ivory-50 text-[10px] font-bold shrink-0">Promo</span>`
@@ -2619,8 +2919,7 @@
                       </div>
                       ${renderPriceBlock(item, "row")}
                     </div>
-                    <!-- Deskripsi Menu Tampil Utuh Tanpa Terpotong di HP -->
-                    <p class="text-xs sm:text-sm text-stone-600 mt-1 leading-relaxed">${safeDesc}</p>
+                    <p class="text-xs sm:text-sm text-stone-600 mt-1 leading-relaxed break-words">${safeDesc}</p>
                     <p class="text-[10px] sm:text-[11px] font-medium text-stone-500 mt-1.5 sm:mt-2 tracking-wide">${safeAttrs}</p>
                   </div>
                 </article>
@@ -2633,11 +2932,44 @@
           const safeSpotImg = escapeHtml(spotlight.imageUrl);
           const safeSpotAttrs = (spotlight.attributes || []).map(escapeHtml).join(" · ");
 
+          // Footer Kartu Spotlight Adaptif: Rapi baik saat Tombol Order Aktif maupun Mode Katalog Murni
+          let spotlightFooterHtml = "";
+          if (!spotlight.isAvailable) {
+            spotlightFooterHtml = `
+              <div class="mt-4 sm:mt-6 pt-3.5 sm:pt-5 border-t border-ivory-200 flex items-center justify-between gap-3">
+                <span class="text-[11px] sm:text-xs text-stone-500 font-medium">Sementara sedang habis</span>
+                <span class="inline-flex items-center justify-center text-xs font-semibold text-stone-500 bg-ivory-200 px-4 py-2 rounded-lg select-none">Habis</span>
+              </div>
+            `;
+          } else if (showOrder) {
+            spotlightFooterHtml = `
+              <div class="mt-4 sm:mt-6 pt-3.5 sm:pt-5 border-t border-ivory-200 flex items-center justify-between gap-3">
+                <span class="text-[11px] sm:text-xs text-stone-600 font-medium">${escapeHtml(activeCtaConfig.spotlightAvailOrder)}</span>
+                <a
+                  href="${escapeHtml(GOFOOD_ORDER_URL)}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1.5 text-xs font-semibold text-espresso-950 bg-amber-brand hover:bg-amber-hover px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-lg transition-colors shrink-0"
+                >
+                  <span>${escapeHtml(activeCtaConfig.orderBtnMain)}</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            `;
+          } else {
+            spotlightFooterHtml = `
+              <div class="mt-4 sm:mt-6 pt-3.5 sm:pt-4 border-t border-ivory-200 flex items-center justify-between gap-2">
+                <span class="text-[11px] sm:text-xs text-amber-brand font-semibold tracking-wide">${escapeHtml(activeCtaConfig.spotlightAvailCatalog)}</span>
+                <span class="text-[11px] text-stone-500 font-medium">Tersedia Hari Ini</span>
+              </div>
+            `;
+          }
+
           contentEl.innerHTML = `
             ${noticeHtml}
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start">
-              <article class="sc-spotlight-card lg:col-span-5 bg-ivory-100 rounded-2xl overflow-hidden border border-ivory-200 shadow-sm">
-                <div class="relative aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden bg-ivory-200">
+              <article class="sc-spotlight-card lg:col-span-5 bg-ivory-100 rounded-2xl overflow-hidden border border-ivory-200 shadow-sm flex flex-col justify-between h-full">
+                <div class="relative aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden bg-ivory-200 shrink-0">
                   <img
                     src="${safeSpotImg}"
                     alt="${safeSpotName}"
@@ -2668,35 +3000,17 @@
                   }
                 </div>
 
-                <div class="p-4 sm:p-7">
-                  <div class="flex items-baseline justify-between gap-3">
-                    <h3 class="font-serif text-lg sm:text-2xl font-semibold text-stone-900">${safeSpotName}</h3>
-                    ${renderPriceBlock(spotlight, "spotlight")}
+                <div class="p-4 sm:p-7 flex-1 flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-baseline justify-between gap-3">
+                      <h3 class="font-serif text-lg sm:text-2xl font-semibold text-stone-900 break-words">${safeSpotName}</h3>
+                      ${renderPriceBlock(spotlight, "spotlight")}
+                    </div>
+                    <p class="text-[11px] sm:text-xs font-medium text-stone-500 mt-0.5 tracking-wide">${safeSpotAttrs}</p>
+                    <p class="text-xs sm:text-sm text-stone-700 mt-2 sm:mt-3 leading-relaxed break-words">${safeSpotDesc}</p>
                   </div>
-                  <p class="text-[11px] sm:text-xs font-medium text-stone-500 mt-0.5 tracking-wide">${safeSpotAttrs}</p>
-                  <p class="text-xs sm:text-sm text-stone-700 mt-2 sm:mt-3 leading-relaxed">${safeSpotDesc}</p>
 
-                  <div class="mt-4 sm:mt-6 pt-3.5 sm:pt-5 border-t border-ivory-200 flex items-center justify-between gap-3">
-                    ${
-                      spotlight.isAvailable
-                        ? `
-                          <span class="text-[11px] sm:text-xs text-stone-600 font-medium">Tersedia di kedai &amp; GoFood</span>
-                          <a
-                            href="${GOFOOD_ORDER_URL}"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="inline-flex items-center gap-1.5 text-xs font-semibold text-espresso-950 bg-amber-brand hover:bg-amber-hover px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-lg transition-colors shrink-0"
-                          >
-                            <span>Pesan di GoFood</span>
-                            <span aria-hidden="true">↗</span>
-                          </a>
-                        `
-                        : `
-                          <span class="text-[11px] sm:text-xs text-stone-500 font-medium">Sementara sedang habis</span>
-                          <span class="inline-flex items-center justify-center text-xs font-semibold text-stone-500 bg-ivory-200 px-4 py-2 rounded-lg select-none">Habis</span>
-                        `
-                    }
-                  </div>
+                  ${spotlightFooterHtml}
                 </div>
               </article>
 
@@ -2735,14 +3049,13 @@
                             <div class="flex-1 min-w-0">
                               <div class="flex items-baseline justify-between gap-2">
                                 <div class="flex flex-wrap items-center gap-1.5 min-w-0">
-                                  <h4 class="font-serif text-sm sm:text-base font-semibold text-stone-900 sm:truncate">${safeName}</h4>
+                                  <h4 class="font-serif text-sm sm:text-base font-semibold text-stone-900 break-words">${safeName}</h4>
                                   ${item.isPromo && item.isAvailable ? `<span class="px-1.5 py-0.5 rounded bg-[#EA580C] text-ivory-50 text-[9px] font-bold shrink-0">Promo</span>` : ""}
                                   ${!item.isAvailable ? `<span class="px-1.5 py-0.5 rounded bg-stone-200 text-stone-600 text-[9px] font-semibold shrink-0">Habis</span>` : ""}
                                 </div>
                                 ${renderPriceBlock(item, "row")}
                               </div>
-                              <!-- Deskripsi Menu Tampil Utuh Tanpa Terpotong di HP -->
-                              <p class="text-xs text-stone-600 mt-1 leading-relaxed">${safeDesc}</p>
+                              <p class="text-xs text-stone-600 mt-1 leading-relaxed break-words">${safeDesc}</p>
                               <p class="text-[10px] sm:text-[11px] text-stone-500 mt-1">${safeAttrs}</p>
                             </div>
                           </article>
@@ -2753,7 +3066,7 @@
 
                 return `
                   <div>
-                    <h3 class="text-xs font-bold uppercase tracking-[0.16em] text-amber-brand pb-2.5 border-b border-stone-900">${cat.name}</h3>
+                    <h3 class="text-xs font-bold uppercase tracking-[0.16em] text-amber-brand pb-2.5 border-b border-stone-900">${escapeHtml(cat.name)}</h3>
                     <div class="mt-2.5 divide-y divide-ivory-200">${rows}</div>
                   </div>
                 `;
@@ -2829,7 +3142,7 @@
 
           return `
             <div class="pt-4 first:pt-0">
-              <h4 class="text-xs font-bold uppercase tracking-widest text-amber-brand mb-2">${cat.name}</h4>
+              <h4 class="text-xs font-bold uppercase tracking-widest text-amber-brand mb-2">${escapeHtml(cat.name)}</h4>
               <div class="divide-y divide-ivory-200">${rows}</div>
             </div>
           `;
@@ -2860,10 +3173,14 @@
                 </tr>`;
             })
             .join("");
-          return `<h2 style="font-size:13px;text-transform:uppercase;letter-spacing:1.5px;color:#C88A2B;margin-top:24px;border-bottom:1px solid #1C1917;padding-bottom:6px;">${cat.name}</h2>
+          return `<h2 style="font-size:13px;text-transform:uppercase;letter-spacing:1.5px;color:#C88A2B;margin-top:24px;border-bottom:1px solid #1C1917;padding-bottom:6px;">${escapeHtml(cat.name)}</h2>
                   <table style="width:100%;border-collapse:collapse;font-size:13px;">${rows}</table>`;
         })
         .join("");
+
+      const orderInfoMeta = activeCtaConfig.enableOnlineOrder !== false
+        ? ` · Order Online: ${escapeHtml(GOFOOD_ORDER_URL)}`
+        : "";
 
       const htmlDoc = `<!DOCTYPE html>
 <html lang="id">
@@ -2878,7 +3195,7 @@
 </head>
 <body>
   <h1>${escapeHtml(activeCafeProfile.name)} — ${escapeHtml(activeCafeProfile.branch)}</h1>
-  <div class="meta">${escapeHtml(activeCafeProfile.address_line_1 || "")} · Order Online: ${escapeHtml(GOFOOD_ORDER_URL)}</div>
+  <div class="meta">${escapeHtml(activeCafeProfile.address_line_1 || "")}${orderInfoMeta}</div>
   ${sectionsHtml}
 </body>
 </html>`;
@@ -2913,7 +3230,7 @@
       }
 
       try {
-        // 1. Ambil Profil Kafe
+        // 1. Ambil Profil Kafe & Custom Config
         const { data: cafeRow } = await supabase
           .from("cafes")
           .select("*")
@@ -3287,6 +3604,7 @@
         setGalleryDescExpanded(false);
         if (galleryTitle) galleryTitle.textContent = item.title;
         if (galleryImg) {
+          delete galleryImg.dataset.fallbackDone;
           galleryImg.src = item.imageUrl;
           galleryImg.alt = item.title;
         }
