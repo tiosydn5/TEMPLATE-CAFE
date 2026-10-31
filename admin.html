@@ -106,18 +106,84 @@
     <section aria-labelledby="login-heading" class="relative z-10 w-full max-w-[420px] bg-ivory-50 text-stone-900 rounded-2xl shadow-2xl border border-ivory-200 overflow-hidden">
       <div class="p-6 sm:p-8">
         <div class="flex flex-col items-center text-center">
+          <!-- Logo Login Dinamis / Netral -->
           <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-ivory-300 bg-white flex items-center justify-center shadow-sm mb-3">
-            <img src="logo.jpg" alt="Logo Kafe" width="56" height="56" onerror="handleImgFallback(this, 'TK')" class="w-full h-full object-contain p-1" />
+            <img
+              id="login-brand-logo"
+              src="logo.jpg"
+              alt="Logo Portal"
+              width="56"
+              height="56"
+              onerror="this.src='https://placehold.co/100x100/181310/FAF7F2?text=CMS'"
+              class="w-full h-full object-contain p-1"
+            />
           </div>
-          <span class="font-bold text-sm tracking-[0.16em] uppercase text-espresso-950">PORTAL MANAJEMEN KAFE</span>
-          <span class="text-[11px] text-stone-500 mt-0.5">Sistem Menu &amp; Profil Online</span>
+          <span id="login-portal-badge" class="font-bold text-xs sm:text-sm tracking-[0.16em] uppercase text-espresso-950 text-center">
+            PORTAL MANAJEMEN BISNIS
+          </span>
+          <span id="login-portal-sub" class="text-[11px] text-stone-500 mt-0.5 text-center">
+            Sistem Menu &amp; Katalog Digital
+          </span>
 
-          <h1 id="login-heading" class="font-serif text-2xl sm:text-[26px] font-semibold text-stone-900 mt-5">
+          <h1 id="login-heading" class="font-serif text-2xl sm:text-[26px] font-semibold text-stone-900 mt-4">
             Masuk ke Dashboard
           </h1>
-          <p class="text-xs text-stone-600 mt-1">
-            Silakan login menggunakan akun Administrator atau Owner Kafe.
+          <p id="login-heading-desc" class="text-xs text-stone-600 mt-1 text-center">
+            Silakan masuk menggunakan akun Administrator atau Pemilik Usaha.
           </p>
+        </div>
+
+        <div id="auth-alert" role="alert" class="hidden mt-5 p-3.5 rounded-xl bg-red-50 border border-red-200 text-xs text-red-800 leading-relaxed"></div>
+
+        <form id="login-form" class="mt-6 space-y-4" novalidate>
+          <div>
+            <label for="login-email" class="block text-xs font-semibold text-stone-700 mb-1.5">Email</label>
+            <input
+              type="email"
+              id="login-email"
+              required
+              autocomplete="email"
+              placeholder="owner@bisnisanda.com"
+              class="w-full h-11 px-3.5 rounded-xl bg-white border border-ivory-300 text-sm text-stone-900 placeholder:text-stone-400 focus:border-amber-brand"
+            />
+          </div>
+
+          <div>
+            <label for="login-password" class="block text-xs font-semibold text-stone-700 mb-1.5">Password</label>
+            <div class="relative">
+              <input
+                type="password"
+                id="login-password"
+                required
+                autocomplete="current-password"
+                placeholder="••••••••"
+                class="w-full h-11 pl-3.5 pr-10 rounded-xl bg-white border border-ivory-300 text-sm text-stone-900 placeholder:text-stone-400 focus:border-amber-brand"
+              />
+              <button
+                type="button"
+                id="toggle-password-btn"
+                aria-label="Tampilkan password"
+                class="absolute right-2.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-lg text-stone-400 hover:text-stone-700 flex items-center justify-center text-xs"
+              >
+                👁
+              </button>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            id="login-submit-btn"
+            class="w-full h-11 rounded-xl bg-espresso-700 hover:bg-espresso-800 text-ivory-50 font-semibold text-sm flex items-center justify-center gap-2 transition-colors shadow-sm disabled:opacity-60"
+          >
+            <span id="login-submit-text">Masuk</span>
+          </button>
+        </form>
+
+        <div class="mt-5 text-center">
+          <a id="login-back-public-link" href="index.html" class="inline-flex items-center gap-1.5 text-xs font-medium text-stone-600 hover:text-espresso-900">
+            <span>← Kembali ke Website Publik</span>
+          </a>
+        </div>
         </div>
 
         <div id="auth-alert" role="alert" class="hidden mt-5 p-3.5 rounded-xl bg-red-50 border border-red-200 text-xs text-red-800 leading-relaxed"></div>
@@ -2756,14 +2822,51 @@
         }
       });
 
-      window.addEventListener("DOMContentLoaded", async () => {
-        if (!window.isSupabaseConfigured() || !supabase) {
-          document.getElementById("config-warning-banner").classList.remove("hidden");
-          return;
+      // Menyesuaikan tampilan login jika dibuka dengan parameter kafe spesifik (Smart White-Label)
+      async function customizeLoginScreen() {
+        const loginLogo = document.getElementById("login-brand-logo");
+        const loginBadge = document.getElementById("login-portal-badge");
+        const loginSub = document.getElementById("login-portal-sub");
+        const loginDesc = document.getElementById("login-heading-desc");
+        const loginEmail = document.getElementById("login-email");
+        const backLink = document.getElementById("login-back-public-link");
+
+        if (backLink) {
+          backLink.href = currentCafeSlug === "tentang-kopi" ? "index.html" : `index.html?kafe=${encodeURIComponent(currentCafeSlug)}`;
         }
-        const { data } = await supabase.auth.getSession();
-        if (data && data.session) await handleSession(data.session);
-      });
+
+        if (!supabase) return;
+
+        // Ambil nama dan logo kafe yang bersangkutan dari database
+        const { data: cafe } = await supabase
+          .from("cafes")
+          .select("name, branch, logo_url")
+          .eq("slug", currentCafeSlug)
+          .maybeSingle();
+
+        if (cafe && cafe.name) {
+          if (loginBadge) loginBadge.textContent = `PORTAL ${cafe.name.toUpperCase()}`;
+          if (loginSub) loginSub.textContent = `Katalog Menu & Profil Online · ${cafe.branch || ""}`;
+          if (loginDesc) loginDesc.textContent = `Masuk untuk mengelola operasional ${cafe.name}.`;
+          if (loginLogo && cafe.logo_url) loginLogo.src = cafe.logo_url;
+          if (loginEmail) loginEmail.placeholder = `admin@${currentCafeSlug.replace(/[^a-z0-9]/g, "")}.com`;
+        } else {
+          if (loginBadge) loginBadge.textContent = "PORTAL MANAJEMEN BISNIS";
+          if (loginSub) loginSub.textContent = "Sistem Menu & Katalog Digital";
+          if (loginEmail) loginEmail.placeholder = "owner@bisnisanda.com";
+        }
+      }
+
+      	window.addEventListener("DOMContentLoaded", async () => {
+	        customizeLoginScreen();
+	
+	     if (!window.isSupabaseConfigured() || !supabase) {
+	     document.getElementById("config-warning-banner").classList.remove("hidden");
+	       return;
+	     }
+	    const { data } = await supabase.auth.getSession();
+	    if (data && data.session) await handleSession(data.session);
+	  });
     })();
   </script>
 </body>
