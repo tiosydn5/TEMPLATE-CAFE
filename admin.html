@@ -78,6 +78,111 @@
 </head>
 <body class="min-h-screen bg-ivory-100 text-stone-900 selection:bg-espresso-900 selection:text-ivory-50">
 
+<!-- ========================================================================
+       STANDALONE WHITE-LABEL GATEKEEPER (TIDAK PERLU REPLACE SCRIPT BAWAH)
+       ======================================================================== -->
+  <div id="wl-standalone-gate" class="fixed inset-0 z-[99999] bg-[#110E0C] text-[#FAF7F2] flex flex-col items-center justify-center p-6 transition-opacity duration-300">
+    <div id="wl-gate-loading" class="flex flex-col items-center text-center max-w-xs">
+      <div class="w-10 h-10 rounded-full border-2 border-[#C88A2B]/25 border-t-[#C88A2B] animate-spin mb-4"></div>
+      <p class="font-serif text-base font-medium text-[#FAF7F2]">Menyiapkan Portal Manajemen...</p>
+      <p class="text-[11px] text-[#A8A29E] mt-1">Memvalidasi identitas &amp; konfigurasi bisnis</p>
+    </div>
+
+    <div id="wl-gate-error" class="hidden flex-col items-center text-center max-w-md bg-[#181310] border border-white/10 rounded-2xl p-6 sm:p-8 shadow-2xl">
+      <div class="w-12 h-12 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 flex items-center justify-center text-lg font-bold mb-4">!</div>
+      <h2 id="wl-gate-err-title" class="font-serif text-xl font-semibold text-[#FAF7F2]">Konfigurasi Kafe Tidak Ditemukan</h2>
+      <p id="wl-gate-err-desc" class="text-xs sm:text-sm text-[#A8A29E] mt-2 leading-relaxed">
+        Kode kafe pada URL tidak ditemukan di dalam database.
+      </p>
+      <div class="mt-6 flex flex-wrap items-center justify-center gap-2.5">
+        <button type="button" onclick="window.location.reload()" class="h-9 px-4 rounded-xl bg-[#C88A2B] hover:bg-[#B5791E] text-[#110E0C] font-semibold text-xs">
+          ↻ Muat Ulang
+        </button>
+        <a href="admin.html" class="h-9 px-4 rounded-xl border border-white/20 hover:bg-white/10 text-[#FAF7F2] font-semibold text-xs inline-flex items-center">
+          Ke Portal Utama
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const slug = (params.get("kafe") || "tentang-kopi").trim().toLowerCase();
+      const hasKafeParam = params.has("kafe");
+      const blankGif = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+
+      // Netralkan logo & teks default seketika saat elemen HTML terbaca
+      const obs = new MutationObserver(() => {
+        if (slug !== "tentang-kopi") {
+          const loginLogo = document.getElementById("login-brand-logo");
+          const sideLogo = document.getElementById("sidebar-cafe-logo");
+          if (loginLogo && loginLogo.getAttribute("src") === "logo.jpg") loginLogo.src = blankGif;
+          if (sideLogo && sideLogo.getAttribute("src") === "logo.jpg") sideLogo.src = blankGif;
+        }
+      });
+      obs.observe(document.documentElement, { childList: true, subtree: true });
+
+      window.addEventListener("DOMContentLoaded", async () => {
+        obs.disconnect();
+        const gate = document.getElementById("wl-standalone-gate");
+        const loadBox = document.getElementById("wl-gate-loading");
+        const errBox = document.getElementById("wl-gate-error");
+        const errTitle = document.getElementById("wl-gate-err-title");
+        const errDesc = document.getElementById("wl-gate-err-desc");
+
+        const closeGate = () => {
+          if (!gate) return;
+          gate.classList.add("opacity-0", "pointer-events-none");
+          setTimeout(() => gate.classList.add("hidden"), 280);
+        };
+
+        const showError = (title, desc) => {
+          if (loadBox) loadBox.classList.add("hidden");
+          if (errBox) {
+            errBox.classList.remove("hidden");
+            errBox.classList.add("flex");
+          }
+          if (errTitle) errTitle.textContent = title;
+          if (errDesc) errDesc.textContent = desc;
+          document.title = title;
+        };
+
+        try {
+          const sb = window.getSupabaseClient ? window.getSupabaseClient() : null;
+          if (!sb) {
+            closeGate();
+            return;
+          }
+
+          const { data: cafe, error } = await sb
+            .from("cafes")
+            .select("name, branch, logo_url")
+            .eq("slug", slug)
+            .maybeSingle();
+
+          if (error) throw error;
+
+          if (!cafe && hasKafeParam) {
+            showError(
+              "Profil Kafe Tidak Ditemukan",
+              `Tidak ditemukan data kafe dengan kode "${slug}". Pastikan parameter URL sudah benar.`
+            );
+            return;
+          }
+
+          // Beri jeda tipis 250ms agar script bawaan di bawah selesai merender nama & logo kafe
+          setTimeout(closeGate, 250);
+        } catch (err) {
+          showError(
+            "Gagal Memuat Konfigurasi",
+            "Terjadi gangguan koneksi saat menghubungi server database. Silakan muat ulang halaman."
+          );
+        }
+      });
+    })();
+  </script>
+
   <!-- Banner Peringatan jika supabase-config.js belum diisi -->
   <div id="config-warning-banner" class="hidden bg-amber-soft border-b border-amber-brand/40 px-4 py-3 text-xs text-espresso-900">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-2">
@@ -3378,10 +3483,19 @@ ATURAN KETAT NO-AI-SLOP:
             });
           }
 
-          try {
-            const resp = await fetch(
-              `[https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=$](https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=$){encodeURIComponent(key)}`,
-              {
+try {
+            // Bersihkan API Key dari spasi atau tanda kutip yang tidak sengaja ikut ter-copy
+            const cleanKey = key.replace(/[\s"']/g, "");
+
+            // Daftar model Gemini (otomatis fallback jika salah satu endpoint gagal)
+            const modelsToTry = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"];
+            let rawText = "";
+            let lastErrorMsg = "";
+
+            for (const modelName of modelsToTry) {
+              const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${encodeURIComponent(cleanKey)}`;
+
+              const resp = await fetch(apiUrl, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -3391,16 +3505,43 @@ ATURAN KETAT NO-AI-SLOP:
                     responseMimeType: "application/json"
                   }
                 })
-              }
-            );
+              });
 
-            const resJson = await resp.json();
-            if (!resp.ok) {
-              throw new Error(resJson?.error?.message || "Gagal memanggil Gemini API.");
+              // Baca sebagai teks dulu agar tidak crash jika server mengembalikan halaman <html>
+              const rawBody = await resp.text();
+
+              if (rawBody.trim().startsWith("<")) {
+                lastErrorMsg = `Server mengembalikan halaman HTML (Status ${resp.status}). Pastikan API Key valid (diawali AIzaSy), matikan VPN/AdBlock, atau kurangi ukuran foto menu.`;
+                continue;
+              }
+
+              let resJson = null;
+              try {
+                resJson = JSON.parse(rawBody);
+              } catch (parseErr) {
+                lastErrorMsg = "Respons server bukan format JSON yang valid.";
+                continue;
+              }
+
+              if (!resp.ok) {
+                lastErrorMsg = resJson?.error?.message || `Error ${resp.status} pada model ${modelName}`;
+                continue;
+              }
+
+              rawText = resJson?.candidates?.[0]?.content?.parts?.[0]?.text || "";
+              if (rawText) break;
             }
 
-            const rawText = resJson?.candidates?.[0]?.content?.parts?.[0]?.text || "";
-            if (!rawText) throw new Error("Respons AI kosong.");
+            if (!rawText) {
+              throw new Error(lastErrorMsg || "Gagal mendapatkan respons dari Gemini AI.");
+            }
+
+            // Ekstrak murni bagian kurung kurawal { ... } agar aman dari teks tambahan
+            const firstBrace = rawText.indexOf("{");
+            const lastBrace = rawText.lastIndexOf("}");
+            if (firstBrace !== -1 && lastBrace !== -1) {
+              rawText = rawText.substring(firstBrace, lastBrace + 1);
+            }
 
             const jsonBox = document.getElementById("ai-json-import-box");
             if (jsonBox) jsonBox.value = rawText;
@@ -3408,12 +3549,12 @@ ATURAN KETAT NO-AI-SLOP:
             await applyAndSaveFullJSON(rawText, false);
             showToast(
               "Copywriting & Menu Siap!",
-              "Hasil sudah dimasukkan ke kotak JSON dan form. Klik '🚀 Terapkan Semua & Simpan' untuk menyimpan ke database."
+              "Hasil sudah masuk ke kotak JSON dan form. Klik '🚀 Terapkan Semua & Simpan' untuk menyimpan ke database."
             );
           } catch (err) {
             showToast("Gagal Generate AI", err.message, "error");
-          } finally {
-            btnRunGemini.disabled = false;
+          } finally {      
+     btnRunGemini.disabled = false;
             if (btnText) btnText.textContent = "⚡ Generate via Gemini AI";
           }
         });
