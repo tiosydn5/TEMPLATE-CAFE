@@ -89,7 +89,7 @@
   </div>
 
   <!-- ========================================================================
-       VIEW 1: HALAMAN LOGIN ADMIN
+       VIEW 1: HALAMAN LOGIN ADMIN (SUDAH BERSIH TANPA DUPLIKAT)
        ======================================================================== -->
   <main id="auth-view" class="min-h-screen flex items-center justify-center p-4 sm:p-6 relative overflow-hidden bg-espresso-950">
     <div class="absolute inset-0 z-0 pointer-events-none">
@@ -181,59 +181,6 @@
 
         <div class="mt-5 text-center">
           <a id="login-back-public-link" href="index.html" class="inline-flex items-center gap-1.5 text-xs font-medium text-stone-600 hover:text-espresso-900">
-            <span>← Kembali ke Website Publik</span>
-          </a>
-        </div>
-        </div>
-
-        <div id="auth-alert" role="alert" class="hidden mt-5 p-3.5 rounded-xl bg-red-50 border border-red-200 text-xs text-red-800 leading-relaxed"></div>
-
-        <form id="login-form" class="mt-6 space-y-4" novalidate>
-          <div>
-            <label for="login-email" class="block text-xs font-semibold text-stone-700 mb-1.5">Email</label>
-            <input
-              type="email"
-              id="login-email"
-              required
-              autocomplete="email"
-              placeholder="admin@tentangkopi.id"
-              class="w-full h-11 px-3.5 rounded-xl bg-white border border-ivory-300 text-sm text-stone-900 placeholder:text-stone-400 focus:border-amber-brand"
-            />
-          </div>
-
-          <div>
-            <label for="login-password" class="block text-xs font-semibold text-stone-700 mb-1.5">Password</label>
-            <div class="relative">
-              <input
-                type="password"
-                id="login-password"
-                required
-                autocomplete="current-password"
-                placeholder="••••••••"
-                class="w-full h-11 pl-3.5 pr-10 rounded-xl bg-white border border-ivory-300 text-sm text-stone-900 placeholder:text-stone-400 focus:border-amber-brand"
-              />
-              <button
-                type="button"
-                id="toggle-password-btn"
-                aria-label="Tampilkan password"
-                class="absolute right-2.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-lg text-stone-400 hover:text-stone-700 flex items-center justify-center text-xs"
-              >
-                👁
-              </button>
-            </div>
-          </div>
-
-          <button
-            type="submit"
-            id="login-submit-btn"
-            class="w-full h-11 rounded-xl bg-espresso-700 hover:bg-espresso-800 text-ivory-50 font-semibold text-sm flex items-center justify-center gap-2 transition-colors shadow-sm disabled:opacity-60"
-          >
-            <span id="login-submit-text">Masuk</span>
-          </button>
-        </form>
-
-        <div class="mt-5 text-center">
-          <a href="index.html" class="inline-flex items-center gap-1.5 text-xs font-medium text-stone-600 hover:text-espresso-900">
             <span>← Kembali ke Website Publik</span>
           </a>
         </div>
@@ -1496,8 +1443,9 @@
 
   <!-- Toast Container -->
   <div id="toast-container" aria-live="polite" class="fixed bottom-5 right-5 z-50 max-w-sm w-full pointer-events-none flex flex-col gap-2 px-4 sm:px-0"></div>
+  <!-- TEMPEL KODE TAHAP 2 TEPAT DI BAWAH BARIS INI -->
 
-  <!-- ========================================================================
+<!-- ========================================================================
        SCRIPTS
        ======================================================================== -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -1507,6 +1455,15 @@
       if (!img || img.dataset.fallbackDone === "true") return;
       img.dataset.fallbackDone = "true";
       img.src = `https://placehold.co/400x400/181310/FAF7F2?text=${encodeURIComponent(label)}`;
+    };
+
+    // Helper pembuat avatar inisial kafe otomatis jika kafe baru belum punya logo sendiri
+    window.getCafeInitialsAvatar = function (cafeName = "Kafe") {
+      const words = String(cafeName || "Kafe").trim().split(/\s+/).filter(Boolean);
+      const initials = words.length >= 2
+        ? (words[0][0] + words[1][0]).toUpperCase()
+        : (words[0] ? words[0].substring(0, 2).toUpperCase() : "KF");
+      return `https://placehold.co/160x160/181310/C88A2B?text=${encodeURIComponent(initials)}`;
     };
 
     // Fungsi Upload Aman ke Supabase Storage (Validasi tipe file, ukuran <= 5MB & penamaan unik)
@@ -1779,9 +1736,16 @@
             ? "index.html"
             : `index.html?kafe=${encodeURIComponent(currentCafeSlug)}`;
 
+        // Jika kafe bukan tentang-kopi tapi logo_url masih default "logo.jpg", tampilkan avatar inisial kafe
+        const isDefaultLogoOnOtherCafe =
+          currentCafeSlug !== "tentang-kopi" && (!data.logo_url || data.logo_url === "logo.jpg");
+        const resolvedLogo = isDefaultLogoOnOtherCafe
+          ? window.getCafeInitialsAvatar(data.name)
+          : (data.logo_url || "logo.jpg");
+
         document.getElementById("sidebar-cafe-name").textContent = data.name;
         document.getElementById("sidebar-cafe-branch").textContent = data.branch;
-        document.getElementById("sidebar-cafe-logo").src = data.logo_url || "logo.jpg";
+        document.getElementById("sidebar-cafe-logo").src = resolvedLogo;
         document.getElementById("sidebar-public-link").href = publicUrl;
         document.getElementById("header-view-public-btn").href = publicUrl;
         document.getElementById("header-cafe-label").textContent = `${data.name} (${data.branch})`;
@@ -2830,9 +2794,15 @@
         const loginDesc = document.getElementById("login-heading-desc");
         const loginEmail = document.getElementById("login-email");
         const backLink = document.getElementById("login-back-public-link");
+        const faviconEl = document.getElementById("dynamic-favicon");
 
         if (backLink) {
           backLink.href = currentCafeSlug === "tentang-kopi" ? "index.html" : `index.html?kafe=${encodeURIComponent(currentCafeSlug)}`;
+        }
+
+        // Jika bukan tentang-kopi, pasang avatar inisial sementara sebelum data Supabase selesai dimuat
+        if (currentCafeSlug !== "tentang-kopi" && loginLogo) {
+          loginLogo.src = window.getCafeInitialsAvatar(currentCafeSlug.replace(/-/g, " "));
         }
 
         if (!supabase) return;
@@ -2845,11 +2815,16 @@
           .maybeSingle();
 
         if (cafe && cafe.name) {
+          document.title = `Admin Portal — ${cafe.name}`;
           if (loginBadge) loginBadge.textContent = `PORTAL ${cafe.name.toUpperCase()}`;
           if (loginSub) loginSub.textContent = `Katalog Menu & Profil Online · ${cafe.branch || ""}`;
           if (loginDesc) loginDesc.textContent = `Masuk untuk mengelola operasional ${cafe.name}.`;
-          if (loginLogo && cafe.logo_url) loginLogo.src = cafe.logo_url;
           if (loginEmail) loginEmail.placeholder = `admin@${currentCafeSlug.replace(/[^a-z0-9]/g, "")}.com`;
+
+          const isDefaultLogo = currentCafeSlug !== "tentang-kopi" && (!cafe.logo_url || cafe.logo_url === "logo.jpg");
+          const resolvedLogo = isDefaultLogo ? window.getCafeInitialsAvatar(cafe.name) : (cafe.logo_url || "logo.jpg");
+          if (loginLogo) loginLogo.src = resolvedLogo;
+          if (faviconEl) faviconEl.href = resolvedLogo;
         } else {
           if (loginBadge) loginBadge.textContent = "PORTAL MANAJEMEN BISNIS";
           if (loginSub) loginSub.textContent = "Sistem Menu & Katalog Digital";
@@ -2857,16 +2832,16 @@
         }
       }
 
-      	window.addEventListener("DOMContentLoaded", async () => {
-	        customizeLoginScreen();
-	
-	     if (!window.isSupabaseConfigured() || !supabase) {
-	     document.getElementById("config-warning-banner").classList.remove("hidden");
-	       return;
-	     }
-	    const { data } = await supabase.auth.getSession();
-	    if (data && data.session) await handleSession(data.session);
-	  });
+      window.addEventListener("DOMContentLoaded", async () => {
+        customizeLoginScreen();
+
+        if (!window.isSupabaseConfigured() || !supabase) {
+          document.getElementById("config-warning-banner").classList.remove("hidden");
+          return;
+        }
+        const { data } = await supabase.auth.getSession();
+        if (data && data.session) await handleSession(data.session);
+      });
     })();
   </script>
 </body>
