@@ -3194,6 +3194,96 @@
 </style>
 </head>
 <body>
+<!-- ========================================================================
+       STANDALONE PUBLIC WHITE-LABEL GATEKEEPER (TANPA REPLACE SCRIPT BAWAH)
+       ======================================================================== -->
+  <div id="wl-public-gate" class="fixed inset-0 z-[99999] bg-[#110E0C] text-[#FAF7F2] flex flex-col items-center justify-center p-6 transition-opacity duration-300">
+    <div id="wl-pub-loading" class="flex flex-col items-center text-center max-w-xs">
+      <div class="w-11 h-11 rounded-full border-2 border-[#C88A2B]/25 border-t-[#C88A2B] animate-spin mb-4"></div>
+      <p class="font-serif text-base sm:text-lg font-medium tracking-wide text-[#FAF7F2]">Memuat Katalog &amp; Ruang...</p>
+      <p class="text-[11px] text-[#A8A29E] mt-1">Menyiapkan informasi terbaru untuk Anda</p>
+    </div>
+
+    <div id="wl-pub-error" class="hidden flex-col items-center text-center max-w-md bg-[#181310] border border-white/10 rounded-2xl p-6 sm:p-8 shadow-2xl">
+      <div class="w-12 h-12 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 flex items-center justify-center text-lg font-bold mb-4">!</div>
+      <h2 id="wl-pub-err-title" class="font-serif text-xl sm:text-2xl font-semibold text-[#FAF7F2]">Halaman Kafe Tidak Ditemukan</h2>
+      <p id="wl-pub-err-desc" class="text-xs sm:text-sm text-[#A8A29E] mt-2 leading-relaxed">
+        Profil kedai yang Anda tuju belum terdaftar atau tautan yang dimasukkan tidak sesuai.
+      </p>
+      <button type="button" onclick="window.location.reload()" class="mt-6 h-10 px-5 rounded-xl bg-[#C88A2B] hover:bg-[#B5791E] text-[#110E0C] font-semibold text-xs">
+        ↻ Coba Muat Ulang
+      </button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const slug = (params.get("kafe") || "tentang-kopi").trim().toLowerCase();
+
+      window.addEventListener("DOMContentLoaded", async () => {
+        const gate = document.getElementById("wl-public-gate");
+        const loadBox = document.getElementById("wl-pub-loading");
+        const errBox = document.getElementById("wl-pub-error");
+        const errTitle = document.getElementById("wl-pub-err-title");
+        const errDesc = document.getElementById("wl-pub-err-desc");
+
+        const closeGate = () => {
+          if (!gate) return;
+          gate.classList.add("opacity-0", "pointer-events-none");
+          setTimeout(() => gate.classList.add("hidden"), 300);
+        };
+
+        const showError = (title, desc) => {
+          if (loadBox) loadBox.classList.add("hidden");
+          if (errBox) {
+            errBox.classList.remove("hidden");
+            errBox.classList.add("flex");
+          }
+          if (errTitle) errTitle.textContent = title;
+          if (errDesc) errDesc.textContent = desc;
+          document.title = title;
+        };
+
+        try {
+          const sb = window.getSupabaseClient ? window.getSupabaseClient() : null;
+          if (!sb) {
+            if (slug !== "tentang-kopi") {
+              showError("Konfigurasi Database Belum Aktif", "Tidak dapat memuat profil kafe tujuan.");
+              return;
+            }
+            closeGate();
+            return;
+          }
+
+          const { data: cafe, error } = await sb
+            .from("cafes")
+            .select("slug, name")
+            .eq("slug", slug)
+            .maybeSingle();
+
+          if (error) throw error;
+
+          if (!cafe) {
+            showError(
+              "Kafe Tidak Ditemukan",
+              `Katalog untuk kode kafe "${slug}" tidak ditemukan atau belum diaktifkan. Pastikan tautan URL Anda sudah benar.`
+            );
+            return;
+          }
+
+          // Beri jeda 350ms agar applyCafeProfileToDOM selesai mengganti seluruh elemen Tentang Kopi
+          setTimeout(closeGate, 350);
+        } catch (err) {
+          showError(
+            "Gagal Memuat Konfigurasi Kafe",
+            "Terjadi kendala jaringan saat mengambil data kedai. Silakan muat ulang halaman."
+          );
+        }
+      });
+    })();
+  </script>
+
   <h1>${escapeHtml(activeCafeProfile.name)} — ${escapeHtml(activeCafeProfile.branch)}</h1>
   <div class="meta">${escapeHtml(activeCafeProfile.address_line_1 || "")}${orderInfoMeta}</div>
   ${sectionsHtml}
