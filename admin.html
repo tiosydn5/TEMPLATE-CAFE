@@ -725,7 +725,7 @@
                 </div>
               </div>
 
-              <!-- ============================================================
+<!-- ============================================================
                    PANEL EKSKLUSIF SUPER ADMIN: FULL WEBSITE BUILDER & CMS
                    (DISEMBUNYIKAN 100% DARI AKUN OWNER KAFE)
                    ============================================================ -->
@@ -743,6 +743,140 @@
                   </div>
                 </div>
 
+                <!-- ==========================================================
+                     BAGIAN 0: AI COMMAND CENTER (SMART JSON IMPORTER + GEMINI API)
+                     ========================================================== -->
+                <div class="p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-espresso-950 via-espresso-900 to-espresso-950 text-ivory-50 border-2 border-amber-brand/60 shadow-xl space-y-6">
+                  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-4">
+                    <div>
+                      <span class="px-2.5 py-0.5 rounded-full bg-amber-brand text-espresso-950 font-bold text-[10px] uppercase tracking-wider">
+                        🤖 SUPER ADMIN AI AUTOMATION (NO-AI-SLOP ENGINE)
+                      </span>
+                      <h4 class="font-serif text-lg sm:text-xl font-semibold text-ivory-50 mt-1.5">
+                        One-Click JSON Importer &amp; Gemini AI Generator
+                      </h4>
+                      <p class="text-xs text-stone-300 mt-0.5">
+                        Isi seluruh Bagian 1–10 + puluhan daftar menu sekaligus lewat JSON hasil riset chat, atau generate langsung pakai Gemini API.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      id="btn-export-current-json"
+                      class="h-9 px-3.5 rounded-xl border border-white/20 hover:bg-white/10 text-ivory-100 text-xs font-semibold shrink-0 inline-flex items-center gap-1.5 transition-colors"
+                      title="Salin seluruh data profil & menu kafe ini ke format JSON"
+                    >
+                      <span>📤 Copy JSON Kafe Ini</span>
+                    </button>
+                  </div>
+
+                  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+                    
+                    <!-- KOLOM KIRI: OPSI A — SMART JSON IMPORTER (DARI RISET CHAT GEMINI) -->
+                    <div class="p-4 rounded-xl bg-white/5 border border-white/10 space-y-3">
+                      <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-wider text-amber-brand">
+                          Opsi A: Smart JSON Importer (Riset Chat)
+                        </span>
+                        <span class="text-[10px] text-stone-400">Tanpa API Key · 100% Akurat</span>
+                      </div>
+                      <p class="text-[11px] text-stone-300 leading-relaxed">
+                        Minta riset lengkap + copywriting <em>no-ai-slop</em> di ruang chat Gemini, lalu paste kode JSON-nya di bawah ini untuk mengisi profil dan menu sekaligus.
+                      </p>
+                      <textarea
+                        id="ai-json-import-box"
+                        rows="6"
+                        placeholder='Paste kode JSON di sini... Contoh: { "profile": { ... }, "menu_items": [ ... ] }'
+                        class="w-full p-3 rounded-xl bg-espresso-950/90 border border-white/15 text-ivory-50 font-mono text-[11px] placeholder:text-stone-500 focus:border-amber-brand"
+                      ></textarea>
+
+                      <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
+                        <label class="inline-flex items-center gap-2 text-[11px] text-stone-300 cursor-pointer select-none">
+                          <input type="checkbox" id="ai-json-replace-menu" checked class="w-4 h-4 accent-amber-brand rounded cursor-pointer" />
+                          <span>Ganti (timpa) semua menu lama di kafe ini</span>
+                        </label>
+
+                        <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+                          <button
+                            type="button"
+                            id="btn-fill-form-only-json"
+                            class="h-9 px-3 rounded-lg border border-white/20 hover:bg-white/10 text-ivory-100 font-semibold text-xs transition-colors"
+                          >
+                            Isi Form Saja
+                          </button>
+                          <button
+                            type="button"
+                            id="btn-apply-full-json"
+                            class="h-9 px-4 rounded-lg bg-amber-brand hover:bg-amber-hover text-espresso-950 font-bold text-xs transition-colors shadow-sm"
+                          >
+                            🚀 Terapkan Semua &amp; Simpan
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- KOLOM KANAN: OPSI B — DIRECT GEMINI API GENERATOR + FOTO MENU -->
+                    <div class="p-4 rounded-xl bg-white/5 border border-white/10 space-y-3">
+                      <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-wider text-amber-brand">
+                          Opsi B: Direct Gemini AI Generator
+                        </span>
+                        <a
+                          href="https://aistudio.google.com/app/apikey"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="text-[10px] text-amber-brand hover:underline font-semibold"
+                        >
+                          Ambil API Key Gratis ↗
+                        </a>
+                      </div>
+
+                      <!-- Input API Key (Tersimpan aman di localStorage perangkat sendiri) -->
+                      <div class="flex items-center gap-2">
+                        <input
+                          type="password"
+                          id="ai-gemini-api-key"
+                          placeholder="Paste Gemini API Key (AIzaSy...) — Tersimpan di browser ini"
+                          class="flex-1 h-8 px-3 rounded-lg bg-espresso-950/90 border border-white/15 text-[11px] text-ivory-50 placeholder:text-stone-500 font-mono"
+                        />
+                        <button
+                          type="button"
+                          id="btn-save-gemini-key"
+                          class="h-8 px-3 rounded-lg bg-white/10 hover:bg-white/20 text-[11px] font-semibold text-ivory-100 shrink-0"
+                        >
+                          Simpan Key
+                        </button>
+                      </div>
+
+                      <div>
+                        <label class="block text-[11px] font-semibold text-stone-300 mb-1">
+                          Brief Riset Kafe Target / Teks Daftar Menu Mentah:
+                        </label>
+                        <textarea
+                          id="ai-gemini-prompt"
+                          rows="3"
+                          placeholder="Contoh: Ko.En Kopitiam & Eatery Depok. Konsep kedai kopi & roti srikaya klasik Melayu, buka tiap hari 07.00-22.00 WIB, suasana hangat ramah keluarga, rating 4.7. Menu: Kopi Butter 22000, Kaya Toast 18000, Mie Laksa 32000..."
+                          class="w-full p-2.5 rounded-xl bg-espresso-950/90 border border-white/15 text-ivory-50 text-xs placeholder:text-stone-500 focus:border-amber-brand"
+                        ></textarea>
+                      </div>
+
+                      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-1">
+                        <label class="inline-flex items-center gap-1.5 px-3 h-9 rounded-lg border border-white/20 hover:bg-white/10 text-[11px] font-semibold text-ivory-100 cursor-pointer shrink-0">
+                          <span id="ai-menu-image-label">📷 Lampirkan Foto Menu (Opsional)</span>
+                          <input type="file" id="ai-menu-image-input" accept="image/jpeg,image/png,image/webp" class="hidden" />
+                        </label>
+
+                        <button
+                          type="button"
+                          id="btn-run-gemini-ai"
+                          class="h-9 px-4 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-espresso-950 font-bold text-xs transition-colors shadow-sm inline-flex items-center justify-center gap-1.5"
+                        >
+                          <span id="btn-run-gemini-text">⚡ Generate via Gemini AI</span>
+                        </button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
                 <!-- BAGIAN 5: IDENTITAS VISUAL & WARNA BRAND -->
                 <div class="p-5 rounded-2xl bg-ivory-100/80 border border-ivory-300 space-y-4">
                   <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
@@ -2769,7 +2903,7 @@
         return "Rp " + num.toLocaleString("id-ID");
       };
 
-      // Auto-scroll mulus saat tombol Promo Diskon di sidebar diklik
+// Auto-scroll mulus saat tombol Promo Diskon di sidebar diklik
       document.addEventListener("click", function (e) {
         const btn = e.target.closest("button, a");
         if (!btn) return;
@@ -2785,6 +2919,505 @@
           }, 50);
         }
       });
+
+      // ======================================================================
+      // MESIN SUPER ADMIN: SMART JSON IMPORTER & GEMINI API (NO-AI-SLOP)
+      // ======================================================================
+      const GEMINI_KEY_STORAGE = "super_admin_gemini_api_key_v1";
+      let attachedMenuImageBase64 = null;
+      let attachedMenuImageMime = null;
+
+      // Muat API Key dari localStorage saat halaman dibuka
+      const savedApiKey = localStorage.getItem(GEMINI_KEY_STORAGE);
+      const apiKeyInput = document.getElementById("ai-gemini-api-key");
+      if (apiKeyInput && savedApiKey) {
+        apiKeyInput.value = savedApiKey;
+      }
+
+      const saveKeyBtn = document.getElementById("btn-save-gemini-key");
+      if (saveKeyBtn) {
+        saveKeyBtn.addEventListener("click", () => {
+          const val = (apiKeyInput?.value || "").trim();
+          if (!val) {
+            localStorage.removeItem(GEMINI_KEY_STORAGE);
+            showToast("API Key dihapus dari browser.");
+            return;
+          }
+          localStorage.setItem(GEMINI_KEY_STORAGE, val);
+          showToast("Gemini API Key disimpan!", "Tersimpan aman khusus di browser perangkat kamu.");
+        });
+      }
+
+      // Handler lampiran foto buku menu untuk dibaca Gemini Vision
+      const aiMenuImgInput = document.getElementById("ai-menu-image-input");
+      if (aiMenuImgInput) {
+        aiMenuImgInput.addEventListener("change", (e) => {
+          const file = e.target.files && e.target.files[0];
+          const labelEl = document.getElementById("ai-menu-image-label");
+          if (!file) {
+            attachedMenuImageBase64 = null;
+            attachedMenuImageMime = null;
+            if (labelEl) labelEl.textContent = "📷 Lampirkan Foto Menu (Opsional)";
+            return;
+          }
+          const reader = new FileReader();
+          reader.onload = () => {
+            const resultStr = String(reader.result || "");
+            const base64Clean = resultStr.split(",")[1] || "";
+            attachedMenuImageBase64 = base64Clean;
+            attachedMenuImageMime = file.type || "image/jpeg";
+            if (labelEl) labelEl.textContent = `✓ ${file.name.substring(0, 18)}...`;
+            showToast("Foto buku menu siap dibaca AI!", "Klik tombol Generate via Gemini AI.");
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      // Fungsi Mengisi Seluruh Form Bagian 1 - 10 dari Objek JSON
+      function populateSettingsFormFromJSON(profileObj) {
+        if (!profileObj) return;
+        const setVal = (id, v) => {
+          const el = document.getElementById(id);
+          if (el && v !== undefined && v !== null) el.value = v;
+        };
+        const setCheck = (id, v) => {
+          const el = document.getElementById(id);
+          if (el && typeof v === "boolean") el.checked = v;
+        };
+
+        // Bagian 1 - 4
+        setVal("set-name", profileObj.name);
+        setVal("set-branch", profileObj.branch);
+        setVal("set-hero-1", profileObj.hero_headline_1);
+        setVal("set-hero-2", profileObj.hero_headline_2);
+        setVal("set-hero-desc", profileObj.hero_description);
+        setVal("set-wa", profileObj.whatsapp_number);
+        setVal("set-gofood", profileObj.gofood_url);
+        setVal("set-ig", profileObj.instagram_url);
+        setVal("set-tiktok", profileObj.tiktok_url);
+        setVal("set-addr-1", profileObj.address_line_1);
+        setVal("set-addr-2", profileObj.address_line_2);
+        setVal("set-hours-weekday", profileObj.hours_weekday);
+        setVal("set-hours-weekend", profileObj.hours_weekend);
+        setVal("set-maps-link", profileObj.maps_link);
+        setVal("set-maps-embed", profileObj.maps_embed_url);
+        if (profileObj.logo_url) setVal("set-logo-url", profileObj.logo_url);
+        if (profileObj.hero_image_url) setVal("set-hero-img", profileObj.hero_image_url);
+        if (profileObj.indoor_image_url) setVal("set-indoor-img", profileObj.indoor_image_url);
+        if (profileObj.outdoor_image_url) setVal("set-outdoor-img", profileObj.outdoor_image_url);
+        if (profileObj.bar_image_url) setVal("set-bar-img", profileObj.bar_image_url);
+
+        const cc = profileObj.custom_config || {};
+
+        if (cc.hours) {
+          setVal("set-hours-label-1", cc.hours.label1);
+          setVal("set-hours-label-2", cc.hours.label2);
+          setVal("set-hours-badge", cc.hours.badgeText);
+          setVal("set-hero-status-custom", cc.hours.customHeroStatus);
+        }
+
+        // Bagian 5: Tema Warna
+        if (cc.theme) {
+          const preset = cc.theme.preset || "espresso";
+          setVal("cms-theme-preset", preset);
+          const mergedTheme = THEME_PRESETS[preset]
+            ? { ...THEME_PRESETS[preset], ...cc.theme }
+            : cc.theme;
+          setThemeColorInputs(mergedTheme);
+        }
+
+        // Bagian 6: Hero Extra, 3 USP & Menu Header
+        if (cc.heroExtra) {
+          setVal("cms-hero-card-kicker", cc.heroExtra.cardKicker);
+          setVal("cms-hero-card-title", cc.heroExtra.cardTitle);
+          setVal("cms-hero-card-badge", cc.heroExtra.cardBadge);
+          setVal("cms-hero-sub-left", cc.heroExtra.subLeft);
+          setVal("cms-hero-sub-right", cc.heroExtra.subRight);
+        }
+
+        if (Array.isArray(cc.usp)) {
+          [1, 2, 3].forEach((n, idx) => {
+            if (cc.usp[idx]) {
+              setVal(`cms-usp-${n}-title`, cc.usp[idx].title);
+              setVal(`cms-usp-${n}-desc`, cc.usp[idx].desc);
+            }
+          });
+        }
+
+        if (cc.menuHeader) {
+          setVal("cms-menu-kicker", cc.menuHeader.kicker);
+          setVal("cms-menu-title", cc.menuHeader.title);
+          setVal("cms-menu-desc", cc.menuHeader.desc);
+        }
+
+        // Bagian 7: Suasana, 3 Ruang & 4 Fasilitas
+        if (cc.ambience) {
+          setVal("cms-amb-kicker", cc.ambience.kicker);
+          setVal("cms-amb-title", cc.ambience.title);
+          setVal("cms-amb-desc", cc.ambience.desc);
+
+          if (Array.isArray(cc.ambience.spaces)) {
+            const sp = cc.ambience.spaces;
+            if (sp[0]) {
+              setVal("cms-space-1-kicker", sp[0].kicker);
+              setVal("cms-space-1-title", sp[0].title);
+              setVal("cms-space-1-sub", sp[0].subtitle);
+              setVal("cms-space-1-lightbox", sp[0].lightboxDesc);
+            }
+            if (sp[1]) {
+              setVal("cms-space-2-kicker", sp[1].kicker);
+              setVal("cms-space-2-title", sp[1].title);
+              setVal("cms-space-2-lightbox", sp[1].lightboxDesc);
+            }
+            if (sp[2]) {
+              setVal("cms-space-3-kicker", sp[2].kicker);
+              setVal("cms-space-3-title", sp[2].title);
+              setVal("cms-space-3-lightbox", sp[2].lightboxDesc);
+            }
+          }
+
+          if (Array.isArray(cc.ambience.facilities)) {
+            [1, 2, 3, 4].forEach((n, idx) => {
+              if (cc.ambience.facilities[idx]) {
+                setVal(`cms-fac-${n}-title`, cc.ambience.facilities[idx].title);
+                setVal(`cms-fac-${n}-desc`, cc.ambience.facilities[idx].desc);
+              }
+            });
+          }
+        }
+
+        // Bagian 8: Reviews
+        if (cc.reviews) {
+          setVal("cms-rev-score", cc.reviews.score);
+          setVal("cms-rev-kicker", cc.reviews.kicker);
+          setVal("cms-rev-title", cc.reviews.title);
+          setVal("cms-rev-desc", cc.reviews.desc);
+
+          if (Array.isArray(cc.reviews.items)) {
+            [1, 2, 3].forEach((n, idx) => {
+              if (cc.reviews.items[idx]) {
+                setVal(`cms-rev-${n}-quote`, cc.reviews.items[idx].quote);
+                setVal(`cms-rev-${n}-author`, cc.reviews.items[idx].author);
+                setVal(`cms-rev-${n}-role`, cc.reviews.items[idx].role);
+              }
+            });
+          }
+        }
+
+        // Bagian 9: Momen / 4 Kartu Visual & Banner Bawah
+        if (cc.momen) {
+          setVal("cms-momen-kicker", cc.momen.kicker);
+          setVal("cms-momen-title", cc.momen.title);
+          if (Array.isArray(cc.momen.cards)) {
+            [1, 2, 3, 4].forEach((n, idx) => {
+              if (cc.momen.cards[idx]) {
+                setVal(`cms-craft-${n}-title`, cc.momen.cards[idx].title);
+                if (cc.momen.cards[idx].imageUrl) setVal(`cms-craft-${n}-img`, cc.momen.cards[idx].imageUrl);
+                setVal(`cms-craft-${n}-desc`, cc.momen.cards[idx].desc);
+              }
+            });
+          }
+        }
+
+        if (cc.promoBanner) {
+          setVal("cms-promo-kicker", cc.promoBanner.kicker);
+          setVal("cms-promo-title", cc.promoBanner.title);
+          setVal("cms-promo-desc", cc.promoBanner.desc);
+          setVal("cms-promo-btn", cc.promoBanner.btnText);
+        }
+
+        // Bagian 10: Kontrol CTA, Navigasi, Lokasi & Footer
+        if (cc.ctaConfig) {
+          setCheck("cms-enable-online-order", cc.ctaConfig.enableOnlineOrder);
+          setCheck("cms-enable-wa-cta", cc.ctaConfig.enableWaCta);
+          setCheck("cms-enable-pdf-bar", cc.ctaConfig.enablePdfBar);
+          setCheck("cms-enable-promo-banner", cc.ctaConfig.enablePromoBanner);
+          setVal("cms-order-btn-nav", cc.ctaConfig.orderBtnNav);
+          setVal("cms-order-btn-main", cc.ctaConfig.orderBtnMain);
+          setVal("cms-hero-btn-menu", cc.ctaConfig.heroBtnMenu);
+          setVal("cms-spotlight-avail-order", cc.ctaConfig.spotlightAvailOrder);
+          setVal("cms-spotlight-avail-catalog", cc.ctaConfig.spotlightAvailCatalog);
+          setVal("cms-pdf-btn-text", cc.ctaConfig.pdfBtnText);
+          setVal("cms-menu-bar-title", cc.ctaConfig.menuBarTitle);
+          setVal("cms-menu-bar-desc", cc.ctaConfig.menuBarDesc);
+        }
+
+        if (cc.navLabels) {
+          setVal("cms-nav-1", cc.navLabels.nav1);
+          setVal("cms-nav-2", cc.navLabels.nav2);
+          setVal("cms-nav-3", cc.navLabels.nav3);
+          setVal("cms-nav-4", cc.navLabels.nav4);
+        }
+
+        if (cc.lokasiExtra) {
+          setVal("cms-loc-kicker", cc.lokasiExtra.kicker);
+          setVal("cms-loc-title", cc.lokasiExtra.title);
+          setVal("cms-loc-btn", cc.lokasiExtra.btnText);
+          setVal("cms-modal-menu-kicker", cc.lokasiExtra.modalMenuKicker);
+          setVal("cms-modal-gallery-kicker", cc.lokasiExtra.modalGalleryKicker);
+          setVal("cms-amb-btn-gallery", cc.lokasiExtra.btnGallery);
+        }
+
+        if (cc.footer) {
+          setVal("cms-footer-copy", cc.footer.copyright);
+          setVal("cms-footer-note", cc.footer.note);
+        }
+      }
+
+      // Fungsi Eksekusi Simpan Profil + Bulk Menu sekaligus
+      async function applyAndSaveFullJSON(rawJsonStr, saveToDb = true) {
+        let parsed = null;
+        try {
+          const cleaned = String(rawJsonStr || "")
+            .trim()
+            .replace(/^```json\s*/i, "")
+            .replace(/^```\s*/i, "")
+            .replace(/```\s*$/i, "");
+          parsed = JSON.parse(cleaned);
+        } catch (err) {
+          showToast("Format JSON Tidak Valid", "Pastikan kode JSON utuh dari kurung kurawal buka { sampai tutup }.", "error");
+          return;
+        }
+
+        const profileData = parsed.profile || parsed;
+        populateSettingsFormFromJSON(profileData);
+
+        if (!saveToDb) {
+          showToast("Form Berhasil Diisi!", "Silakan periksa isian form di bawah lalu klik Simpan Pengaturan Kafe.");
+          return;
+        }
+
+        const incomingMenus = Array.isArray(parsed.menu_items) ? parsed.menu_items : [];
+        const replaceOldMenu = document.getElementById("ai-json-replace-menu")?.checked;
+
+        if (incomingMenus.length > 0 && supabase) {
+          if (replaceOldMenu) {
+            await supabase.from("menu_items").delete().eq("cafe_slug", currentCafeSlug);
+          }
+
+          const formattedRows = incomingMenus.map((m, idx) => ({
+            cafe_slug: currentCafeSlug,
+            slug: m.slug || `item-${Date.now()}-${idx}`,
+            name: String(m.name || "Menu Pilihan").trim(),
+            category: String(m.category || "signature-coffee").trim().toLowerCase().replace(/\s+/g, "-"),
+            price: Math.round(Number(m.price) || 25000),
+            description: String(m.description || "").trim(),
+            attributes: Array.isArray(m.attributes) ? m.attributes : ["Dine-In", "Fresh"],
+            badge: m.badge || null,
+            image_url: m.image_url || "menu-espresso-latte.jpg",
+            is_available: m.is_available !== false,
+            is_promo: Boolean(m.is_promo),
+            promo_price: m.is_promo && m.promo_price ? Math.round(Number(m.promo_price)) : null,
+            sort_order: m.sort_order || (idx + 1) * 10
+          }));
+
+          const { error: menuErr } = await supabase.from("menu_items").insert(formattedRows);
+          if (menuErr) {
+            showToast("Gagal mengimpor daftar menu", menuErr.message, "error");
+          } else {
+            await fetchMenuItems(false);
+          }
+        }
+
+        const saveBtn = document.getElementById("save-settings-btn");
+        if (saveBtn) saveBtn.click();
+      }
+
+      // Event Listener Tombol Smart JSON Importer & Exporter
+      const btnFillOnly = document.getElementById("btn-fill-form-only-json");
+      if (btnFillOnly) {
+        btnFillOnly.addEventListener("click", () => {
+          const raw = document.getElementById("ai-json-import-box")?.value;
+          applyAndSaveFullJSON(raw, false);
+        });
+      }
+
+      const btnApplyFull = document.getElementById("btn-apply-full-json");
+      if (btnApplyFull) {
+        btnApplyFull.addEventListener("click", () => {
+          const raw = document.getElementById("ai-json-import-box")?.value;
+          applyAndSaveFullJSON(raw, true);
+        });
+      }
+
+      const btnExportJson = document.getElementById("btn-export-current-json");
+      if (btnExportJson) {
+        btnExportJson.addEventListener("click", () => {
+          const exportPayload = {
+            profile: currentCafeData || {},
+            menu_items: allMenuItems.map((m, i) => ({
+              name: m.name,
+              category: m.categoryId,
+              price: m.price,
+              description: m.description,
+              attributes: m.attributes,
+              badge: m.badge,
+              image_url: m.imageUrl,
+              is_available: m.isAvailable,
+              is_promo: m.isPromo,
+              promo_price: m.promoPrice,
+              sort_order: (i + 1) * 10
+            }))
+          };
+          const jsonStr = JSON.stringify(exportPayload, null, 2);
+          navigator.clipboard.writeText(jsonStr);
+          const box = document.getElementById("ai-json-import-box");
+          if (box) box.value = jsonStr;
+          showToast("JSON Kafe Disalin!", "Data profil & seluruh menu kafe ini berhasil disalin ke clipboard dan kotak JSON.");
+        });
+      }
+
+      // Event Listener Direct Gemini AI Generator (dengan System Prompt No-AI-Slop)
+      const btnRunGemini = document.getElementById("btn-run-gemini-ai");
+      if (btnRunGemini) {
+        btnRunGemini.addEventListener("click", async () => {
+          const key = (document.getElementById("ai-gemini-api-key")?.value || localStorage.getItem(GEMINI_KEY_STORAGE) || "").trim();
+          const brief = (document.getElementById("ai-gemini-prompt")?.value || "").trim();
+          const btnText = document.getElementById("btn-run-gemini-text");
+
+          if (!key) {
+            showToast("API Key Belum Diisi", "Masukkan Gemini API Key gratis dari Google AI Studio terlebih dahulu.", "error");
+            return;
+          }
+          if (!brief && !attachedMenuImageBase64) {
+            showToast("Brief Kosong", "Tuliskan nama/ciri khas kafe atau lampirkan foto buku menu terlebih dahulu.", "error");
+            return;
+          }
+
+          localStorage.setItem(GEMINI_KEY_STORAGE, key);
+          btnRunGemini.disabled = true;
+          if (btnText) btnText.textContent = "⏳ Meracik Copywriting...";
+
+          const systemInstruction = `Kamu adalah Web Copywriter & Brand Strategist F&B tajam berstandar NO-AI-SLOP.
+ATURAN KETAT NO-AI-SLOP:
+1. DILARANG KERAS memakai kata klise AI seperti: "menghadirkan pengalaman tak terlupakan", "di era modern", "bukan sekadar X melainkan Y", "solusi komprehensif", "memanjakan lidah", "cita rasa autentik yang tiada duanya", "perpaduan sempurna".
+2. DILARANG memakai tanda pisah panjang (em-dash "—") di dalam kalimat deskripsi atau headline. Gunakan koma atau titik biasa.
+3. Gunakan bahasa Indonesia yang konkret, spesifik, jujur, dan langsung menyebut bahan, teknik seduh/masak, suasana ruang nyata, serta patokan lokasi.
+4. Kembalikan HANYA JSON murni yang valid tanpa teks pengantar dan tanpa markdown codeblock, dengan struktur persis berikut:
+{
+  "profile": {
+    "name": "NAMA KAFE",
+    "branch": "Kecamatan, Kota",
+    "hero_headline_1": "Baris 1 (3-4 kata konkret)",
+    "hero_headline_2": "Baris 2 Aksen (2-4 kata)",
+    "hero_description": "Deskripsi konkret 1-2 kalimat tentang sajian utama dan fungsi ruang.",
+    "address_line_1": "Alamat jalan & patokan",
+    "address_line_2": "Kelurahan, Kecamatan, Kota",
+    "hours_weekday": "08.00 - 22.00 WIB",
+    "hours_weekend": "08.00 - 23.00 WIB",
+    "maps_embed_url": "[https://www.google.com/maps?q=Nama+Kafe+Kota&output=embed](https://www.google.com/maps?q=Nama+Kafe+Kota&output=embed)",
+    "custom_config": {
+      "theme": { "preset": "pilih satu: espresso | matcha | kopitiam | terracotta | charcoal | ocean" },
+      "hours": { "label1": "Senin - Jumat", "label2": "Sabtu - Minggu", "badgeText": "Buka Setiap Hari", "customHeroStatus": "" },
+      "heroExtra": { "cardKicker": "Sajian Utama", "cardTitle": "Nama Menu Ikonik", "cardBadge": "NAMA AREA", "subLeft": "CIRI KHAS 1", "subRight": "CIRI KHAS 2" },
+      "usp": [
+        { "title": "Keunggulan Konkret 1", "desc": "Penjelasan spesifik bahan/proses." },
+        { "title": "Keunggulan Konkret 2", "desc": "Penjelasan spesifik ruang/fasilitas." },
+        { "title": "Keunggulan Konkret 3", "desc": "Penjelasan spesifik makanan/pendamping." }
+      ],
+      "menuHeader": { "kicker": "DAFTAR SAJIAN", "title": "Menu Pilihan", "desc": "Penjelasan singkat daftar menu." },
+      "ambience": {
+        "kicker": "RUANG & SUASANA",
+        "title": "Judul Suasana Konkret",
+        "desc": "Deskripsi pencahayaan, meja, dan sirkulasi udara.",
+        "spaces": [
+          { "kicker": "AREA UTAMA", "title": "Area Indoor (AC)", "subtitle": "Keterangan singkat meja & suasana.", "lightboxDesc": "Deskripsi lengkap area indoor." },
+          { "kicker": "AREA TERAS", "title": "Area Outdoor", "subtitle": "", "lightboxDesc": "Deskripsi lengkap area outdoor." },
+          { "kicker": "DAPUR & BAR", "title": "Bar Seduh & Dapur", "subtitle": "", "lightboxDesc": "Deskripsi meja bar/dapur." }
+        ],
+        "facilities": [
+          { "title": "Fasilitas 1", "desc": "Keterangan singkat" },
+          { "title": "Fasilitas 2", "desc": "Keterangan singkat" },
+          { "title": "Fasilitas 3", "desc": "Keterangan singkat" },
+          { "title": "Fasilitas 4", "desc": "Keterangan singkat" }
+        ]
+      },
+      "reviews": {
+        "score": "4.7",
+        "kicker": "CATATAN PELANGGAN",
+        "title": "Apa Kata Mereka",
+        "desc": "Kesan pelanggan yang singgah.",
+        "items": [
+          { "quote": "Kutipan ulasan natural 1", "author": "Nama 1", "role": "Pelanggan" },
+          { "quote": "Kutipan ulasan natural 2", "author": "Nama 2", "role": "Local Guide" },
+          { "quote": "Kutipan ulasan natural 3", "author": "Nama 3", "role": "Penikmat Kuliner" }
+        ]
+      },
+      "momen": {
+        "kicker": "DI BALIK DAPUR",
+        "title": "Proses & Sajian Harian",
+        "cards": [
+          { "title": "Judul Kartu 1", "desc": "Deskripsi singkat 1" },
+          { "title": "Judul Kartu 2", "desc": "Deskripsi singkat 2" },
+          { "title": "Judul Kartu 3", "desc": "Deskripsi singkat 3" },
+          { "title": "Judul Kartu 4", "desc": "Deskripsi singkat 4" }
+        ]
+      }
+    }
+  },
+  "menu_items": [
+    {
+      "name": "Nama Menu",
+      "category": "kategori-slug",
+      "price": 25000,
+      "description": "Deskripsi bahan & rasa yang konkret tanpa kata hiperbola.",
+      "attributes": ["Hot / Iced", "Signature"],
+      "badge": "Menu Andalan",
+      "image_url": "menu-espresso-latte.jpg"
+    }
+  ]
+}`;
+
+          const userParts = [{ text: `${systemInstruction}\n\nDATA KAFE TARGET:\n${brief}` }];
+          if (attachedMenuImageBase64) {
+            userParts.push({
+              inline_data: {
+                mime_type: attachedMenuImageMime || "image/jpeg",
+                data: attachedMenuImageBase64
+              }
+            });
+          }
+
+          try {
+            const resp = await fetch(
+              `[https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=$](https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=$){encodeURIComponent(key)}`,
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  contents: [{ parts: userParts }],
+                  generationConfig: {
+                    temperature: 0.4,
+                    responseMimeType: "application/json"
+                  }
+                })
+              }
+            );
+
+            const resJson = await resp.json();
+            if (!resp.ok) {
+              throw new Error(resJson?.error?.message || "Gagal memanggil Gemini API.");
+            }
+
+            const rawText = resJson?.candidates?.[0]?.content?.parts?.[0]?.text || "";
+            if (!rawText) throw new Error("Respons AI kosong.");
+
+            const jsonBox = document.getElementById("ai-json-import-box");
+            if (jsonBox) jsonBox.value = rawText;
+
+            await applyAndSaveFullJSON(rawText, false);
+            showToast(
+              "Copywriting & Menu Siap!",
+              "Hasil sudah dimasukkan ke kotak JSON dan form. Klik '🚀 Terapkan Semua & Simpan' untuk menyimpan ke database."
+            );
+          } catch (err) {
+            showToast("Gagal Generate AI", err.message, "error");
+          } finally {
+            btnRunGemini.disabled = false;
+            if (btnText) btnText.textContent = "⚡ Generate via Gemini AI";
+          }
+        });
+      }
 
       // Menyesuaikan tampilan login jika dibuka dengan parameter kafe spesifik (Smart White-Label)
       async function customizeLoginScreen() {
