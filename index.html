@@ -4007,9 +4007,13 @@
           .join("");
       }
 
-      // Suntikkan tombol [+ Tambah] otomatis ke kartu menu di halaman & modal tanpa merusak HTML asli
+      // Suntikkan tombol [+ Tambah] tepat di bagian paling bawah kolom konten kartu
       function injectOrderButtonsIntoMenuCards() {
-        if (activeOrderMode === "catalog") return;
+        // Bersihkan elemen injeksi jika kembali ke mode catalog
+        if (activeOrderMode === "catalog") {
+          document.querySelectorAll(".mf-card-order-wrap").forEach((el) => el.remove());
+          return;
+        }
 
         const grids = [
           document.getElementById("menu-grid") || document.getElementById("menu-content-area"),
@@ -4017,42 +4021,79 @@
         ].filter(Boolean);
 
         grids.forEach((container) => {
-          const cards = container.querySelectorAll("article, div.group");
-          cards.forEach((card) => {
+          const cards = container.querySelectorAll("article");
+          cards.forEach((card, idx) => {
             const titleEl = card.querySelector("h3, h4");
             if (!titleEl) return;
             const itemName = (titleEl.textContent || "").trim();
             if (!itemName) return;
 
-            // Cari harga Rupiah di dalam kartu
+            // Ambil harga Rupiah dari dalam kartu (jika ada promo 2 harga, ambil harga akhir/promo)
             const cardText = card.textContent || "";
-            const priceMatch = cardText.match(/Rp\s*([\d.]+)/i);
-            const rawPrice = priceMatch ? Number(priceMatch[1].replace(/\./g, "")) : 25000;
+            const priceMatches = [...cardText.matchAll(/Rp\s*([\d.]+)/gi)];
+            const rawPrice = priceMatches.length
+              ? Number(priceMatches[priceMatches.length - 1][1].replace(/\./g, ""))
+              : 25000;
 
-            let actionWrap = card.querySelector(".mf-card-order-wrap");
+            // Deteksi apakah ini Kartu Spotlight Besar
+            const isSpotlightCard =
+              card.classList.contains("sc-spotlight-card") ||
+              (idx === 0 && (container.id === "menu-grid" || container.id === "menu-content-area") && card.querySelector("a, button"));
+
+            // Cari kontainer kolom teks utama (induk dari baris judul, deskripsi, dan atribut)
+            // Pada kartu Spotlight: letakkan tepat di bawah blok atas atau di dalam div.flex-1 utama kartu
+            // Pada kartu daftar menu kanan/all-menu: titleEl ada di dalam div flex judul -> div.flex.items-baseline -> div.flex-1
+            const headerRow = titleEl.parentElement;
+            const contentColumn = isSpotlightCard
+              ? titleEl.closest(".flex-1") || card
+              : titleEl.closest(".flex-1") ||
+                (headerRow && headerRow.tagName === "DIV" && headerRow.parentElement && headerRow.parentElement !== card
+                  ? headerRow.parentElement
+                  : headerRow || card);
+
+            // Bersihkan wrapper lama jika sebelumnya salah posisi di dalam baris judul
+            card.querySelectorAll(".mf-card-order-wrap").forEach((el) => {
+              if (el.parentElement !== contentColumn) el.remove();
+            });
+
+            // Sembunyikan footer bawaan Kartu Spotlight agar tidak bertumpuk 2 garis/tombol di bawah
+            if (isSpotlightCard) {
+              const nativeSpotFooter = contentColumn.querySelector(":scope > div.border-t:not(.mf-card-order-wrap)");
+              if (nativeSpotFooter) nativeSpotFooter.classList.add("hidden");
+            }
+
+            let actionWrap = contentColumn.querySelector(":scope > .mf-card-order-wrap");
             if (!actionWrap) {
               actionWrap = document.createElement("div");
-              actionWrap.className = "mf-card-order-wrap mt-3 pt-2.5 border-t border-stone-200/70 flex items-center justify-between gap-2";
-              const targetBody = titleEl.closest("div") || card;
-              targetBody.appendChild(actionWrap);
+              contentColumn.appendChild(actionWrap);
             }
+
+            actionWrap.className = isSpotlightCard
+              ? "mf-card-order-wrap mt-4 pt-3.5 border-t border-stone-300/80 flex items-center justify-between gap-3 w-full"
+              : "mf-card-order-wrap mt-3 pt-2.5 border-t border-stone-200/70 flex items-center justify-between gap-3 w-full";
 
             const currentQty = cart[itemName] ? cart[itemName].qty : 0;
             const addBtnLabel = activeOrderMode === "preorder_delivery" ? "+ Pesan PO" : "+ Tambah";
+            const safeName = itemName.replace(/"/g, "&quot;");
 
             if (currentQty > 0) {
               actionWrap.innerHTML = `
-                <span class="text-[11px] font-semibold text-amber-800">Di Keranjang</span>
-                <div class="inline-flex items-center gap-1.5 bg-stone-900 text-white rounded-xl p-1">
-                  <button type="button" data-mf-dec="${itemName.replace(/"/g, "&quot;")}" data-mf-price="${rawPrice}" class="w-6 h-6 rounded-lg bg-white/10 hover:bg-white/20 font-bold text-xs">−</button>
+                <span class="text-[11px] font-semibold text-amber-800 flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-amber-600 inline-block"></span>
+                  <span>${currentQty} di Keranjang</span>
+                </span>
+                <div class="inline-flex items-center gap-1.5 bg-[#181310] text-[#FAF7F2] rounded-xl p-1 shadow-sm shrink-0">
+                  <button type="button" data-mf-dec="${safeName}" data-mf-price="${rawPrice}" class="w-6 h-6 rounded-lg bg-white/10 hover:bg-white/20 font-bold text-xs flex items-center justify-center">−</button>
                   <span class="px-2 font-bold text-xs">${currentQty}</span>
-                  <button type="button" data-mf-inc="${itemName.replace(/"/g, "&quot;")}" data-mf-price="${rawPrice}" class="w-6 h-6 rounded-lg bg-[#C88A2B] text-[#110E0C] font-bold text-xs">+</button>
+                  <button type="button" data-mf-inc="${safeName}" data-mf-price="${rawPrice}" class="w-6 h-6 rounded-lg bg-[#C88A2B] text-[#110E0C] font-bold text-xs flex items-center justify-center">+</button>
                 </div>
               `;
             } else {
               actionWrap.innerHTML = `
-                <span class="text-[10px] uppercase tracking-wider text-stone-500">${activeOrderMode === "preorder_delivery" ? "Pre-Order" : "Pesan Langsung"}</span>
-                <button type="button" data-mf-inc="${itemName.replace(/"/g, "&quot;")}" data-mf-price="${rawPrice}" class="h-8 px-3.5 rounded-xl bg-stone-900 hover:bg-[#C88A2B] text-white hover:text-[#110E0C] font-semibold text-xs transition-colors">
+                <span class="text-[10px] font-semibold uppercase tracking-wider text-stone-500">
+                  ${activeOrderMode === "preorder_delivery" ? "Sistem Pre-Order" : "Pesan Langsung"}
+                </span>
+                <button type="button" data-mf-inc="${safeName}" data-mf-price="${rawPrice}" class="h-8 px-3.5 rounded-xl bg-[#181310] hover:bg-[#C88A2B] text-[#FAF7F2] hover:text-[#110E0C] font-semibold text-xs transition-colors shrink-0 shadow-sm">
                   ${addBtnLabel}
                 </button>
               `;
