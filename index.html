@@ -326,8 +326,8 @@
     /* ACT 5: TENTANG / REVIEWS */
     #tentang .sc-review-ledger {
       transform: translate3d(
-        calc((1 - var(--sc-enter, 1)) * -64px),
-        calc((1 - var(--sc-enter, 1)) * 42px),
+        calc((1 - var(--sc-enter, 1)) * -32px),
+        calc((1 - var(--sc-enter, 1)) * 24px),
         0
       );
       opacity: calc(0.05 + (var(--sc-enter, 1) * 0.95));
@@ -337,15 +337,8 @@
     @media (min-width: 768px) {
       #tentang [data-sc-quote] {
         --sc-q-i: 0;
-        --sc-q-p: clamp(0, calc((var(--sc-enter, 1) - (var(--sc-q-i) * 0.15)) / 0.65), 1);
-        transform: perspective(1000px)
-          translate3d(
-            calc((1 - var(--sc-q-p)) * (1 - var(--sc-q-i)) * 95px),
-            calc(((1 - var(--sc-q-p)) * 82px) + ((var(--sc-p, 0.5) - 0.5) * (var(--sc-q-i) - 1) * -32px)),
-            0
-          )
-          rotate(calc((1 - var(--sc-q-p)) * (var(--sc-q-i) - 1) * 7deg))
-          scale(calc(0.88 + (var(--sc-q-p) * 0.12)));
+        --sc-q-p: clamp(0, calc((var(--sc-enter, 1) - (var(--sc-q-i) * 0.10)) / 0.65), 1);
+        transform: translate3d(0, calc((1 - var(--sc-q-p)) * 28px), 0);
         opacity: calc(0.05 + (var(--sc-q-p) * 0.95));
         will-change: transform, opacity;
       }
@@ -1298,14 +1291,14 @@
             <!-- Reviews Slider Track -->
             <div
               id="reviews-slider"
-              class="flex md:grid md:grid-cols-3 overflow-x-auto md:overflow-visible snap-x snap-mandatory no-scrollbar scroll-smooth gap-4 md:gap-0 md:divide-x divide-ivory-200 w-full"
+              class="flex md:grid md:grid-cols-3 md:items-stretch overflow-x-auto md:overflow-visible snap-x snap-mandatory no-scrollbar scroll-smooth gap-4 md:gap-0 md:divide-x divide-ivory-200 w-full"
             >
               
               <!-- Quote 1 -->
               <blockquote
                 data-sc-quote
                 style="--sc-q-i: 0;"
-                class="w-full min-w-full md:min-w-0 md:w-auto shrink-0 snap-center bg-ivory-100/80 md:bg-transparent py-5 px-9 md:p-0 rounded-xl md:rounded-none border border-ivory-200 md:border-0 md:px-6 first:md:pl-0 flex flex-col justify-between"
+                class="w-full min-w-full md:min-w-0 md:w-auto md:h-full shrink-0 snap-center bg-ivory-100/80 md:bg-transparent py-5 px-9 md:p-0 rounded-xl md:rounded-none border border-ivory-200 md:border-0 md:px-6 md:first:pl-0 flex flex-col justify-between"
               >
                 <div>
                   <span class="font-serif text-2xl sm:text-3xl text-amber-brand leading-none block" aria-hidden="true">“</span>
@@ -1323,7 +1316,7 @@
               <blockquote
                 data-sc-quote
                 style="--sc-q-i: 1;"
-                class="w-full min-w-full md:min-w-0 md:w-auto shrink-0 snap-center bg-ivory-100/80 md:bg-transparent py-5 px-9 md:p-0 rounded-xl md:rounded-none border border-ivory-200 md:border-0 md:px-6 flex flex-col justify-between"
+                class="w-full min-w-full md:min-w-0 md:w-auto md:h-full shrink-0 snap-center bg-ivory-100/80 md:bg-transparent py-5 px-9 md:p-0 rounded-xl md:rounded-none border border-ivory-200 md:border-0 md:px-6 flex flex-col justify-between"
               >
                 <div>
                   <span class="font-serif text-2xl sm:text-3xl text-amber-brand leading-none block" aria-hidden="true">“</span>
@@ -1341,7 +1334,7 @@
               <blockquote
                 data-sc-quote
                 style="--sc-q-i: 2;"
-                class="w-full min-w-full md:min-w-0 md:w-auto shrink-0 snap-center bg-ivory-100/80 md:bg-transparent py-5 px-9 md:p-0 rounded-xl md:rounded-none border border-ivory-200 md:border-0 md:px-6 last:md:pr-0 flex flex-col justify-between"
+                class="w-full min-w-full md:min-w-0 md:w-auto md:h-full shrink-0 snap-center bg-ivory-100/80 md:bg-transparent py-5 px-9 md:p-0 rounded-xl md:rounded-none border border-ivory-200 md:border-0 md:px-6 md:last:pr-0 flex flex-col justify-between"
               >
                 <div>
                   <span class="font-serif text-2xl sm:text-3xl text-amber-brand leading-none block" aria-hidden="true">“</span>
