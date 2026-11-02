@@ -1340,6 +1340,24 @@
                     </p>
                   </div>
 
+                  <!-- PILIHAN MODE PEMESANAN & TRANSAKSI (MULTI-FORMAT ENGINE) -->
+                  <div class="p-3.5 rounded-xl bg-amber-brand/10 border border-amber-brand/40 space-y-1.5 mb-3">
+                    <label for="cms-order-mode" class="block text-xs font-bold uppercase tracking-wider text-espresso-900">
+                      🛒 Mode Interaksi Menu &amp; Pemesanan Kafe Ini
+                    </label>
+                    <select
+                      id="cms-order-mode"
+                      class="w-full h-10 px-3 rounded-xl bg-white border border-ivory-300 text-xs font-semibold text-espresso-900 focus:border-amber-brand"
+                    >
+                      <option value="catalog">Mode A: Katalog Estetik Standar (Default — Tanpa Keranjang)</option>
+                      <option value="qr_table">Mode B: Interactive QR Table &amp; Takeaway Cart (Cocok untuk Kafe WFC/Nongkrong)</option>
+                      <option value="preorder_delivery">Mode C: Cloud Kitchen Pre-Order &amp; Kurir Instan (Cocok untuk Las Bonitas / Online-Only)</option>
+                    </select>
+                    <p class="text-[11px] text-stone-600">
+                      Kafe lama otomatis tetap di <strong>Mode A</strong>. Pilih <strong>Mode B</strong> atau <strong>Mode C</strong> untuk mengaktifkan keranjang belanja &amp; form WhatsApp terstruktur di halaman publik.
+                    </p>
+                  </div>
+
                   <!-- 4 Saklar Toggle Visibilitas CTA & Elemen -->
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3.5 rounded-xl bg-white border border-ivory-200">
                     <label class="flex items-start gap-3 cursor-pointer select-none p-1.5 rounded-lg hover:bg-ivory-50">
@@ -2134,6 +2152,7 @@
 
         // Bagian 10: Kontrol Tombol Order/CTA, Navigasi, Lokasi & Footer
         const cta = cc.ctaConfig || {};
+        document.getElementById("cms-order-mode").value = cta.orderMode || "catalog";
         document.getElementById("cms-enable-online-order").checked = cta.enableOnlineOrder !== false;
         document.getElementById("cms-enable-wa-cta").checked = cta.enableWaCta !== false;
         document.getElementById("cms-enable-pdf-bar").checked = cta.enablePdfBar !== false;
@@ -2276,6 +2295,7 @@
           };
 
           existingCc.ctaConfig = {
+            orderMode: document.getElementById("cms-order-mode").value || "catalog",
             enableOnlineOrder: document.getElementById("cms-enable-online-order").checked,
             enableWaCta: document.getElementById("cms-enable-wa-cta").checked,
             enablePdfBar: document.getElementById("cms-enable-pdf-bar").checked,
@@ -3233,6 +3253,7 @@
 
         // Bagian 10: Kontrol CTA, Navigasi, Lokasi & Footer
         if (cc.ctaConfig) {
+          setVal("cms-order-mode", cc.ctaConfig.orderMode || "catalog");
           setCheck("cms-enable-online-order", cc.ctaConfig.enableOnlineOrder);
           setCheck("cms-enable-wa-cta", cc.ctaConfig.enableWaCta);
           setCheck("cms-enable-pdf-bar", cc.ctaConfig.enablePdfBar);

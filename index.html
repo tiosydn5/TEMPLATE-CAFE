@@ -1185,7 +1185,7 @@
               <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-brand shrink-0" aria-hidden="true"></span>
               <div class="min-w-0">
                 <span id="fac-1-title" class="text-xs sm:text-sm font-semibold text-ivory-50 block leading-relaxed">Mushola Bersih</span>
-                <span id="fac-1-desc" class="text-[11px] sm:text-xs text-stone-400 block truncate">Di dalam area kedai</span>
+                <span id="fac-1-desc" class="text-[11px] sm:text-xs text-stone-400 block leading-relaxed break-words">Di dalam area kedai</span>
               </div>
             </div>
 
@@ -1193,7 +1193,7 @@
               <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-brand shrink-0" aria-hidden="true"></span>
               <div class="min-w-0">
                 <span id="fac-2-title" class="text-xs sm:text-sm font-semibold text-ivory-50 block leading-relaxed">Area Parkir Memadai</span>
-                <span id="fac-2-desc" class="text-[11px] sm:text-xs text-stone-400 block truncate">Akses motor &amp; mobil</span>
+                <span id="fac-2-desc" class="text-[11px] sm:text-xs text-stone-400 block leading-relaxed break-words">Akses motor &amp; mobil</span>
               </div>
             </div>
 
@@ -1201,7 +1201,7 @@
               <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-brand shrink-0" aria-hidden="true"></span>
               <div class="min-w-0">
                 <span id="fac-3-title" class="text-xs sm:text-sm font-semibold text-ivory-50 block leading-relaxed">Pet Friendly</span>
-                <span id="fac-3-desc" class="text-[11px] sm:text-xs text-stone-400 block truncate">Area teras outdoor</span>
+                <span id="fac-3-desc" class="text-[11px] sm:text-xs text-stone-400 block leading-relaxed break-words">Area teras outdoor</span>
               </div>
             </div>
 
@@ -1209,7 +1209,7 @@
               <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-brand shrink-0" aria-hidden="true"></span>
               <div class="min-w-0">
                 <span id="fac-4-title" class="text-xs sm:text-sm font-semibold text-ivory-50 block leading-relaxed">Toilet Terawat</span>
-                <span id="fac-4-desc" class="text-[11px] sm:text-xs text-stone-400 block truncate">Bersih &amp; nyaman</span>
+                <span id="fac-4-desc" class="text-[11px] sm:text-xs text-stone-400 block leading-relaxed break-words">Bersih &amp; nyaman</span>
               </div>
             </div>
 
@@ -3747,6 +3747,478 @@
         });
       });
     });
+  </script>
+
+  <!-- ========================================================================
+       STANDALONE MULTI-FORMAT ORDER ENGINE (MODE A / MODE B / MODE C)
+       Aman 100%: Kafe tanpa setting orderMode otomatis tetap memakai Mode A (Katalog)
+       ======================================================================== -->
+  <div id="mf-floating-cart" class="hidden fixed bottom-5 inset-x-0 z-[90] px-4 pointer-events-none">
+    <div class="max-w-xl mx-auto bg-[#181310] text-[#FAF7F2] border border-[#C88A2B]/60 rounded-2xl p-3.5 sm:p-4 shadow-2xl flex items-center justify-between gap-3 pointer-events-auto">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-[#C88A2B] text-[#110E0C] font-bold text-sm flex items-center justify-center shrink-0" id="mf-cart-count-badge">
+          0
+        </div>
+        <div>
+          <p class="text-[11px] uppercase tracking-wider text-[#C88A2B] font-semibold" id="mf-cart-mode-label">Keranjang Pesanan</p>
+          <p class="font-serif text-base sm:text-lg font-semibold text-[#FAF7F2]" id="mf-cart-total-text">Rp 0</p>
+        </div>
+      </div>
+      <button
+        type="button"
+        id="mf-open-checkout-btn"
+        class="h-10 px-4 sm:px-5 rounded-xl bg-[#C88A2B] hover:bg-[#B5791E] text-[#110E0C] font-bold text-xs sm:text-sm inline-flex items-center gap-2 transition-colors shrink-0"
+      >
+        <span id="mf-open-checkout-label">Lanjut Pesan</span>
+        <span>→</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL CHECKOUT DINAMIS (BERUBAH ANTARA QR MEJA VS PRE-ORDER DELIVERY) -->
+  <div id="mf-checkout-modal" class="hidden fixed inset-0 z-[9990] bg-black/75 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="w-full max-w-lg bg-[#FAF7F2] text-[#181310] rounded-t-3xl sm:rounded-3xl border border-[#E6DEC8] shadow-2xl max-h-[92vh] flex flex-col overflow-hidden">
+      <!-- Header Modal -->
+      <div class="p-4 sm:p-5 bg-[#181310] text-[#FAF7F2] flex items-center justify-between border-b border-white/10">
+        <div>
+          <span id="mf-modal-kicker" class="text-[10px] font-bold uppercase tracking-widest text-[#C88A2B]">RINGKASAN PESANAN</span>
+          <h3 id="mf-modal-title" class="font-serif text-lg sm:text-xl font-semibold mt-0.5">Konfirmasi Pemesanan</h3>
+        </div>
+        <button type="button" id="mf-close-modal-btn" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-[#FAF7F2] flex items-center justify-center text-sm font-bold">
+          ✕
+        </button>
+      </div>
+
+      <!-- Body Modal -->
+      <div class="p-4 sm:p-5 overflow-y-auto space-y-5 flex-1 text-xs sm:text-sm">
+        <!-- Daftar Item di Keranjang -->
+        <div class="space-y-2.5">
+          <div class="flex items-center justify-between">
+            <h4 class="font-bold text-xs uppercase tracking-wider text-stone-600">Daftar Menu Dipilih</h4>
+            <button type="button" id="mf-clear-cart-btn" class="text-[11px] text-red-600 hover:underline font-semibold">Kosongkan</button>
+          </div>
+          <div id="mf-cart-items-list" class="space-y-2 max-h-48 overflow-y-auto pr-1"></div>
+        </div>
+
+        <!-- Data Pemesan Umum -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-stone-200">
+          <div>
+            <label class="block text-[11px] font-bold uppercase text-stone-600 mb-1">Nama Pemesan *</label>
+            <input type="text" id="mf-cust-name" placeholder="Nama Anda" class="w-full h-9 px-3 rounded-xl bg-white border border-stone-300 text-xs" />
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold uppercase text-stone-600 mb-1">No. WhatsApp Aktif</label>
+            <input type="tel" id="mf-cust-phone" placeholder="0812xxxx" class="w-full h-9 px-3 rounded-xl bg-white border border-stone-300 text-xs" />
+          </div>
+        </div>
+
+        <!-- FORM KHUSUS MODE B: QR TABLE & DINE-IN / TAKEAWAY -->
+        <div id="mf-fields-qr-table" class="hidden space-y-3 p-3.5 rounded-2xl bg-stone-200/60 border border-stone-300">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-bold uppercase text-stone-700 mb-1">Tipe Pesanan</label>
+              <select id="mf-qr-type" class="w-full h-9 px-3 rounded-xl bg-white border border-stone-300 text-xs font-semibold">
+                <option value="Dine-In (Makan di Tempat)">Dine-In (Di Meja)</option>
+                <option value="Takeaway (Bungkus)">Takeaway (Bungkus)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold uppercase text-stone-700 mb-1">Nomor Meja / Area</label>
+              <input type="text" id="mf-qr-table-no" placeholder="Contoh: Meja 05 / Indoor AC" class="w-full h-9 px-3 rounded-xl bg-white border border-stone-300 text-xs" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold uppercase text-stone-700 mb-1">Metode Pembayaran</label>
+            <select id="mf-qr-payment" class="w-full h-9 px-3 rounded-xl bg-white border border-stone-300 text-xs">
+              <option value="QRIS / Non-Tunai di Kasir">QRIS / Kartu di Kasir</option>
+              <option value="Tunai (Cash) di Kasir">Tunai (Cash) di Kasir</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- FORM KHUSUS MODE C: CLOUD KITCHEN PRE-ORDER & DELIVERY (LAS BONITAS) -->
+        <div id="mf-fields-preorder" class="hidden space-y-3 p-3.5 rounded-2xl bg-amber-900/5 border border-amber-900/20">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-bold uppercase text-stone-700 mb-1">Tanggal Pengiriman / PO *</label>
+              <input type="date" id="mf-po-date" class="w-full h-9 px-3 rounded-xl bg-white border border-stone-300 text-xs" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold uppercase text-stone-700 mb-1">Sesi Slot Baking &amp; Kirim</label>
+              <select id="mf-po-slot" class="w-full h-9 px-3 rounded-xl bg-white border border-stone-300 text-xs font-semibold">
+                <option value="Pagi (10.00 - 12.00 WIB)">Pagi (10.00 - 12.00 WIB)</option>
+                <option value="Siang (13.00 - 16.00 WIB)">Siang (13.00 - 16.00 WIB)</option>
+                <option value="Sore/Malam (16.30 - 19.30 WIB)">Sore/Malam (16.30 - 19.30 WIB)</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-bold uppercase text-stone-700 mb-1">Metode Pengambilan / Kurir</label>
+            <select id="mf-po-courier" class="w-full h-9 px-3 rounded-xl bg-white border border-stone-300 text-xs font-semibold">
+              <option value="Kurir Instan (Gosend / GrabExpress)">Kurir Instan (Gosend / GrabExpress)</option>
+              <option value="Kurir Same Day / Paxel">Kurir Same Day</option>
+              <option value="Self Pick-Up (Ambil Sendiri di Dapur)">Self Pick-Up (Ambil di Titik Dapur)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-bold uppercase text-stone-700 mb-1">Alamat Lengkap Pengiriman &amp; Patokan *</label>
+            <textarea id="mf-po-address" rows="2" placeholder="Nama jalan, nomor rumah, RT/RW, kelurahan, dan patokan kurir..." class="w-full p-2.5 rounded-xl bg-white border border-stone-300 text-xs"></textarea>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-bold uppercase text-stone-700 mb-1">Teks Kartu Ucapan Hampers / Catatan Dapur (Opsional)</label>
+            <input type="text" id="mf-po-giftcard" placeholder="Contoh: Selamat Ulang Tahun Bunda / Saus dipisah..." class="w-full h-9 px-3 rounded-xl bg-white border border-stone-300 text-xs" />
+          </div>
+        </div>
+
+        <!-- Catatan Umum untuk Mode B -->
+        <div id="mf-general-note-wrap">
+          <label class="block text-[11px] font-bold uppercase text-stone-600 mb-1">Catatan Pesanan (Opsional)</label>
+          <input type="text" id="mf-general-note" placeholder="Contoh: Less sugar, es dipisah, tambah tisu..." class="w-full h-9 px-3 rounded-xl bg-white border border-stone-300 text-xs" />
+        </div>
+      </div>
+
+      <!-- Footer Modal -->
+      <div class="p-4 sm:p-5 bg-white border-t border-stone-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <span class="text-[11px] text-stone-500 block">Estimasi Total Menu</span>
+          <strong id="mf-modal-total-price" class="font-serif text-xl font-bold text-[#181310]">Rp 0</strong>
+        </div>
+        <button
+          type="button"
+          id="mf-submit-wa-order-btn"
+          class="h-11 px-6 rounded-xl bg-[#C88A2B] hover:bg-[#B5791E] text-[#110E0C] font-bold text-xs sm:text-sm inline-flex items-center justify-center gap-2 shadow-md transition-colors"
+        >
+          <span id="mf-submit-wa-label">Kirim Pesanan via WhatsApp</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const cafeSlug = (params.get("kafe") || "tentang-kopi").trim().toLowerCase();
+      const urlTableParam = params.get("meja") || "";
+
+      let activeOrderMode = "catalog"; // Default aman: "catalog" | "qr_table" | "preorder_delivery"
+      let cafeProfileCache = null;
+      const CART_STORAGE_KEY = `mf_cart_${cafeSlug}`;
+      let cart = {};
+
+      try {
+        const saved = localStorage.getItem(CART_STORAGE_KEY);
+        if (saved) cart = JSON.parse(saved) || {};
+      } catch (e) {}
+
+      function saveCart() {
+        try {
+          localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+        } catch (e) {}
+      }
+
+      function formatRp(num) {
+        return "Rp " + Math.round(Number(num) || 0).toLocaleString("id-ID");
+      }
+
+      function getCartSummary() {
+        const items = Object.values(cart).filter((it) => it && it.qty > 0);
+        const totalQty = items.reduce((acc, it) => acc + it.qty, 0);
+        const totalPrice = items.reduce((acc, it) => acc + it.qty * it.price, 0);
+        return { items, totalQty, totalPrice };
+      }
+
+      function updateCartUI() {
+        const floatingBar = document.getElementById("mf-floating-cart");
+        if (!floatingBar) return;
+
+        // Jika mode katalog standar, sembunyikan seluruh fitur keranjang
+        if (activeOrderMode === "catalog") {
+          floatingBar.classList.add("hidden");
+          return;
+        }
+
+        const { items, totalQty, totalPrice } = getCartSummary();
+        const badgeEl = document.getElementById("mf-cart-count-badge");
+        const totalEl = document.getElementById("mf-cart-total-text");
+        const modeLabelEl = document.getElementById("mf-cart-mode-label");
+        const btnLabelEl = document.getElementById("mf-open-checkout-label");
+        const modalTotalEl = document.getElementById("mf-modal-total-price");
+
+        if (badgeEl) badgeEl.textContent = String(totalQty);
+        if (totalEl) totalEl.textContent = formatRp(totalPrice);
+        if (modalTotalEl) modalTotalEl.textContent = formatRp(totalPrice);
+
+        if (activeOrderMode === "preorder_delivery") {
+          if (modeLabelEl) modeLabelEl.textContent = "Keranjang Pre-Order & Delivery";
+          if (btnLabelEl) btnLabelEl.textContent = "Atur Jadwal Kirim";
+        } else {
+          if (modeLabelEl) modeLabelEl.textContent = urlTableParam ? `Pesanan Meja ${urlTableParam}` : "Keranjang Pesanan Meja";
+          if (btnLabelEl) btnLabelEl.textContent = "Review Pesanan";
+        }
+
+        if (totalQty > 0) {
+          floatingBar.classList.remove("hidden");
+        } else {
+          floatingBar.classList.add("hidden");
+        }
+
+        renderCartModalList(items);
+        injectOrderButtonsIntoMenuCards();
+      }
+
+      function changeItemQty(name, price, delta) {
+        const key = name.trim();
+        if (!cart[key]) {
+          cart[key] = { name: key, price: Number(price) || 0, qty: 0 };
+        }
+        cart[key].qty += delta;
+        if (cart[key].qty <= 0) delete cart[key];
+        saveCart();
+        updateCartUI();
+      }
+
+      function renderCartModalList(items) {
+        const listEl = document.getElementById("mf-cart-items-list");
+        if (!listEl) return;
+
+        if (items.length === 0) {
+          listEl.innerHTML = `<p class="text-xs text-stone-500 py-4 text-center">Keranjang masih kosong. Silakan pilih menu terlebih dahulu.</p>`;
+          return;
+        }
+
+        listEl.innerHTML = items
+          .map(
+            (it) => `
+          <div class="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-white border border-stone-200">
+            <div class="min-w-0 flex-1">
+              <p class="font-semibold text-xs text-stone-900 truncate">${it.name}</p>
+              <p class="text-[11px] text-stone-500">${formatRp(it.price)} × ${it.qty}</p>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <button type="button" data-mf-dec="${it.name.replace(/"/g, "&quot;")}" data-mf-price="${it.price}" class="w-7 h-7 rounded-lg bg-stone-100 hover:bg-stone-200 font-bold text-xs">−</button>
+              <span class="w-6 text-center font-bold text-xs">${it.qty}</span>
+              <button type="button" data-mf-inc="${it.name.replace(/"/g, "&quot;")}" data-mf-price="${it.price}" class="w-7 h-7 rounded-lg bg-[#C88A2B] text-[#110E0C] font-bold text-xs">+</button>
+            </div>
+          </div>`
+          )
+          .join("");
+      }
+
+      // Suntikkan tombol [+ Tambah] otomatis ke kartu menu di halaman & modal tanpa merusak HTML asli
+      function injectOrderButtonsIntoMenuCards() {
+        if (activeOrderMode === "catalog") return;
+
+        const grids = [
+          document.getElementById("menu-grid") || document.getElementById("menu-content-area"),
+          document.getElementById("full-menu-modal-content") || document.getElementById("full-menu-modal-body")
+        ].filter(Boolean);
+
+        grids.forEach((container) => {
+          const cards = container.querySelectorAll("article, div.group");
+          cards.forEach((card) => {
+            const titleEl = card.querySelector("h3, h4");
+            if (!titleEl) return;
+            const itemName = (titleEl.textContent || "").trim();
+            if (!itemName) return;
+
+            // Cari harga Rupiah di dalam kartu
+            const cardText = card.textContent || "";
+            const priceMatch = cardText.match(/Rp\s*([\d.]+)/i);
+            const rawPrice = priceMatch ? Number(priceMatch[1].replace(/\./g, "")) : 25000;
+
+            let actionWrap = card.querySelector(".mf-card-order-wrap");
+            if (!actionWrap) {
+              actionWrap = document.createElement("div");
+              actionWrap.className = "mf-card-order-wrap mt-3 pt-2.5 border-t border-stone-200/70 flex items-center justify-between gap-2";
+              const targetBody = titleEl.closest("div") || card;
+              targetBody.appendChild(actionWrap);
+            }
+
+            const currentQty = cart[itemName] ? cart[itemName].qty : 0;
+            const addBtnLabel = activeOrderMode === "preorder_delivery" ? "+ Pesan PO" : "+ Tambah";
+
+            if (currentQty > 0) {
+              actionWrap.innerHTML = `
+                <span class="text-[11px] font-semibold text-amber-800">Di Keranjang</span>
+                <div class="inline-flex items-center gap-1.5 bg-stone-900 text-white rounded-xl p-1">
+                  <button type="button" data-mf-dec="${itemName.replace(/"/g, "&quot;")}" data-mf-price="${rawPrice}" class="w-6 h-6 rounded-lg bg-white/10 hover:bg-white/20 font-bold text-xs">−</button>
+                  <span class="px-2 font-bold text-xs">${currentQty}</span>
+                  <button type="button" data-mf-inc="${itemName.replace(/"/g, "&quot;")}" data-mf-price="${rawPrice}" class="w-6 h-6 rounded-lg bg-[#C88A2B] text-[#110E0C] font-bold text-xs">+</button>
+                </div>
+              `;
+            } else {
+              actionWrap.innerHTML = `
+                <span class="text-[10px] uppercase tracking-wider text-stone-500">${activeOrderMode === "preorder_delivery" ? "Pre-Order" : "Pesan Langsung"}</span>
+                <button type="button" data-mf-inc="${itemName.replace(/"/g, "&quot;")}" data-mf-price="${rawPrice}" class="h-8 px-3.5 rounded-xl bg-stone-900 hover:bg-[#C88A2B] text-white hover:text-[#110E0C] font-semibold text-xs transition-colors">
+                  ${addBtnLabel}
+                </button>
+              `;
+            }
+          });
+        });
+      }
+
+      // Event Delegation untuk klik tombol +/- di kartu maupun modal
+      document.addEventListener("click", (e) => {
+        const incBtn = e.target.closest("[data-mf-inc]");
+        if (incBtn) {
+          e.stopPropagation();
+          changeItemQty(incBtn.getAttribute("data-mf-inc"), incBtn.getAttribute("data-mf-price"), 1);
+          return;
+        }
+        const decBtn = e.target.closest("[data-mf-dec]");
+        if (decBtn) {
+          e.stopPropagation();
+          changeItemQty(decBtn.getAttribute("data-mf-dec"), decBtn.getAttribute("data-mf-price"), -1);
+          return;
+        }
+      });
+
+      // Buka & Tutup Modal Checkout
+      const checkoutModal = document.getElementById("mf-checkout-modal");
+      document.getElementById("mf-open-checkout-btn")?.addEventListener("click", () => {
+        const qrFields = document.getElementById("mf-fields-qr-table");
+        const poFields = document.getElementById("mf-fields-preorder");
+        const genNote = document.getElementById("mf-general-note-wrap");
+        const modalKicker = document.getElementById("mf-modal-kicker");
+        const modalTitle = document.getElementById("mf-modal-title");
+        const submitLabel = document.getElementById("mf-submit-wa-label");
+
+        if (activeOrderMode === "preorder_delivery") {
+          qrFields?.classList.add("hidden");
+          poFields?.classList.remove("hidden");
+          genNote?.classList.add("hidden");
+          if (modalKicker) modalKicker.textContent = "FORM PRE-ORDER & PENGIRIMAN KURIR";
+          if (modalTitle) modalTitle.textContent = "Jadwal Baking & Alamat Kirim";
+          if (submitLabel) submitLabel.textContent = "Kirim Format Pre-Order ke WhatsApp";
+        } else {
+          poFields?.classList.add("hidden");
+          qrFields?.classList.remove("hidden");
+          genNote?.classList.remove("hidden");
+          if (urlTableParam) {
+            const tableInput = document.getElementById("mf-qr-table-no");
+            if (tableInput && !tableInput.value) tableInput.value = `Meja ${urlTableParam}`;
+          }
+          if (modalKicker) modalKicker.textContent = "PEMESANAN MEJA & TAKEAWAY";
+          if (modalTitle) modalTitle.textContent = "Konfirmasi Pesanan Anda";
+          if (submitLabel) submitLabel.textContent = "Kirim Pesanan ke WhatsApp Kasir";
+        }
+
+        checkoutModal?.classList.remove("hidden");
+      });
+
+      document.getElementById("mf-close-modal-btn")?.addEventListener("click", () => {
+        checkoutModal?.classList.add("hidden");
+      });
+
+      document.getElementById("mf-clear-cart-btn")?.addEventListener("click", () => {
+        cart = {};
+        saveCart();
+        updateCartUI();
+        checkoutModal?.classList.add("hidden");
+      });
+
+      // Kirim Format Pesanan Rapi ke WhatsApp Kafe Target
+      document.getElementById("mf-submit-wa-order-btn")?.addEventListener("click", () => {
+        const { items, totalPrice } = getCartSummary();
+        if (items.length === 0) return;
+
+        const custName = (document.getElementById("mf-cust-name")?.value || "").trim();
+        const custPhone = (document.getElementById("mf-cust-phone")?.value || "").trim();
+        if (!custName) {
+          alert("Mohon isi Nama Pemesan terlebih dahulu.");
+          return;
+        }
+
+        const cafeName = cafeProfileCache?.name || "Admin Kedai";
+        const waNumber = String(cafeProfileCache?.whatsapp_number || "6281234567890").replace(/\D/g, "");
+
+        const itemLines = items
+          .map((it) => `• ${it.qty}x ${it.name} (${formatRp(it.price * it.qty)})`)
+          .join("\n");
+
+        let message = "";
+
+        if (activeOrderMode === "preorder_delivery") {
+          const poDate = document.getElementById("mf-po-date")?.value || "-";
+          const poSlot = document.getElementById("mf-po-slot")?.value || "-";
+          const poCourier = document.getElementById("mf-po-courier")?.value || "-";
+          const poAddr = (document.getElementById("mf-po-address")?.value || "").trim();
+          const poGift = (document.getElementById("mf-po-giftcard")?.value || "").trim();
+
+          if (!poAddr && !poCourier.includes("Self Pick-Up")) {
+            alert("Mohon lengkapi Alamat Pengiriman untuk memudahkan kurir.");
+            return;
+          }
+
+          message =
+            `Halo Admin *${cafeName}*, saya ingin melakukan Pre-Order melalui website:\n\n` +
+            `*Rincian Pesanan:*\n${itemLines}\n` +
+            `*Estimasi Total Menu:* ${formatRp(totalPrice)} _(belum termasuk ongkir)_\n\n` +
+            `*Data Pengiriman & Jadwal Baking:*\n` +
+            `• Nama Pemesan: ${custName} (${custPhone || "-"})\n` +
+            `• Tanggal Kirim: ${poDate}\n` +
+            `• Sesi Slot: ${poSlot}\n` +
+            `• Kurir / Pengambilan: ${poCourier}\n` +
+            `• Alamat Lengkap: ${poAddr || "Ambil Sendiri di Dapur"}\n` +
+            (poGift ? `• Kartu Ucapan / Catatan: "${poGift}"\n\n` : `\n`) +
+            `Mohon info ketersediaan slot baking dan total pembayarannya. Terima kasih!`;
+        } else {
+          const orderType = document.getElementById("mf-qr-type")?.value || "Dine-In";
+          const tableNo = (document.getElementById("mf-qr-table-no")?.value || "-").trim();
+          const paymentMethod = document.getElementById("mf-qr-payment")?.value || "Kasir";
+          const genNote = (document.getElementById("mf-general-note")?.value || "").trim();
+
+          message =
+            `Halo Kasir *${cafeName}*, berikut pesanan baru dari website:\n\n` +
+            `*Daftar Menu:*\n${itemLines}\n` +
+            `*Total Pesanan:* ${formatRp(totalPrice)}\n\n` +
+            `*Detail Meja & Pemesan:*\n` +
+            `• Nama: ${custName} (${custPhone || "-"})\n` +
+            `• Tipe: ${orderType}\n` +
+            `• Nomor Meja: ${tableNo}\n` +
+            `• Pembayaran: ${paymentMethod}\n` +
+            (genNote ? `• Catatan: ${genNote}\n\n` : `\n`) +
+            `Mohon diproses ya, terima kasih!`;
+        }
+
+        window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`, "_blank");
+      });
+
+      // Pantau perubahan isi grid menu (ketika user ganti tab kategori / pencarian)
+      const menuGridEl = document.getElementById("menu-grid") || document.getElementById("menu-content-area");
+      const modalMenuEl = document.getElementById("full-menu-modal-content") || document.getElementById("full-menu-modal-body");
+      const gridObserver = new MutationObserver(() => {
+        if (activeOrderMode !== "catalog") {
+          injectOrderButtonsIntoMenuCards();
+        }
+      });
+      if (menuGridEl) gridObserver.observe(menuGridEl, { childList: true });
+      if (modalMenuEl) gridObserver.observe(modalMenuEl, { childList: true });
+
+      // Ambil konfigurasi orderMode kafe saat halaman dimuat
+      window.addEventListener("DOMContentLoaded", async () => {
+        const sb = window.getSupabaseClient ? window.getSupabaseClient() : null;
+        if (!sb) return;
+
+        const { data: cafe } = await sb
+          .from("cafes")
+          .select("name, whatsapp_number, custom_config")
+          .eq("slug", cafeSlug)
+          .maybeSingle();
+
+        if (cafe) {
+          cafeProfileCache = cafe;
+          const modeFromDb = cafe.custom_config?.ctaConfig?.orderMode || "catalog";
+          // Jika URL memiliki ?meja=XX dan mode masih catalog, otomatis aktifkan qr_table
+          activeOrderMode = urlTableParam && modeFromDb === "catalog" ? "qr_table" : modeFromDb;
+          updateCartUI();
+        }
+      });
+    })();
   </script>
 </body>
 </html>
