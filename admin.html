@@ -3645,5 +3645,510 @@ try {
       });
     })();
   </script>
+<!-- ========================================================================
+       STANDALONE SMART CULINARY IMAGE ENGINE (AUTO-MATCHER + VISUAL PICKER)
+       Otomatis mengisi foto kamera asli sesuai konteks menu & konsep kafe
+       ======================================================================== -->
+  <div id="sc-photo-picker-modal" class="hidden fixed inset-0 z-[99999] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="w-full max-w-3xl bg-[#181310] text-[#FAF7F2] border border-[#C88A2B]/50 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[88vh]">
+      <div class="p-4 sm:p-5 border-b border-white/10 flex items-center justify-between gap-3">
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-widest text-[#C88A2B]">CURATED F&B PHOTO BANK</span>
+          <h3 class="font-serif text-lg sm:text-xl font-semibold mt-0.5">Pilih Foto Kamera Asli (1-Klik Terapkan)</h3>
+        </div>
+        <button type="button" id="sc-close-picker-btn" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white font-bold text-sm flex items-center justify-center">
+          ✕
+        </button>
+      </div>
+
+      <!-- Filter Kategori Cepat -->
+      <div class="px-4 sm:px-5 py-3 bg-black/30 border-b border-white/10 flex items-center gap-2 overflow-x-auto no-scrollbar" id="sc-picker-tabs">
+        <button type="button" data-sc-cat="all" class="sc-tab-btn px-3 py-1.5 rounded-xl bg-[#C88A2B] text-[#110E0C] font-bold text-xs shrink-0">Semua</button>
+        <button type="button" data-sc-cat="kopi" class="sc-tab-btn px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold shrink-0">☕ Kopi & Espresso</button>
+        <button type="button" data-sc-cat="nonkopi" class="sc-tab-btn px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold shrink-0">🍵 Matcha, Cokelat & Teh</button>
+        <button type="button" data-sc-cat="roti" class="sc-tab-btn px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold shrink-0">🍞 Roti, Toast & Pastry</button>
+        <button type="button" data-sc-cat="mie_kaldu" class="sc-tab-btn px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold shrink-0">🍜 Misoa, Kaldu & Mie</button>
+        <button type="button" data-sc-cat="baked_pasta" class="sc-tab-btn px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold shrink-0">🧀 Lasagna & Panggang</button>
+        <button type="button" data-sc-cat="nasi_ayam" class="sc-tab-btn px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold shrink-0">🍛 Nasi, Ayam & Snack</button>
+        <button type="button" data-sc-cat="ambience" class="sc-tab-btn px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold shrink-0">🏠 Interior, Bar & Dapur</button>
+      </div>
+
+      <!-- Grid Thumbnail Gambar -->
+      <div id="sc-picker-grid" class="p-4 sm:p-5 overflow-y-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 flex-1"></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      // ======================================================================
+      // 1. DATABASE FOTO KULINER & INTERIOR ASLI TERKURASI (NO AI-SLOP)
+      // ======================================================================
+      const CURATED_FOOD_BANK = [
+        // KOPI SUSU, LATTE & ESPRESSO
+        {
+          cat: "kopi",
+          label: "Es Kopi Susu Creamy",
+          keywords: ["kopi susu", "es kopi", "pallet coffee", "kopi c", "aren", "butterscotch", "pandan", "hazelnut", "vanilla", "baileys"],
+          urls: [
+            "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "kopi",
+          label: "Hot Cappuccino / Cafe Latte Art",
+          keywords: ["cappuccino", "cafe latte", "latte", "flat white", "macchiato", "caramel", "brulee", "pilihan barista"],
+          urls: [
+            "https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1485808191679-5f86510681a2?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "kopi",
+          label: "Kopi Hitam / Americano / Kopi O Butter",
+          keywords: ["americano", "espresso", "kopi o", "butter", "gu you", "long black", "kopi hitam", "kopi tarik", "vietnam drip"],
+          urls: [
+            "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1551030173-122aabc4489c?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "kopi",
+          label: "Manual Brew V60 / Cold Brew / Filter",
+          keywords: ["v60", "japanese", "aeropress", "single origin", "cold brew", "mont blanc", "manual brew", "filter"],
+          urls: [
+            "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+
+        // NON-KOPI: MATCHA, COKELAT, TEH & MOCKTAIL
+        {
+          cat: "nonkopi",
+          label: "Matcha & Green Tea Latte",
+          keywords: ["matcha", "green tea"],
+          urls: [
+            "https://images.unsplash.com/photo-1515823662972-da6a2e4d3002?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "nonkopi",
+          label: "Es Cokelat Pekat & Mocha",
+          keywords: ["choco", "cokelat", "chocolate", "mochaccino", "mocha", "milo", "ovaltine"],
+          urls: [
+            "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "nonkopi",
+          label: "Teh Tarik, Thai Tea & Milk Tea",
+          keywords: ["teh tarik", "thai tea", "yuanyang", "milk tea", "earl grey", "taro", "red velvet", "pink ladies", "smoothies"],
+          urls: [
+            "https://images.unsplash.com/photo-1558857563-b371033873b8?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "nonkopi",
+          label: "Lemon Tea, Lychee Tea & Mocktail Segar",
+          keywords: ["lychee", "lemon", "tea", "tehbotol", "mocktail", "butterfly", "ocean", "coke", "aqua", "mineral", "orange", "strawberry"],
+          urls: [
+            "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+
+        // ROTI BAKAR SRIKAYA, PASTRY & DESSERT
+        {
+          cat: "roti",
+          label: "Kaya Toast / Roti Bakar Srikaya Butter",
+          keywords: ["roti", "srikaya", "kaya", "toast", "panggang", "egg toast", "sandwich"],
+          urls: [
+            "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1484723091739-30a097e8f929?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "roti",
+          label: "Croissant, Brownies & Kue Panggang",
+          keywords: ["croissant", "brownies", "pastry", "cinnamon", "pisang", "cake", "dessert", "hampers"],
+          urls: [
+            "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+
+        // MISOA, KALDU KOLAGEN, LAKSA & MIE KUAH
+        {
+          cat: "mie_kaldu",
+          label: "Set Misoa Ayam & Kuah Kaldu Hangat",
+          keywords: ["misoa", "misua", "kaldu", "laksa", "mie", "bakmi", "kuah", "sup", "soup", "ramen"],
+          urls: [
+            "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1617093727343-374698b1b08d?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+
+        // LASAGNA, SCHOTEL & PASTA PANGGANG KEJU
+        {
+          cat: "baked_pasta",
+          label: "Beef Lasagna Panggang Keju Lumer",
+          keywords: ["lasagna", "beef lasagna", "loyang"],
+          urls: [
+            "https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1619895092538-128341789043?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "baked_pasta",
+          label: "Macaroni Schotel, Brulee & Gratin",
+          keywords: ["schotel", "macaroni", "spaghetti", "brulee", "gratin", "potato", "pasta"],
+          urls: [
+            "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1621996346565-e3d5d6281298?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+
+        // NASI AYAM HAINAN / SOUS VIDE, GORENGAN & DIMSUM
+        {
+          cat: "nasi_ayam",
+          label: "Set Nasi Ayam Hainan / Sous Vide Lembut",
+          keywords: ["set nasi", "hainan", "ayam oma", "ayam kampung", "nasi putih", "nasi ayam"],
+          urls: [
+            "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "nasi_ayam",
+          label: "Ayam Goreng Krispi, Perkedel Keju & Tahu",
+          keywords: ["ayam goreng", "krispi", "crispy", "perkedel", "tahu", "snack", "goreng"],
+          urls: [
+            "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "nasi_ayam",
+          label: "Dimsum Kukus & Telur Setengah Matang",
+          keywords: ["siomay", "dimsum", "hakau", "kuotie", "telur", "telor"],
+          urls: [
+            "https://images.unsplash.com/photo-1496116218417-1a781b1c416c?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+
+        // AMBIENCE: RUANG KAFE, KOPITIAM & DAPUR CLOUD KITCHEN
+        {
+          cat: "ambience",
+          label: "Interior Kafe Hangat & Area WFC",
+          keywords: ["indoor", "ruang", "ac", "meja"],
+          urls: [
+            "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80",
+            "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80"
+          ]
+        },
+        {
+          cat: "ambience",
+          label: "Area Teras Outdoor & Komunal",
+          keywords: ["outdoor", "teras", "komunal"],
+          urls: [
+            "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=1200&q=80",
+            "https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=1200&q=80"
+          ]
+        },
+        {
+          cat: "ambience",
+          label: "Bar Seduh Kopi & Dapur Oven Panggang",
+          keywords: ["bar", "dapur", "oven", "kemasan"],
+          urls: [
+            "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1200&q=80",
+            "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=1200&q=80"
+          ]
+        }
+      ];
+
+      // Fungsi Pencari Gambar Terbaik Berdasarkan Nama Menu & Kategori
+      function resolveBestFoodImage(menuName, category, itemIndex = 0) {
+        const hay = `${menuName || ""} ${category || ""}`.toLowerCase();
+        let bestEntry = null;
+        let maxScore = 0;
+
+        for (const entry of CURATED_FOOD_BANK) {
+          if (entry.cat === "ambience") continue;
+          let score = 0;
+          for (const kw of entry.keywords) {
+            if (hay.includes(kw)) {
+              score += kw.length * 2;
+            }
+          }
+          if (score > maxScore) {
+            maxScore = score;
+            bestEntry = entry;
+          }
+        }
+
+        if (!bestEntry) {
+          bestEntry = CURATED_FOOD_BANK[0];
+        }
+
+        const urls = bestEntry.urls;
+        return urls[itemIndex % urls.length];
+      }
+
+      // Fungsi Menentukan Paket Gambar Profil & Ruang Berdasarkan Konsep Kafe
+      function resolveCafeSpaceImages(cafeName, heroDesc, themePreset) {
+        const text = `${cafeName || ""} ${heroDesc || ""} ${themePreset || ""}`.toLowerCase();
+
+        // Konsep 1: Lasagna / Baked Pasta / Cloud Kitchen
+        if (text.includes("lasagna") || text.includes("bonitas") || text.includes("panggang")) {
+          return {
+            hero: "https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=1200&q=80",
+            indoor: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=1200&q=80",
+            outdoor: "https://images.unsplash.com/photo-1619895092538-128341789043?auto=format&fit=crop&w=1200&q=80",
+            bar: "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&w=1200&q=80",
+            crafts: [
+              "https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=800&q=80",
+              "https://images.unsplash.com/photo-1619895092538-128341789043?auto=format&fit=crop&w=800&q=80",
+              "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&w=800&q=80",
+              "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80"
+            ]
+          };
+        }
+
+        // Konsep 2: Kaldu / Misoa / Kopitiam / Kedai Oriental
+        if (text.includes("kaldu") || text.includes("misoa") || text.includes("kopitiam") || text.includes("oma")) {
+          return {
+            hero: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=1200&q=80",
+            indoor: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80",
+            outdoor: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
+            bar: "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=1200&q=80",
+            crafts: [
+              "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80",
+              "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=80",
+              "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=800&q=80",
+              "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=800&q=80"
+            ]
+          };
+        }
+
+        // Konsep 3 Default: Coffee Shop Modern & WFC (Pallet Coffee dll)
+        return {
+          hero: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80",
+          indoor: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80",
+          outdoor: "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=1200&q=80",
+          bar: "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1200&q=80",
+          crafts: [
+            "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80",
+            "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=800&q=80",
+            "https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=800&q=80",
+            "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=80"
+          ]
+        };
+      }
+
+      // ======================================================================
+      // 2. MODAL GALERI VISUAL PICKER (UNTUK GANTI 1 FOTO DALAM 1 KLIK)
+      // ======================================================================
+      let activeTargetInputEl = null;
+      const pickerModal = document.getElementById("sc-photo-picker-modal");
+      const pickerGrid = document.getElementById("sc-picker-grid");
+
+      function renderPickerPhotos(filterCat = "all") {
+        if (!pickerGrid) return;
+        const items = [];
+        CURATED_FOOD_BANK.forEach((group) => {
+          if (filterCat !== "all" && group.cat !== filterCat) return;
+          group.urls.forEach((u, idx) => {
+            items.push({ label: `${group.label} #${idx + 1}`, url: u });
+          });
+        });
+
+        pickerGrid.innerHTML = items
+          .map(
+            (it) => `
+          <button
+            type="button"
+            data-sc-pick-url="${it.url}"
+            class="group text-left rounded-2xl overflow-hidden bg-white/5 border border-white/10 hover:border-[#C88A2B] transition-all flex flex-col"
+          >
+            <div class="aspect-[4/3] w-full overflow-hidden bg-black/40">
+              <img src="${it.url}" alt="${it.label}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+            </div>
+            <div class="p-2.5">
+              <p class="text-[11px] font-semibold text-[#FAF7F2] line-clamp-1">${it.label}</p>
+              <span class="text-[10px] text-[#C88A2B] font-bold">✓ Klik Gunakan</span>
+            </div>
+          </button>`
+          )
+          .join("");
+      }
+
+      function openPhotoPickerForInput(inputEl) {
+        activeTargetInputEl = inputEl;
+        renderPickerPhotos("all");
+        pickerModal?.classList.remove("hidden");
+      }
+
+      document.getElementById("sc-close-picker-btn")?.addEventListener("click", () => {
+        pickerModal?.classList.add("hidden");
+      });
+
+      document.getElementById("sc-picker-tabs")?.addEventListener("click", (e) => {
+        const tab = e.target.closest("[data-sc-cat]");
+        if (!tab) return;
+        document.querySelectorAll(".sc-tab-btn").forEach((b) => {
+          b.className = "sc-tab-btn px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold shrink-0";
+        });
+        tab.className = "sc-tab-btn px-3 py-1.5 rounded-xl bg-[#C88A2B] text-[#110E0C] font-bold text-xs shrink-0";
+        renderPickerPhotos(tab.getAttribute("data-sc-cat"));
+      });
+
+      pickerGrid?.addEventListener("click", (e) => {
+        const card = e.target.closest("[data-sc-pick-url]");
+        if (!card || !activeTargetInputEl) return;
+        const chosenUrl = card.getAttribute("data-sc-pick-url");
+        activeTargetInputEl.value = chosenUrl;
+        activeTargetInputEl.dispatchEvent(new Event("input", { bubbles: true }));
+        activeTargetInputEl.dispatchEvent(new Event("change", { bubbles: true }));
+        pickerModal?.classList.add("hidden");
+      });
+
+      // ======================================================================
+      // 3. SUNTIK TOMBOL OTOMATIS KE FORM ADMIN & AI COMMAND CENTER
+      // ======================================================================
+      function enhanceAdminImageInputs() {
+        // A. Suntik tombol "📸 Pilih Foto" di sebelah tiap input URL Gambar
+        const imageInputIds = [
+          "item-image-url",
+          "set-hero-img",
+          "set-indoor-img",
+          "set-outdoor-img",
+          "set-bar-img",
+          "cms-craft-1-img",
+          "cms-craft-2-img",
+          "cms-craft-3-img",
+          "cms-craft-4-img"
+        ];
+
+        imageInputIds.forEach((id) => {
+          const inp = document.getElementById(id);
+          if (!inp || inp.dataset.scEnhanced === "1") return;
+          inp.dataset.scEnhanced = "1";
+
+          const btnBar = document.createElement("div");
+          btnBar.className = "mt-1.5 flex flex-wrap items-center gap-1.5";
+          btnBar.innerHTML = `
+            <button type="button" class="sc-open-gallery-btn h-7 px-2.5 rounded-lg bg-espresso-900 hover:bg-amber-brand text-ivory-50 hover:text-espresso-950 font-semibold text-[11px] inline-flex items-center gap-1 transition-colors">
+              <span>📸 Pilih Foto Asli Terkurasi</span>
+            </button>
+          `;
+          btnBar.querySelector(".sc-open-gallery-btn").addEventListener("click", () => openPhotoPickerForInput(inp));
+
+          // Khusus form tambah/edit menu: tambah tombol Auto-Tebak dari nama menu
+          if (id === "item-image-url") {
+            const autoMenuBtn = document.createElement("button");
+            autoMenuBtn.type = "button";
+            autoMenuBtn.className = "h-7 px-2.5 rounded-lg border border-espresso-900/30 hover:bg-ivory-200 text-espresso-900 font-semibold text-[11px] inline-flex items-center gap-1 transition-colors";
+            autoMenuBtn.innerHTML = `<span>🪄 Auto-Cocokkan dari Nama Menu</span>`;
+            autoMenuBtn.addEventListener("click", () => {
+              const nameVal = document.getElementById("item-name")?.value || "";
+              const catVal = document.getElementById("item-category")?.value || "";
+              inp.value = resolveBestFoodImage(nameVal, catVal, Math.floor(Math.random() * 3));
+              inp.dispatchEvent(new Event("input", { bubbles: true }));
+            });
+            btnBar.appendChild(autoMenuBtn);
+          }
+
+          inp.parentElement?.appendChild(btnBar);
+        });
+
+        // B. Suntik Tombol Master "🪄 Auto-Match Semua Foto Kafe & Menu" di AI Command Center
+        const exportBtn = document.getElementById("btn-export-current-json");
+        if (exportBtn && !document.getElementById("btn-sc-automatch-all")) {
+          const masterBtn = document.createElement("button");
+          masterBtn.type = "button";
+          masterBtn.id = "btn-sc-automatch-all";
+          masterBtn.className = "h-9 px-3.5 rounded-xl bg-amber-brand hover:bg-amber-hover text-espresso-950 text-xs font-bold shrink-0 inline-flex items-center gap-1.5 transition-colors shadow-sm";
+          masterBtn.innerHTML = `<span>🪄 Auto-Match Semua Foto Asli</span>`;
+
+          masterBtn.addEventListener("click", async () => {
+            // 1. Jika ada JSON di kotak Opsi A, percantik semua image_url di dalam JSON tersebut
+            const jsonBox = document.getElementById("ai-json-import-box");
+            if (jsonBox && jsonBox.value.trim()) {
+              try {
+                const parsed = JSON.parse(jsonBox.value);
+                const prof = parsed.profile || parsed;
+                const spaceImgs = resolveCafeSpaceImages(prof.name, prof.hero_description, prof.custom_config?.theme?.preset);
+
+                prof.hero_image_url = spaceImgs.hero;
+                prof.indoor_image_url = spaceImgs.indoor;
+                prof.outdoor_image_url = spaceImgs.outdoor;
+                prof.bar_image_url = spaceImgs.bar;
+
+                if (prof.custom_config?.momen?.cards) {
+                  prof.custom_config.momen.cards.forEach((c, i) => {
+                    c.imageUrl = spaceImgs.crafts[i % spaceImgs.crafts.length];
+                  });
+                }
+
+                if (Array.isArray(parsed.menu_items)) {
+                  parsed.menu_items.forEach((m, idx) => {
+                    m.image_url = resolveBestFoodImage(m.name, m.category, idx);
+                  });
+                }
+
+                jsonBox.value = JSON.stringify(parsed, null, 2);
+              } catch (e) {}
+            }
+
+            // 2. Isi juga langsung ke kolom-kolom form Pengaturan Kafe yang sedang tampil
+            const cafeName = document.getElementById("set-name")?.value || "";
+            const heroDesc = document.getElementById("set-hero-desc")?.value || "";
+            const themePreset = document.getElementById("cms-theme-preset")?.value || "";
+            const spaceImgs = resolveCafeSpaceImages(cafeName, heroDesc, themePreset);
+
+            const setField = (id, val) => {
+              const el = document.getElementById(id);
+              if (el) el.value = val;
+            };
+            setField("set-hero-img", spaceImgs.hero);
+            setField("set-indoor-img", spaceImgs.indoor);
+            setField("set-outdoor-img", spaceImgs.outdoor);
+            setField("set-bar-img", spaceImgs.bar);
+            [1, 2, 3, 4].forEach((n, i) => setField(`cms-craft-${n}-img`, spaceImgs.crafts[i]));
+
+            // 3. Update foto seluruh menu kafe yang sedang aktif di database Supabase
+            const sb = window.getSupabaseClient ? window.getSupabaseClient() : null;
+            const slug = new URLSearchParams(window.location.search).get("kafe") || "tentang-kopi";
+            if (sb) {
+              const { data: rows } = await sb.from("menu_items").select("id, name, category").eq("cafe_slug", slug);
+              if (Array.isArray(rows) && rows.length > 0) {
+                for (let i = 0; i < rows.length; i++) {
+                  const newImg = resolveBestFoodImage(rows[i].name, rows[i].category, i);
+                  await sb.from("menu_items").update({ image_url: newImg }).eq("id", rows[i].id);
+                }
+              }
+            }
+
+            alert("✨ Seluruh foto Hero, Ruangan, Momen & Daftar Menu berhasil dicocokkan dengan foto kamera asli! Klik 'Simpan Pengaturan Kafe' untuk menyimpan profil.");
+            window.location.reload();
+          });
+
+          exportBtn.parentElement?.insertBefore(masterBtn, exportBtn);
+        }
+      }
+
+      window.addEventListener("DOMContentLoaded", () => {
+        enhanceAdminImageInputs();
+        setTimeout(enhanceAdminImageInputs, 1200);
+      });
+    })();
+  </script>
 </body>
 </html>
