@@ -3646,15 +3646,15 @@ try {
     })();
   </script>
 <!-- ========================================================================
-       STANDALONE SMART CULINARY IMAGE ENGINE (AUTO-MATCHER + VISUAL PICKER)
-       Otomatis mengisi foto kamera asli sesuai konteks menu & konsep kafe
+       STANDALONE SMART CULINARY IMAGE ENGINE V2 (UNIVERSAL F&B TAXONOMY)
+       Memisahkan 45+ sub-kategori berdasarkan warna minuman, bentuk karbo, & wadah
        ======================================================================== -->
   <div id="sc-photo-picker-modal" class="hidden fixed inset-0 z-[99999] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="w-full max-w-3xl bg-[#181310] text-[#FAF7F2] border border-[#C88A2B]/50 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[88vh]">
+    <div class="w-full max-w-4xl bg-[#181310] text-[#FAF7F2] border border-[#C88A2B]/50 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[88vh]">
       <div class="p-4 sm:p-5 border-b border-white/10 flex items-center justify-between gap-3">
         <div>
-          <span class="text-[10px] font-bold uppercase tracking-widest text-[#C88A2B]">CURATED F&B PHOTO BANK</span>
-          <h3 class="font-serif text-lg sm:text-xl font-semibold mt-0.5">Pilih Foto Kamera Asli (1-Klik Terapkan)</h3>
+          <span class="text-[10px] font-bold uppercase tracking-widest text-[#C88A2B]">UNIVERSAL F&amp;B VISUAL BANK (V2)</span>
+          <h3 class="font-serif text-lg sm:text-xl font-semibold mt-0.5">Pilih Foto Kamera Asli Sesuai Warna &amp; Jenis Sajian</h3>
         </div>
         <button type="button" id="sc-close-picker-btn" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white font-bold text-sm flex items-center justify-center">
           ✕
@@ -3664,13 +3664,14 @@ try {
       <!-- Filter Kategori Cepat -->
       <div class="px-4 sm:px-5 py-3 bg-black/30 border-b border-white/10 flex items-center gap-2 overflow-x-auto no-scrollbar" id="sc-picker-tabs">
         <button type="button" data-sc-cat="all" class="sc-tab-btn px-3 py-1.5 rounded-xl bg-[#C88A2B] text-[#110E0C] font-bold text-xs shrink-0">Semua</button>
-        <button type="button" data-sc-cat="kopi" class="sc-tab-btn px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold shrink-0">☕ Kopi & Espresso</button>
-        <button type="button" data-sc-cat="nonkopi" class="sc-tab-btn px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold shrink-0">🍵 Matcha, Cokelat & Teh</button>
-        <button type="button" data-sc-cat="roti" class="sc-tab-btn px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold shrink-0">🍞 Roti, Toast & Pastry</button>
-        <button type="button" data-sc-cat="mie_kaldu" class="sc-tab-btn px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold shrink-0">🍜 Misoa, Kaldu & Mie</button>
-        <button type="button" data-sc-cat="baked_pasta" class="sc-tab-btn px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold shrink-0">🧀 Lasagna & Panggang</button>
-        <button type="button" data-sc-cat="nasi_ayam" class="sc-tab-btn px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold shrink-0">🍛 Nasi, Ayam & Snack</button>
-        <button type="button" data-sc-cat="ambience" class="sc-tab-btn px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold shrink-0">🏠 Interior, Bar & Dapur</button>
+        <button type="button" data-sc-cat="kopi" class="sc-tab-btn px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold shrink-0">☕ Kopi, Filter &amp; Affogato</button>
+        <button type="button" data-sc-cat="nonkopi_warna" class="sc-tab-btn px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold shrink-0">🎨 Matcha, Red Velvet, Taro &amp; Cokelat</button>
+        <button type="button" data-sc-cat="teh_mocktail" class="sc-tab-btn px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold shrink-0">🍹 Teh, Mocktail &amp; Botolan</button>
+        <button type="button" data-sc-cat="nasi_lauk" class="sc-tab-btn px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold shrink-0">🍛 Nasi, Rice Bowl, Ayam &amp; Daging</button>
+        <button type="button" data-sc-cat="mie_pasta" class="sc-tab-btn px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold shrink-0">🍜 Mie, Kaldu, Pasta &amp; Lasagna</button>
+        <button type="button" data-sc-cat="snack_dimsum" class="sc-tab-btn px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold shrink-0">🍟 Fries, Gorengan &amp; Dimsum</button>
+        <button type="button" data-sc-cat="roti_dessert" class="sc-tab-btn px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold shrink-0">🥐 Toast, Pastry &amp; Dessert</button>
+        <button type="button" data-sc-cat="ambience" class="sc-tab-btn px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold shrink-0">🏠 Interior, Outdoor &amp; Dapur</button>
       </div>
 
       <!-- Grid Thumbnail Gambar -->
@@ -3681,14 +3682,212 @@ try {
   <script>
     (function () {
       // ======================================================================
-      // 1. DATABASE FOTO KULINER & INTERIOR ASLI TERKURASI (NO AI-SLOP)
+      // 1. MASTER TAXONOMY F&B INDONESIA (40+ SUB-KATEGORI VISUAL SPESIFIK)
       // ======================================================================
       const CURATED_FOOD_BANK = [
-        // KOPI SUSU, LATTE & ESPRESSO
+        // --------------------------------------------------------------------
+        // A. KELOMPOK NASI, RICE BOWL, AYAM, DAGING & WESTERN (nasi_lauk)
+        // --------------------------------------------------------------------
+        {
+          cat: "nasi_lauk",
+          label: "Nasi GorengSpesial / Kampung / Seafood",
+          keywords: ["nasi goreng", "nasgor", "fried rice", "kwetiau goreng", "mie goreng", "bakmi goreng"],
+          urls: [
+            "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "nasi_lauk",
+          label: "Chicken Nanban / Katsu / Karage / Geprek",
+          keywords: ["chicken nanban", "nanban", "chicken katsu", "katsu", "karaage", "karage", "ayam geprek", "chicken Teriyaki", "dori", "fish and chips"],
+          urls: [
+            "https://images.unsplash.com/photo-1604908554025-aaa87c152c7b?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "nasi_lauk",
+          label: "Beef Slice Rice Bowl / Gyudon / Yakiniku",
+          keywords: ["beef slice", "rice bowl", "gyudon", "yakiniku", "beef bowl", "sei sapi", "sambal matah", "paru", "empal"],
+          urls: [
+            "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "nasi_lauk",
+          label: "Set Nasi Ayam Hainan / Sous Vide / Rebus",
+          keywords: ["set nasi", "hainan", "ayam oma", "ayam kampung", "sous vide", "nasi ayam", "nasi tim", "bubur ayam"],
+          urls: [
+            "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "nasi_lauk",
+          label: "Ayam Goreng Krispi / Bakar / Penyet",
+          keywords: ["ayam goreng", "crispy boneless", "ayam bakar", "ayam penyet", "fried chicken", "wings", "chicken wings"],
+          urls: [
+            "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "nasi_lauk",
+          label: "Burger, Steak & Sate",
+          keywords: ["burger", "beef burger", "steak", "sirloin", "tenderloin", "sate", "satay", "taichan", "iga bakar", "sop buntut"],
+          urls: [
+            "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "nasi_lauk",
+          label: "Nasi Putih Hangat Polos",
+          keywords: ["nasi putih", "steamed rice", "extra rice", "nasi uduk"],
+          urls: [
+            "https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+
+        // --------------------------------------------------------------------
+        // B. KELOMPOK MIE, MISOA, KALDU, PASTA & LASAGNA (mie_pasta)
+        // --------------------------------------------------------------------
+        {
+          cat: "mie_pasta",
+          label: "Misoa, Kuah Kaldu, Laksa, Ramen & Bakso",
+          keywords: ["misoa", "misua", "kaldu", "bone broth", "laksa", "ramen", "mie kuah", "bakmi", "mie ayam", "mie karet", "bakso", "soto", "sup", "tom yum"],
+          urls: [
+            "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1617093727343-374698b1b08d?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "mie_pasta",
+          label: "Spaghetti Carbonara / Aglio Olio / Bolognese",
+          keywords: ["spaghetti", "carbonara", "aglio olio", "bolognese", "fettuccine", "penne", "marinara"],
+          urls: [
+            "https://images.unsplash.com/photo-1612874742237-6526221588e3?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "mie_pasta",
+          label: "Beef Lasagna Panggang Keju Lumer",
+          keywords: ["lasagna", "beef lasagna", "loyang-keluarga"],
+          urls: [
+            "https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1619895092538-128341789043?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "mie_pasta",
+          label: "Macaroni Schotel, Brulee & Potato Gratin",
+          keywords: ["schotel", "macaroni", "spaghetti brulee", "gratin", "potato gratin", "mac and cheese"],
+          urls: [
+            "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1621996346565-e3d5d6281298?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+
+        // --------------------------------------------------------------------
+        // C. KELOMPOK CAMILAN GURIH, FRIES, GORENGAN & DIMSUM (snack_dimsum)
+        // --------------------------------------------------------------------
+        {
+          cat: "snack_dimsum",
+          label: "French Fries, Wedges & Mix Platter",
+          keywords: ["french fries", "mix platter", "platter", "kentang goreng", "potato wedges", "fries", "nachos", "onion ring", "sosis", "nugget"],
+          urls: [
+            "https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "snack_dimsum",
+          label: "Perkedel Keju, Tahu Lada Garam & Gorengan",
+          keywords: ["perkedel", "tahu goreng", "tahu cabai", "tahu lada", "tahu", "tempe", "mendoan", "cireng", "singkong", "risoles", "pastel"],
+          urls: [
+            "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1604908554025-aaa87c152c7b?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "snack_dimsum",
+          label: "Dimsum Siomay, Hakau & Kuotie / Gyoza",
+          keywords: ["siomay", "dimsum", "hakau", "kuotie", "gyoza", "dumpling", "bakpao", "lumpia", "wonton", "pangsit"],
+          urls: [
+            "https://images.unsplash.com/photo-1496116218417-1a781b1c416c?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "snack_dimsum",
+          label: "Telur Setengah Matang & Telor Kecap",
+          keywords: ["telur ayam kampung", "setengah matang", "telor kecap", "telur rebus", "soft boiled egg", "omelette"],
+          urls: [
+            "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+
+        // --------------------------------------------------------------------
+        // D. KELOMPOK ROTI BAKAR, PASTRY, PISANG & DESSERT (roti_dessert)
+        // --------------------------------------------------------------------
+        {
+          cat: "roti_dessert",
+          label: "Pisang Goreng Crispy, Churros & Waffle",
+          keywords: ["pisang goreng", "pisang bakar", "banana", "churros", "waffle", "pancake", "crepes", "donat", "doughnut"],
+          urls: [
+            "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1603532648955-039310d9ed75?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "roti_dessert",
+          label: "Roti Bakar Srikaya Butter / Kaya Toast / Sandwich",
+          keywords: ["roti bakar", "srikaya", "kaya toast", "egg toast", "toast", "sandwich", "roti panggang", "roti kukus", "garlic bread"],
+          urls: [
+            "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1484723091739-30a097e8f929?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "roti_dessert",
+          label: "Croissant, Pain au Chocolat, Croffle & Cinnamon Roll",
+          keywords: ["croissant", "pain au chocolat", "croffle", "cromboloni", "cinnamon roll", "danish", "puff pastry"],
+          urls: [
+            "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "roti_dessert",
+          label: "Fudgy Brownies, Cake, Cheesecake & Hampers",
+          keywords: ["brownies", "cheesecake", "tiramisu", "red velvet cake", "cookies", "soft cookies", "hampers", "gift box", "puding", "dessert"],
+          urls: [
+            "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+
+        // --------------------------------------------------------------------
+        // E. KELOMPOK KOPI SPESIFIK (kopi)
+        // --------------------------------------------------------------------
         {
           cat: "kopi",
-          label: "Es Kopi Susu Creamy",
-          keywords: ["kopi susu", "es kopi", "pallet coffee", "kopi c", "aren", "butterscotch", "pandan", "hazelnut", "vanilla", "baileys"],
+          label: "Affogato (Es Krim + Espresso) & Frappe Blend",
+          keywords: ["affogato", "ice cream coffee", "frappe", "frappuccino", "coffee blend"],
+          urls: [
+            "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "kopi",
+          label: "Es Kopi Susu Aren / Signature / Flavored Iced Latte",
+          keywords: ["kopi susu", "es kopi", "gula aren", "baileys latte", "pallet coffee", "kopi c", "butterscotch coffee", "coffee pandan", "hazelnut latte", "vanilla latte", "coconut coffee", "coffee banana", "vietnam drip"],
           urls: [
             "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=900&q=80",
             "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=900&q=80",
@@ -3697,8 +3896,8 @@ try {
         },
         {
           cat: "kopi",
-          label: "Hot Cappuccino / Cafe Latte Art",
-          keywords: ["cappuccino", "cafe latte", "latte", "flat white", "macchiato", "caramel", "brulee", "pilihan barista"],
+          label: "Caramel Macchiato, Cream Brulee & Latte Art",
+          keywords: ["caramel macchiato", "sea salt caramel", "cream brulee", "cappuccino", "cafe latte", "flat white", "piccolo", "pilihan barista"],
           urls: [
             "https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=900&q=80",
             "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=900&q=80",
@@ -3707,8 +3906,8 @@ try {
         },
         {
           cat: "kopi",
-          label: "Kopi Hitam / Americano / Kopi O Butter",
-          keywords: ["americano", "espresso", "kopi o", "butter", "gu you", "long black", "kopi hitam", "kopi tarik", "vietnam drip"],
+          label: "Kopi Hitam Panas, Americano, Tubruk & Kopi O Butter",
+          keywords: ["americano", "kopi tubruk", "tubruk", "kopi o", "gu you", "espresso", "long black", "kopi hitam", "kopi saring"],
           urls: [
             "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=900&q=80",
             "https://images.unsplash.com/photo-1551030173-122aabc4489c?auto=format&fit=crop&w=900&q=80"
@@ -3716,134 +3915,106 @@ try {
         },
         {
           cat: "kopi",
-          label: "Manual Brew V60 / Cold Brew / Filter",
-          keywords: ["v60", "japanese", "aeropress", "single origin", "cold brew", "mont blanc", "manual brew", "filter"],
+          label: "Manual Brew V60, Japanese Iced, Cold Brew & Filter",
+          keywords: ["v60", "japanese", "cold drip", "french press", "aeropress", "single origin", "cold brew", "mont blanc", "syphon"],
           urls: [
             "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80",
             "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=900&q=80"
           ]
         },
 
-        // NON-KOPI: MATCHA, COKELAT, TEH & MOCKTAIL
+        // --------------------------------------------------------------------
+        // F. KELOMPOK NON-KOPI BERDASARKAN WARNA ASLI MINUMAN (nonkopi_warna)
+        // --------------------------------------------------------------------
         {
-          cat: "nonkopi",
-          label: "Matcha & Green Tea Latte",
-          keywords: ["matcha", "green tea"],
+          cat: "nonkopi_warna",
+          label: "Minuman Hijau: Matcha Latte, Green Tea & Avocado",
+          keywords: ["matcha", "green tea latte", "green tea matcha", "avocado", "alpukat", "pandan latte", "klepon"],
           urls: [
             "https://images.unsplash.com/photo-1515823662972-da6a2e4d3002?auto=format&fit=crop&w=900&q=80",
             "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=900&q=80"
           ]
         },
         {
-          cat: "nonkopi",
-          label: "Es Cokelat Pekat & Mocha",
-          keywords: ["choco", "cokelat", "chocolate", "mochaccino", "mocha", "milo", "ovaltine"],
+          cat: "nonkopi_warna",
+          label: "Minuman Merah / Pink: Red Velvet, Strawberry & Pink Lava",
+          keywords: ["red velvet", "red latte", "strawberry", "pink ladies", "pink", "berry", "rose", "fanta"],
+          urls: [
+            "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1497534446932-c925b458314e?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "nonkopi_warna",
+          label: "Minuman Ungu & Creamy: Taro Latte, Blueberry & Smoothies",
+          keywords: ["taro", "ube", "blueberry", "charcoal latte", "black sesame", "cookies and cream", "oreo", "vanilla milk"],
+          urls: [
+            "https://images.unsplash.com/photo-1577805947697-89e18249d767?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "nonkopi_warna",
+          label: "Minuman Cokelat Pekat: Dark Choco, Milo & Mocha",
+          keywords: ["dark chocolate", "choco", "cokelat", "chocolate", "mochaccino", "mocha", "milo", "ovaltine", "nutella", "cadbury"],
           urls: [
             "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?auto=format&fit=crop&w=900&q=80",
             "https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?auto=format&fit=crop&w=900&q=80"
           ]
         },
+
+        // --------------------------------------------------------------------
+        // G. KELOMPOK TEH, MOCKTAIL BIRU/CITRUS & BOTOLAN (teh_mocktail)
+        // --------------------------------------------------------------------
         {
-          cat: "nonkopi",
+          cat: "teh_mocktail",
           label: "Teh Tarik, Thai Tea & Milk Tea",
-          keywords: ["teh tarik", "thai tea", "yuanyang", "milk tea", "earl grey", "taro", "red velvet", "pink ladies", "smoothies"],
+          keywords: ["teh tarik", "thai tea", "yuanyang", "milk tea", "brown sugar boba", "earl grey macchiato", "teh susu"],
           urls: [
             "https://images.unsplash.com/photo-1558857563-b371033873b8?auto=format&fit=crop&w=900&q=80",
-            "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=900&q=80"
+            "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?auto=format&fit=crop&w=900&q=80"
           ]
         },
         {
-          cat: "nonkopi",
-          label: "Lemon Tea, Lychee Tea & Mocktail Segar",
-          keywords: ["lychee", "lemon", "tea", "tehbotol", "mocktail", "butterfly", "ocean", "coke", "aqua", "mineral", "orange", "strawberry"],
+          cat: "teh_mocktail",
+          label: "Mocktail Biru & Soda Segar: Ocean Blue / Bubblegum",
+          keywords: ["ocean blue", "blue sea", "blue lagoon", "bubblegum", "buggy gum", "pheromone", "minion", "butterfly", "mojito", "squash", "mocktail"],
+          urls: [
+            "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "teh_mocktail",
+          label: "Teh Buah & Citrus: Lychee, Lemon, Peach & Mango Tea",
+          keywords: ["lychee tea", "lemon tea", "lemoned", "peach tea", "mango tea", "orange", "passion", "yuzu", "apple tea", "sweet tea", "es teh"],
           urls: [
             "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=900&q=80",
-            "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=900&q=80"
+            "https://images.unsplash.com/photo-1499638673689-79a0b5115d87?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "teh_mocktail",
+          label: "Artisan Tea Hangat: Chamomile, Jasmine & Green Tea",
+          keywords: ["chamomile", "jasmine tea", "green tea", "classic tea", "earl grey", "peppermint", "oolong", "teh tawar", "teh hangat"],
+          urls: [
+            "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=900&q=80"
+          ]
+        },
+        {
+          cat: "teh_mocktail",
+          label: "Air Mineral, Coca-Cola & Teh Botol",
+          keywords: ["mineral water", "air mineral", "aqua", "coke", "coca-cola", "soda", "tehbotol", "teh botol"],
+          urls: [
+            "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=900&q=80",
+            "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=900&q=80"
           ]
         },
 
-        // ROTI BAKAR SRIKAYA, PASTRY & DESSERT
-        {
-          cat: "roti",
-          label: "Kaya Toast / Roti Bakar Srikaya Butter",
-          keywords: ["roti", "srikaya", "kaya", "toast", "panggang", "egg toast", "sandwich"],
-          urls: [
-            "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=900&q=80",
-            "https://images.unsplash.com/photo-1484723091739-30a097e8f929?auto=format&fit=crop&w=900&q=80"
-          ]
-        },
-        {
-          cat: "roti",
-          label: "Croissant, Brownies & Kue Panggang",
-          keywords: ["croissant", "brownies", "pastry", "cinnamon", "pisang", "cake", "dessert", "hampers"],
-          urls: [
-            "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=900&q=80",
-            "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=900&q=80"
-          ]
-        },
-
-        // MISOA, KALDU KOLAGEN, LAKSA & MIE KUAH
-        {
-          cat: "mie_kaldu",
-          label: "Set Misoa Ayam & Kuah Kaldu Hangat",
-          keywords: ["misoa", "misua", "kaldu", "laksa", "mie", "bakmi", "kuah", "sup", "soup", "ramen"],
-          urls: [
-            "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=900&q=80",
-            "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=900&q=80",
-            "https://images.unsplash.com/photo-1617093727343-374698b1b08d?auto=format&fit=crop&w=900&q=80"
-          ]
-        },
-
-        // LASAGNA, SCHOTEL & PASTA PANGGANG KEJU
-        {
-          cat: "baked_pasta",
-          label: "Beef Lasagna Panggang Keju Lumer",
-          keywords: ["lasagna", "beef lasagna", "loyang"],
-          urls: [
-            "https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=900&q=80",
-            "https://images.unsplash.com/photo-1619895092538-128341789043?auto=format&fit=crop&w=900&q=80"
-          ]
-        },
-        {
-          cat: "baked_pasta",
-          label: "Macaroni Schotel, Brulee & Gratin",
-          keywords: ["schotel", "macaroni", "spaghetti", "brulee", "gratin", "potato", "pasta"],
-          urls: [
-            "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&w=900&q=80",
-            "https://images.unsplash.com/photo-1621996346565-e3d5d6281298?auto=format&fit=crop&w=900&q=80"
-          ]
-        },
-
-        // NASI AYAM HAINAN / SOUS VIDE, GORENGAN & DIMSUM
-        {
-          cat: "nasi_ayam",
-          label: "Set Nasi Ayam Hainan / Sous Vide Lembut",
-          keywords: ["set nasi", "hainan", "ayam oma", "ayam kampung", "nasi putih", "nasi ayam"],
-          urls: [
-            "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=900&q=80",
-            "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=900&q=80"
-          ]
-        },
-        {
-          cat: "nasi_ayam",
-          label: "Ayam Goreng Krispi, Perkedel Keju & Tahu",
-          keywords: ["ayam goreng", "krispi", "crispy", "perkedel", "tahu", "snack", "goreng"],
-          urls: [
-            "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=900&q=80",
-            "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=900&q=80"
-          ]
-        },
-        {
-          cat: "nasi_ayam",
-          label: "Dimsum Kukus & Telur Setengah Matang",
-          keywords: ["siomay", "dimsum", "hakau", "kuotie", "telur", "telor"],
-          urls: [
-            "https://images.unsplash.com/photo-1496116218417-1a781b1c416c?auto=format&fit=crop&w=900&q=80",
-            "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?auto=format&fit=crop&w=900&q=80"
-          ]
-        },
-
-        // AMBIENCE: RUANG KAFE, KOPITIAM & DAPUR CLOUD KITCHEN
+        // --------------------------------------------------------------------
+        // H. KELOMPOK AMBIENCE RUANG, TERAS & DAPUR (ambience)
+        // --------------------------------------------------------------------
         {
           cat: "ambience",
           label: "Interior Kafe Hangat & Area WFC",
@@ -3855,8 +4026,8 @@ try {
         },
         {
           cat: "ambience",
-          label: "Area Teras Outdoor & Komunal",
-          keywords: ["outdoor", "teras", "komunal"],
+          label: "Area Teras Outdoor, Tribun & Rooftop",
+          keywords: ["outdoor", "teras", "komunal", "rooftop"],
           urls: [
             "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=1200&q=80",
             "https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=1200&q=80"
@@ -3864,7 +4035,7 @@ try {
         },
         {
           cat: "ambience",
-          label: "Bar Seduh Kopi & Dapur Oven Panggang",
+          label: "Bar Seduh Kopi & Dapur Produksi",
           keywords: ["bar", "dapur", "oven", "kemasan"],
           urls: [
             "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1200&q=80",
@@ -3873,9 +4044,10 @@ try {
         }
       ];
 
-      // Fungsi Pencari Gambar Terbaik Berdasarkan Nama Menu & Kategori
+      // Algoritma Pencocokan Presisi (Prioritas Frasa Spesifik & Warna)
       function resolveBestFoodImage(menuName, category, itemIndex = 0) {
-        const hay = `${menuName || ""} ${category || ""}`.toLowerCase();
+        const nameLower = String(menuName || "").toLowerCase();
+        const catLower = String(category || "").toLowerCase();
         let bestEntry = null;
         let maxScore = 0;
 
@@ -3883,7 +4055,11 @@ try {
           if (entry.cat === "ambience") continue;
           let score = 0;
           for (const kw of entry.keywords) {
-            if (hay.includes(kw)) {
+            if (nameLower.includes(kw)) {
+              // Bonus tinggi untuk kecocokan frasa 2 kata (misal "french fries" vs "french press")
+              const multiWordBonus = kw.includes(" ") ? 40 : 12;
+              score += kw.length * 5 + multiWordBonus;
+            } else if (catLower.includes(kw)) {
               score += kw.length * 2;
             }
           }
@@ -3893,19 +4069,31 @@ try {
           }
         }
 
+        // Fallback pintar berdasarkan nama kategori jika nama menu benar-benar baru/unik
         if (!bestEntry) {
-          bestEntry = CURATED_FOOD_BANK[0];
+          if (catLower.includes("makanan") || catLower.includes("main") || catLower.includes("nasi") || catLower.includes("bowl")) {
+            bestEntry = CURATED_FOOD_BANK[2]; // Rice Bowl / Hidangan Utama
+          } else if (catLower.includes("mie") || catLower.includes("pasta") || catLower.includes("kaldu")) {
+            bestEntry = CURATED_FOOD_BANK[7]; // Mie / Pasta
+          } else if (catLower.includes("camilan") || catLower.includes("snack") || catLower.includes("add")) {
+            bestEntry = CURATED_FOOD_BANK[11]; // Platter / Snack
+          } else if (catLower.includes("roti") || catLower.includes("pastry") || catLower.includes("dessert")) {
+            bestEntry = CURATED_FOOD_BANK[16]; // Toast / Pastry
+          } else if (catLower.includes("tea") || catLower.includes("teh") || catLower.includes("mocktail")) {
+            bestEntry = CURATED_FOOD_BANK[30]; // Fruit Tea / Mocktail
+          } else {
+            bestEntry = CURATED_FOOD_BANK[20]; // Default Kopi Susu Signature
+          }
         }
 
         const urls = bestEntry.urls;
         return urls[itemIndex % urls.length];
       }
 
-      // Fungsi Menentukan Paket Gambar Profil & Ruang Berdasarkan Konsep Kafe
+      // Paket Gambar Profil & Ruang Berdasarkan Konsep Kafe
       function resolveCafeSpaceImages(cafeName, heroDesc, themePreset) {
         const text = `${cafeName || ""} ${heroDesc || ""} ${themePreset || ""}`.toLowerCase();
 
-        // Konsep 1: Lasagna / Baked Pasta / Cloud Kitchen
         if (text.includes("lasagna") || text.includes("bonitas") || text.includes("panggang")) {
           return {
             hero: "https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=1200&q=80",
@@ -3921,7 +4109,6 @@ try {
           };
         }
 
-        // Konsep 2: Kaldu / Misoa / Kopitiam / Kedai Oriental
         if (text.includes("kaldu") || text.includes("misoa") || text.includes("kopitiam") || text.includes("oma")) {
           return {
             hero: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=1200&q=80",
@@ -3937,7 +4124,6 @@ try {
           };
         }
 
-        // Konsep 3 Default: Coffee Shop Modern & WFC (Pallet Coffee dll)
         return {
           hero: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80",
           indoor: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80",
@@ -3953,7 +4139,7 @@ try {
       }
 
       // ======================================================================
-      // 2. MODAL GALERI VISUAL PICKER (UNTUK GANTI 1 FOTO DALAM 1 KLIK)
+      // 2. MODAL GALERI VISUAL PICKER
       // ======================================================================
       let activeTargetInputEl = null;
       const pickerModal = document.getElementById("sc-photo-picker-modal");
@@ -4023,7 +4209,6 @@ try {
       // 3. SUNTIK TOMBOL OTOMATIS KE FORM ADMIN & AI COMMAND CENTER
       // ======================================================================
       function enhanceAdminImageInputs() {
-        // A. Suntik tombol "📸 Pilih Foto" di sebelah tiap input URL Gambar
         const imageInputIds = [
           "item-image-url",
           "set-hero-img",
@@ -4050,7 +4235,6 @@ try {
           `;
           btnBar.querySelector(".sc-open-gallery-btn").addEventListener("click", () => openPhotoPickerForInput(inp));
 
-          // Khusus form tambah/edit menu: tambah tombol Auto-Tebak dari nama menu
           if (id === "item-image-url") {
             const autoMenuBtn = document.createElement("button");
             autoMenuBtn.type = "button";
@@ -4059,7 +4243,7 @@ try {
             autoMenuBtn.addEventListener("click", () => {
               const nameVal = document.getElementById("item-name")?.value || "";
               const catVal = document.getElementById("item-category")?.value || "";
-              inp.value = resolveBestFoodImage(nameVal, catVal, Math.floor(Math.random() * 3));
+              inp.value = resolveBestFoodImage(nameVal, catVal, Math.floor(Math.random() * 2));
               inp.dispatchEvent(new Event("input", { bubbles: true }));
             });
             btnBar.appendChild(autoMenuBtn);
@@ -4068,7 +4252,6 @@ try {
           inp.parentElement?.appendChild(btnBar);
         });
 
-        // B. Suntik Tombol Master "🪄 Auto-Match Semua Foto Kafe & Menu" di AI Command Center
         const exportBtn = document.getElementById("btn-export-current-json");
         if (exportBtn && !document.getElementById("btn-sc-automatch-all")) {
           const masterBtn = document.createElement("button");
@@ -4078,7 +4261,6 @@ try {
           masterBtn.innerHTML = `<span>🪄 Auto-Match Semua Foto Asli</span>`;
 
           masterBtn.addEventListener("click", async () => {
-            // 1. Jika ada JSON di kotak Opsi A, percantik semua image_url di dalam JSON tersebut
             const jsonBox = document.getElementById("ai-json-import-box");
             if (jsonBox && jsonBox.value.trim()) {
               try {
@@ -4107,7 +4289,6 @@ try {
               } catch (e) {}
             }
 
-            // 2. Isi juga langsung ke kolom-kolom form Pengaturan Kafe yang sedang tampil
             const cafeName = document.getElementById("set-name")?.value || "";
             const heroDesc = document.getElementById("set-hero-desc")?.value || "";
             const themePreset = document.getElementById("cms-theme-preset")?.value || "";
@@ -4123,7 +4304,6 @@ try {
             setField("set-bar-img", spaceImgs.bar);
             [1, 2, 3, 4].forEach((n, i) => setField(`cms-craft-${n}-img`, spaceImgs.crafts[i]));
 
-            // 3. Update foto seluruh menu kafe yang sedang aktif di database Supabase
             const sb = window.getSupabaseClient ? window.getSupabaseClient() : null;
             const slug = new URLSearchParams(window.location.search).get("kafe") || "tentang-kopi";
             if (sb) {
@@ -4136,7 +4316,7 @@ try {
               }
             }
 
-            alert("✨ Seluruh foto Hero, Ruangan, Momen & Daftar Menu berhasil dicocokkan dengan foto kamera asli! Klik 'Simpan Pengaturan Kafe' untuk menyimpan profil.");
+            alert("✨ Seluruh foto Hero, Ruangan, Momen & Daftar Menu berhasil dicocokkan dengan Master Bank V2! Klik 'Simpan Pengaturan Kafe' untuk menyimpan profil.");
             window.location.reload();
           });
 
